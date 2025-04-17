@@ -1,0 +1,45 @@
+compressed\_lists package
+=========================
+
+Submodules
+----------
+
+compressed\_lists.CompressedIntegerList module
+----------------------------------------------
+
+.. automodule:: compressed_lists.CompressedIntegerList
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.CompressedList module
+---------------------------------------
+
+.. automodule:: compressed_lists.CompressedList
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.CompressedStringList module
+---------------------------------------------
+
+.. automodule:: compressed_lists.CompressedStringList
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.partition module
+----------------------------------
+
+.. automodule:: compressed_lists.partition
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: compressed_lists
+   :members:
+   :show-inheritance:
+   :undoc-members:
