@@ -1,17 +1,16 @@
 # compressed-lists
 
-Add a short description here!
+A Python implementation of the `CompressedList` class from R/Bioconductor for memory-efficient list-like objects.
 
+`CompressedList` is a memory-efficient container for list-like objects. Instead of storing each list element separately, it concatenates all elements into a single vector-like object and maintains information about where each original element begins and ends. This approach is significantly more memory-efficient than standard lists, especially when dealing with many list elements.
 
-## Note
+## Install
 
-> This is the main page of your project's [Sphinx] documentation. It is
-> formatted in [Markdown]. Add additional pages by creating md-files in
-> `docs` or rst-files (formatted in [reStructuredText]) and adding links to
-> them in the `Contents` section below.
->
-> Please check [Sphinx] and [MyST] for more information
-> about how to document your project and how to configure your preferences.
+To get started, install the package from [PyPI](https://pypi.org/project/compressed-lists/)
+
+```bash
+pip install compressed-lists
+```
 
 
 ## Contents
@@ -20,6 +19,7 @@ Add a short description here!
 :maxdepth: 2
 
 Overview <readme>
+Tutorial <tutorial>
 Contributions & Help <contributing>
 License <license>
 Authors <authors>

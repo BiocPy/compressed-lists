@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Any, Callable, Iterator, List, Optional, Sequence, Union
+from warnings import warn
 
 import biocutils as ut
 import numpy as np
@@ -173,6 +174,32 @@ class CompressedList(ABC):
 
         return output
 
+    #############################
+    ######>> element_type <<#####
+    #############################
+
+    def get_element_type(self) -> str:
+        """Return the element_type."""
+        return self._element_type
+
+    @property
+    def element_type(self) -> str:
+        """Alias for :py:attr:`~get_element_type`, provided for back-compatibility."""
+        return self.get_element_type()
+
+    ###########################
+    ######>> partitions <<#####
+    ###########################
+
+    def get_partitioning(self) -> Partitioning:
+        """Return the paritioning info."""
+        return self._partitioning
+
+    @property
+    def paritioning(self) -> Partitioning:
+        """Alias for :py:attr:`~get_paritioning`, provided for back-compatibility."""
+        return self.get_partitioning()
+
     #######################
     ######>> names <<######
     #######################
@@ -181,17 +208,7 @@ class CompressedList(ABC):
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
-    def set_names(self, names: Sequence[str], in_place: bool = False) -> None:
-        """Set the names of list elements."""
-        return self._partitioning.set_names(names=names, in_place=in_place)
-
-    @property
-    def names(self) -> Optional[ut.NamedList]:
-        """Get the names of list elements."""
-        return self._partitioning.get_names()
-
-    @names.setter
-    def names(self, names: Sequence[str], in_place: bool = False) -> "CompressedList":
+    def set_names(self, names: Sequence[str], in_place: bool = False) -> "CompressedList":
         """Set the names of list elements.
 
         names:
@@ -207,8 +224,167 @@ class CompressedList(ABC):
             or as a reference to the (in-place-modified) original.
         """
         output = self._define_output(in_place)
-        output._partitioning.set_names(names, in_place=True)
+        output._partitioning = self._partitioning.set_names(names, in_place=False)
         return output
+
+    @property
+    def names(self) -> Optional[ut.NamedList]:
+        """Alias for :py:attr:`~get_names`."""
+        return self._partitioning.get_names()
+
+    @names.setter
+    def names(self, names: Sequence[str]):
+        """Alias for :py:attr:`~set_names` with ``in_place = True``.
+
+        As this mutates the original object, a warning is raised.
+        """
+        warn(
+            "Setting property 'names' is an in-place operation, use 'set_names' instead",
+            UserWarning,
+        )
+        self.set_names(names=names, in_place=True)
+
+    #############################
+    ######>> unlist_data <<######
+    #############################
+
+    def get_unlist_data(self) -> Any:
+        """Get all elements."""
+        return self._unlist_data
+
+    def set_unlist_data(self, unlist_data: Any, in_place: bool = False) -> "CompressedList":
+        """Set new list elements.
+
+        Args:
+            unlist_data:
+                New vector-like object containing concatenated elements.
+
+            in_place:
+                Whether to modify the ``CompressedList`` in place.
+
+        Returns:
+            A modified ``CompressedList`` object, either as a copy of the original
+            or as a reference to the (in-place-modified) original.
+        """
+        output = self._define_output(in_place)
+
+        _validate_data_and_partitions(unlist_data=unlist_data, partition=self._partitioning)
+
+        output._unlist_data = unlist_data
+        return output
+
+    @property
+    def unlist_data(self) -> Any:
+        """Alias for :py:attr:`~get_unlist_data`."""
+        return self.get_unlist_data()
+
+    @unlist_data.setter
+    def unlist_data(self, unlist_data: Any):
+        """Alias for :py:attr:`~set_unlist_data` with ``in_place = True``.
+
+        As this mutates the original object, a warning is raised.
+        """
+        warn(
+            "Setting property 'unlist_data' is an in-place operation, use 'set_unlist_data' instead",
+            UserWarning,
+        )
+        self.set_unlist_data(unlist_data, in_place=True)
+
+    ###################################
+    ######>> element metadata <<#######
+    ###################################
+
+    def get_element_metadata(self) -> dict:
+        """
+        Returns:
+            Dictionary of metadata for each element in this object.
+        """
+        return self._element_metadata
+
+    def set_element_metadata(self, element_metadata: dict, in_place: bool = False) -> "CompressedList":
+        """Set new element metadata.
+
+        Args:
+            element_metadata:
+                New element metadata for this object.
+
+            in_place:
+                Whether to modify the ``CompressedList`` in place.
+
+        Returns:
+            A modified ``CompressedList`` object, either as a copy of the original
+            or as a reference to the (in-place-modified) original.
+        """
+        if not isinstance(element_metadata, dict):
+            raise TypeError(f"`element_metadata` must be a dictionary, provided {type(element_metadata)}.")
+        output = self._define_output(in_place)
+        output._element_metadata = element_metadata
+        return output
+
+    @property
+    def element_metadata(self) -> dict:
+        """Alias for :py:attr:`~get_element_metadata`."""
+        return self.get_element_metadata()
+
+    @element_metadata.setter
+    def element_metadata(self, element_metadata: dict):
+        """Alias for :py:attr:`~set_element_metadata` with ``in_place = True``.
+
+        As this mutates the original object, a warning is raised.
+        """
+        warn(
+            "Setting property 'element_metadata' is an in-place operation, use 'set_element_metadata' instead",
+            UserWarning,
+        )
+        self.set_element_metadata(element_metadata, in_place=True)
+
+    ###########################
+    ######>> metadata <<#######
+    ###########################
+
+    def get_metadata(self) -> dict:
+        """
+        Returns:
+            Dictionary of metadata for this object.
+        """
+        return self._metadata
+
+    def set_metadata(self, metadata: dict, in_place: bool = False) -> "CompressedList":
+        """Set additional metadata.
+
+        Args:
+            metadata:
+                New metadata for this object.
+
+            in_place:
+                Whether to modify the ``CompressedList`` in place.
+
+        Returns:
+            A modified ``CompressedList`` object, either as a copy of the original
+            or as a reference to the (in-place-modified) original.
+        """
+        if not isinstance(metadata, dict):
+            raise TypeError(f"`metadata` must be a dictionary, provided {type(metadata)}.")
+        output = self._define_output(in_place)
+        output._metadata = metadata
+        return output
+
+    @property
+    def metadata(self) -> dict:
+        """Alias for :py:attr:`~get_metadata`."""
+        return self.get_metadata()
+
+    @metadata.setter
+    def metadata(self, metadata: dict):
+        """Alias for :py:attr:`~set_metadata` with ``in_place = True``.
+
+        As this mutates the original object, a warning is raised.
+        """
+        warn(
+            "Setting property 'metadata' is an in-place operation, use 'set_metadata' instead",
+            UserWarning,
+        )
+        self.set_metadata(metadata, in_place=True)
 
     ##########################
     ######>> accessors <<#####

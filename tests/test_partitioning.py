@@ -14,9 +14,9 @@ def test_init_with_ends():
     names = ["A", "B", "C"]
     part = Partitioning(ends, names)
 
-    assert list(part._ends) == ends
-    assert list(part._starts) == [0, 3, 5]
-    assert list(part._names) == names
+    assert list(part.get_ends()) == ends
+    assert list(part.starts) == [0, 3, 5]
+    assert list(part.get_names()) == names
     assert len(part) == 3
 
 
@@ -32,8 +32,8 @@ def test_from_lengths():
     lengths = [2, 3, 5]
     part = Partitioning.from_lengths(lengths)
 
-    assert list(part._ends) == [2, 5, 10]
-    assert list(part._starts) == [0, 2, 5]
+    assert list(part.ends) == [2, 5, 10]
+    assert list(part.get_starts()) == [0, 2, 5]
     assert len(part) == 3
 
 
@@ -41,7 +41,7 @@ def test_from_list():
     lst = [[1, 2], [3, 4, 5], ["a", "b", "c", "d", "e"]]
     part = Partitioning.from_list(lst)
 
-    assert list(part._ends) == [2, 5, 10]
+    assert list(part.ends) == [2, 5, 10]
     assert list(part.get_element_lengths()) == [2, 3, 5]
 
 

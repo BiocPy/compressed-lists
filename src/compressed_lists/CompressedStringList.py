@@ -19,8 +19,7 @@ class CompressedStringList(CompressedList):
         metadata: dict = None,
         **kwargs,
     ):
-        """
-        Initialize a CompressedStringList.
+        """Initialize a CompressedStringList.
 
         Args:
             unlist_data:
@@ -43,8 +42,7 @@ class CompressedStringList(CompressedList):
         )
 
     def _extract_range(self, start: int, end: int) -> List[str]:
-        """
-        Extract a range from unlist_data.
+        """Extract a range from unlist_data.
 
         Args:
             start:
@@ -62,8 +60,7 @@ class CompressedStringList(CompressedList):
     def from_list(
         cls, lst: List[List[str]], names: Optional[Sequence[str]] = None, metadata: dict = None
     ) -> "CompressedStringList":
-        """
-        Create a `CompressedStringList` from a list of string lists.
+        """Create a `CompressedStringList` from a list of string lists.
 
         Args:
             lst:

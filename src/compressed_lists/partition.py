@@ -1,4 +1,5 @@
 from typing import List, Optional, Sequence, Union
+from warnings import warn
 
 import biocutils as ut
 import numpy as np
@@ -215,7 +216,7 @@ class Partitioning:
         """Return the names of each partition."""
         return self._names
 
-    def set_names(self, names: Optional[List[str]], in_place: bool = False) -> None:
+    def set_names(self, names: Optional[List[str]], in_place: bool = False) -> "Partitioning":
         """Set the names of list elements.
 
         Args:
@@ -239,3 +240,46 @@ class Partitioning:
         output = self._define_output(in_place)
         output._names = names
         return output
+
+    @property
+    def names(self) -> Optional[ut.Names]:
+        """Alias for :py:attr:`~get_names`, provided for back-compatibility."""
+        return self.get_names()
+
+    @names.setter
+    def names(self, names: Optional[List[str]]):
+        """Alias for :py:meth:`~set_names` with ``in_place = True``.
+
+        As this mutates the original object, a warning is raised.
+        """
+        warn(
+            "Setting property 'row_names' is an in-place operation, use 'set_names' instead",
+            UserWarning,
+        )
+        self.set_names(names, in_place=True)
+
+    #####################
+    ######>> ends <<#####
+    #####################
+
+    def get_ends(self) -> Optional[ut.NamedList]:
+        """Return the names of each partition."""
+        return self._ends
+
+    @property
+    def ends(self) -> Optional[ut.Names]:
+        """Alias for :py:attr:`~get_ends`, provided for back-compatibility."""
+        return self.get_ends()
+    
+    #######################
+    ######>> starts <<#####
+    #######################
+
+    def get_starts(self) -> Optional[ut.NamedList]:
+        """Return the starts of each partition."""
+        return self._starts
+
+    @property
+    def starts(self) -> Optional[ut.Names]:
+        """Alias for :py:attr:`~get_starts`, provided for back-compatibility."""
+        return self.get_starts()

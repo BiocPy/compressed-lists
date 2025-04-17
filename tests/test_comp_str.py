@@ -22,8 +22,8 @@ def test_creation(char_data):
     char_list = CompressedStringList.from_list(char_data)
 
     assert len(char_list) == 3
-    assert isinstance(char_list._unlist_data, list)
-    assert char_list._unlist_data == ["apple", "banana", "cherry", "date", "elderberry", "fig"]
+    assert isinstance(char_list.unlist_data, list)
+    assert char_list.get_unlist_data() == ["apple", "banana", "cherry", "date", "elderberry", "fig"]
     assert list(char_list.get_element_lengths()) == [2, 3, 1]
 
 
