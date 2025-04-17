@@ -14,3 +14,8 @@ except PackageNotFoundError:  # pragma: no cover
     __version__ = "unknown"
 finally:
     del version, PackageNotFoundError
+
+from .partition import Partitioning
+from .CompressedList import CompressedList
+from .CompressedIntegerList import CompressedIntegerList
+from .CompressedStringList import CompressedStringList
