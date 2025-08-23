@@ -270,7 +270,7 @@ class Partitioning:
     def ends(self) -> Optional[ut.Names]:
         """Alias for :py:attr:`~get_ends`, provided for back-compatibility."""
         return self.get_ends()
-    
+
     #######################
     ######>> starts <<#####
     #######################
