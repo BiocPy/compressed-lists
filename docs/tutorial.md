@@ -71,12 +71,12 @@ class CustomCompressedList(CompressedList):
 The constructor should initialize the superclass with the appropriate data:
 
 ```python
-def __init__(self, 
-             unlist_data: Any,  # Replace with your data type 
+def __init__(self,
+             unlist_data: Any,  # Replace with your data type
              partitioning: Partitioning,
              element_metadata: dict = None,
              metadata: dict = None):
-    super().__init__(unlist_data, partitioning, 
+    super().__init__(unlist_data, partitioning,
                     element_type="custom_type",  # Set your element type
                     element_metadata=element_metadata,
                     metadata=metadata)
@@ -91,7 +91,7 @@ def _extract_range(self, start: int, end: int) -> List[T]:
     """Extract a range from unlisted data."""
     # For example, with numpy arrays:
     return self.unlist_data[start:end].tolist()
-    
+
     # Or for other data types:
     # return self.unlist_data[start:end]
 ```
@@ -102,21 +102,21 @@ This factory method creates a new instance from a list:
 
 ```python
 @classmethod
-def from_list(cls, lst: List[List[T]], names: list = None, 
+def from_list(cls, lst: List[List[T]], names: list = None,
              metadata: dict = None) -> 'CustomCompressedList':
     """Create a new CustomCompressedList from a list."""
     # Flatten the list
     flat_data = []
     for sublist in lst:
         flat_data.extend(sublist)
-    
+
     # Create partitioning
     partitioning = Partitioning.from_list(lst, names)
-    
+
     # Create unlisted data in your preferred format
     # For example, with numpy:
     unlist_data = np.array(flat_data, dtype=np.float64)
-    
+
     return cls(unlist_data, partitioning, metadata=metadata)
 ```
 
@@ -130,33 +130,33 @@ from compressed_lists import CompressedList, Partitioning
 from typing import List
 
 class CompressedFloatList(CompressedList):
-    def __init__(self, 
-                unlist_data: np.ndarray, 
+    def __init__(self,
+                unlist_data: np.ndarray,
                 partitioning: Partitioning,
                 element_metadata: dict = None,
                 metadata: dict = None):
-        super().__init__(unlist_data, partitioning, 
+        super().__init__(unlist_data, partitioning,
                         element_type="float",
                         element_metadata=element_metadata,
                         metadata=metadata)
-    
+
     def _extract_range(self, start: int, end: int) -> List[float]:
         return self.unlist_data[start:end].tolist()
-    
+
     @classmethod
-    def from_list(cls, lst: List[List[float]], names: list = None, 
+    def from_list(cls, lst: List[List[float]], names: list = None,
                  metadata: dict = None) -> 'CompressedFloatList':
         # Flatten the list
         flat_data = []
         for sublist in lst:
             flat_data.extend(sublist)
-        
+
         # Create partitioning
         partitioning = Partitioning.from_list(lst, names)
-        
+
         # Create unlist_data
         unlist_data = np.array(flat_data, dtype=np.float64)
-        
+
         return cls(unlist_data, partitioning, metadata=metadata)
 
 # Usage
@@ -178,10 +178,10 @@ class MyObject:
 
 class CompressedMyObjectList(CompressedList[List[MyObject]]):
     # Implementation details...
-    
+
     def _extract_range(self, start: int, end: int) -> List[MyObject]:
         return self.unlist_data[start:end]
-    
+
     @classmethod
     def from_list(cls, lst: List[List[MyObject]], ...):
         # Custom flattening and storage logic
