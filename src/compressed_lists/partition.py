@@ -29,7 +29,7 @@ class Partitioning:
 
         Args:
             ends:
-                Sequence of ending positions for each partition.
+                Sequence of ending positions for each partition (exclusive).
 
             names:
                 Optional names for each partition.

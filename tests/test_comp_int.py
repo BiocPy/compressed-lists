@@ -28,6 +28,15 @@ def test_creation(int_data):
     assert list(int_list.get_element_lengths()) == [3, 2, 4]
 
 
+def test_creation_from_parts():
+    int_list = CompressedIntegerList(np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]), Partitioning(ends=[3, 5, 9]))
+
+    assert len(int_list) == 3
+    assert isinstance(int_list.unlist_data, np.ndarray)
+    assert list(int_list.get_unlist_data()) == [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    assert list(int_list.get_element_lengths()) == [3, 2, 4]
+
+
 def test_creation_with_names(int_data):
     names = ["A", "B", "C"]
     int_list = CompressedIntegerList.from_list(int_data, names)
