@@ -5,12 +5,12 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Contributing" href="contributing.html" /><link rel="prev" title="CompressedList Implementation in Python" href="readme.html" />
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>Basic Usage - compressed-lists 0.1.0 documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
+        <title>Basic Usage - compressed-lists 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
 
@@ -23,14 +23,14 @@
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
   
       }
     }
@@ -167,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">compressed-lists 0.1.0 documentation</div></a>
+      <a href="index.html"><div class="brand">compressed-lists 0.1.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,8 +190,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  
-  <span class="sidebar-brand-text">compressed-lists 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.1.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -340,12 +339,12 @@ metadata(0):
 <section id="implement-the-constructor">
 <h2>2. Implement the Constructor<a class="headerlink" href="#implement-the-constructor" title="Link to this heading">¶</a></h2>
 <p>The constructor should initialize the superclass with the appropriate data:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
-             <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>  <span class="c1"># Replace with your data type </span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+             <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>  <span class="c1"># Replace with your data type</span>
              <span class="n">partitioning</span><span class="p">:</span> <span class="n">Partitioning</span><span class="p">,</span>
              <span class="n">element_metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span> 
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span>
                     <span class="n">element_type</span><span class="o">=</span><span class="s2">&quot;custom_type&quot;</span><span class="p">,</span>  <span class="c1"># Set your element type</span>
                     <span class="n">element_metadata</span><span class="o">=</span><span class="n">element_metadata</span><span class="p">,</span>
                     <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
@@ -359,7 +358,7 @@ metadata(0):
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Extract a range from unlisted data.&quot;&quot;&quot;</span>
     <span class="c1"># For example, with numpy arrays:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unlist_data</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    
+
     <span class="c1"># Or for other data types:</span>
     <span class="c1"># return self.unlist_data[start:end]</span>
 </pre></div>
@@ -369,21 +368,21 @@ metadata(0):
 <h2>4. Implement from_list Class Method<a class="headerlink" href="#implement-from-list-class-method" title="Link to this heading">¶</a></h2>
 <p>This factory method creates a new instance from a list:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@classmethod</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">]],</span> <span class="n">names</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+<span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">T</span><span class="p">]],</span> <span class="n">names</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
              <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CustomCompressedList&#39;</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a new CustomCompressedList from a list.&quot;&quot;&quot;</span>
     <span class="c1"># Flatten the list</span>
     <span class="n">flat_data</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
         <span class="n">flat_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sublist</span><span class="p">)</span>
-    
+
     <span class="c1"># Create partitioning</span>
     <span class="n">partitioning</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
-    
+
     <span class="c1"># Create unlisted data in your preferred format</span>
     <span class="c1"># For example, with numpy:</span>
     <span class="n">unlist_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">flat_data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-    
+
     <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -398,33 +397,33 @@ metadata(0):
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CompressedFloatList</span><span class="p">(</span><span class="n">CompressedList</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
-                <span class="n">unlist_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">unlist_data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
                 <span class="n">partitioning</span><span class="p">:</span> <span class="n">Partitioning</span><span class="p">,</span>
                 <span class="n">element_metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                 <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span> 
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span>
                         <span class="n">element_type</span><span class="o">=</span><span class="s2">&quot;float&quot;</span><span class="p">,</span>
                         <span class="n">element_metadata</span><span class="o">=</span><span class="n">element_metadata</span><span class="p">,</span>
                         <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
-    
+
     <span class="k">def</span><span class="w"> </span><span class="nf">_extract_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unlist_data</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
-    
+
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">names</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span> <span class="n">names</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CompressedFloatList&#39;</span><span class="p">:</span>
         <span class="c1"># Flatten the list</span>
         <span class="n">flat_data</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
             <span class="n">flat_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sublist</span><span class="p">)</span>
-        
+
         <span class="c1"># Create partitioning</span>
         <span class="n">partitioning</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
-        
+
         <span class="c1"># Create unlist_data</span>
         <span class="n">unlist_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">flat_data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        
+
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span>
 
 <span class="c1"># Usage</span>
@@ -451,10 +450,10 @@ metadata(0):
 
 <span class="k">class</span><span class="w"> </span><span class="nc">CompressedMyObjectList</span><span class="p">(</span><span class="n">CompressedList</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">MyObject</span><span class="p">]]):</span>
     <span class="c1"># Implementation details...</span>
-    
+
     <span class="k">def</span><span class="w"> </span><span class="nf">_extract_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MyObject</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unlist_data</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
-    
+
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">MyObject</span><span class="p">]],</span> <span class="o">...</span><span class="p">):</span>
         <span class="c1"># Custom flattening and storage logic</span>
@@ -541,9 +540,9 @@ metadata(0):
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=01f34227"></script>
+</div><script src="_static/documentation_options.js?v=a58bc63e"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
     </body>
 </html>
