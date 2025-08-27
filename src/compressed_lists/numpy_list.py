@@ -1,7 +1,6 @@
 from typing import List, Optional, Sequence
 
 import numpy as np
-from biocutils.IntegerList import IntegerList
 
 from .base import CompressedList
 from .partition import Partitioning
