@@ -47,7 +47,7 @@ class CompressedFloatList(CompressedList):
                 raise TypeError("'unlist_data' must be an `FloatList`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type="integer", element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type="float", element_metadata=element_metadata, metadata=metadata
         )
 
     def _extract_range(self, start: int, end: int) -> FloatList:
