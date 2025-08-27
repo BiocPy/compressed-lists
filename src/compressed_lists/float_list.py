@@ -1,8 +1,8 @@
 from typing import List, Optional, Sequence
 
-import numpy as np
+from biocutils.FloatList import FloatList
 
-from .CompressedList import CompressedList
+from .base import CompressedList
 from .partition import Partitioning
 
 __author__ = "Jayaram Kancherla"
@@ -10,12 +10,12 @@ __copyright__ = "Jayaram Kancherla"
 __license__ = "MIT"
 
 
-class CompressedIntegerList(CompressedList):
+class CompressedFloatList(CompressedList):
     """CompressedList implementation for lists of integers."""
 
     def __init__(
         self,
-        unlist_data: np.ndarray,
+        unlist_data: FloatList,
         partitioning: Partitioning,
         element_metadata: dict = None,
         metadata: dict = None,
@@ -25,7 +25,7 @@ class CompressedIntegerList(CompressedList):
 
         Args:
             unlist_data:
-                NumPy array of integers.
+                List of floats.
 
             partitioning:
                 Partitioning object defining element boundaries.
@@ -39,11 +39,18 @@ class CompressedIntegerList(CompressedList):
             kwargs:
                 Additional arguments.
         """
+
+        if not isinstance(unlist_data, FloatList):
+            try:
+                unlist_data = FloatList(unlist_data)
+            except Exception as e:
+                raise TypeError("'unlist_data' must be an `FloatList`, provided ", type(unlist_data)) from e
+
         super().__init__(
             unlist_data, partitioning, element_type="integer", element_metadata=element_metadata, metadata=metadata
         )
 
-    def _extract_range(self, start: int, end: int) -> np.ndarray:
+    def _extract_range(self, start: int, end: int) -> FloatList:
         """Extract a range from unlist_data.
 
         Args:
@@ -60,10 +67,10 @@ class CompressedIntegerList(CompressedList):
 
     @classmethod
     def from_list(
-        cls, lst: List[List[int]], names: Optional[Sequence[str]] = None, metadata: dict = None
-    ) -> "CompressedIntegerList":
+        cls, lst: List[List[bool]], names: Optional[Sequence[str]] = None, metadata: dict = None
+    ) -> "CompressedFloatList":
         """
-        Create a CompressedIntegerList from a list of integer lists.
+        Create a `CompressedFloatList` from a list of integer lists.
 
         Args:
             lst:
@@ -76,7 +83,7 @@ class CompressedIntegerList(CompressedList):
                 Optional metadata.
 
         Returns:
-            A new CompressedIntegerList.
+            A new `CompressedFloatList`.
         """
         # Flatten the list
         flat_data = []
@@ -87,6 +94,6 @@ class CompressedIntegerList(CompressedList):
         partitioning = Partitioning.from_list(lst, names)
 
         # Create unlist_data
-        unlist_data = np.array(flat_data, dtype=np.int64)
+        unlist_data = FloatList(data=flat_data)
 
         return cls(unlist_data, partitioning, metadata=metadata)

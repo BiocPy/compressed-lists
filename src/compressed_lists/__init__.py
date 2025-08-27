@@ -16,6 +16,8 @@ finally:
     del version, PackageNotFoundError
 
 from .partition import Partitioning
-from .CompressedList import CompressedList
-from .CompressedIntegerList import CompressedIntegerList
-from .CompressedStringList import CompressedStringList
+from .base import CompressedList
+from .integer_list import CompressedIntegerList
+from .string_list import CompressedStringList, CompressedCharacterList
+from .bool_list import CompressedBooleanList
+from .float_list import CompressedFloatList

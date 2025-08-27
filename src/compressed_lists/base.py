@@ -43,7 +43,7 @@ class CompressedList(ABC):
                 Vector-like object containing concatenated elements.
 
             partitioning:
-                Partitioning object defining element boundaries.
+                Partitioning object defining element boundaries (exclusive).
 
             element_type:
                 String identifier for the type of elements.
