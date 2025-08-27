@@ -11,7 +11,7 @@ __license__ = "MIT"
 
 
 class CompressedFloatList(CompressedList):
-    """CompressedList implementation for lists of integers."""
+    """CompressedList implementation for lists of floats."""
 
     def __init__(
         self,
@@ -21,7 +21,7 @@ class CompressedFloatList(CompressedList):
         metadata: dict = None,
         **kwargs,
     ):
-        """Initialize a CompressedIntegerList.
+        """Initialize a CompressedFloatList.
 
         Args:
             unlist_data:
@@ -67,14 +67,14 @@ class CompressedFloatList(CompressedList):
 
     @classmethod
     def from_list(
-        cls, lst: List[List[bool]], names: Optional[Sequence[str]] = None, metadata: dict = None
+        cls, lst: List[List[float]], names: Optional[Sequence[str]] = None, metadata: dict = None
     ) -> "CompressedFloatList":
         """
-        Create a `CompressedFloatList` from a list of integer lists.
+        Create a `CompressedFloatList` from a list of float lists.
 
         Args:
             lst:
-                List of integer lists.
+                List of float lists.
 
             names:
                 Optional names for list elements.

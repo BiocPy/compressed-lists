@@ -1,6 +1,7 @@
 from typing import List, Optional, Sequence
 
-from biocutils.BooleanList import BooleanList
+import numpy as np
+from biocutils.IntegerList import IntegerList
 
 from .base import CompressedList
 from .partition import Partitioning
@@ -10,22 +11,22 @@ __copyright__ = "Jayaram Kancherla"
 __license__ = "MIT"
 
 
-class CompressedBooleanList(CompressedList):
-    """CompressedList implementation for lists of booleans."""
+class CompressedNumpyList(CompressedList):
+    """CompressedList implementation for lists of NumPy vectors."""
 
     def __init__(
         self,
-        unlist_data: BooleanList,
+        unlist_data: np.ndarray,
         partitioning: Partitioning,
         element_metadata: dict = None,
         metadata: dict = None,
         **kwargs,
     ):
-        """Initialize a CompressedBooleanList.
+        """Initialize a CompressedNumpyList.
 
         Args:
             unlist_data:
-                List of booleans.
+                NumPy vector.
 
             partitioning:
                 Partitioning object defining element boundaries.
@@ -40,17 +41,18 @@ class CompressedBooleanList(CompressedList):
                 Additional arguments.
         """
 
-        if not isinstance(unlist_data, BooleanList):
+        if not isinstance(unlist_data, np.ndarray):
             try:
-                unlist_data = BooleanList(unlist_data)
+                unlist_data = np.array(unlist_data)
             except Exception as e:
-                raise TypeError("'unlist_data' must be an `BooleanList`, provided ", type(unlist_data)) from e
+                raise TypeError("'unlist_data' must be an `np.ndarray`, provided ", type(unlist_data)) from e
 
+        print(unlist_data)
         super().__init__(
-            unlist_data, partitioning, element_type="boolean", element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type="ndarray", element_metadata=element_metadata, metadata=metadata
         )
 
-    def _extract_range(self, start: int, end: int) -> BooleanList:
+    def _extract_range(self, start: int, end: int) -> np.ndarray:
         """Extract a range from unlist_data.
 
         Args:
@@ -67,14 +69,14 @@ class CompressedBooleanList(CompressedList):
 
     @classmethod
     def from_list(
-        cls, lst: List[List[bool]], names: Optional[Sequence[str]] = None, metadata: dict = None
-    ) -> "CompressedBooleanList":
+        cls, lst: List[List[np.ndarray]], names: Optional[Sequence[str]] = None, metadata: dict = None
+    ) -> "CompressedNumpyList":
         """
-        Create a `CompressedBooleanList` from a list of boolean lists.
+        Create a `CompressedNumpyList` from a list of NumPy vectors.
 
         Args:
             lst:
-                List of boolean lists.
+                List of NumPy vectors.
 
             names:
                 Optional names for list elements.
@@ -83,17 +85,16 @@ class CompressedBooleanList(CompressedList):
                 Optional metadata.
 
         Returns:
-            A new `CompressedBooleanList`.
+            A new `CompressedNumpyList`.
         """
-        # Flatten the list
-        flat_data = []
-        for sublist in lst:
-            flat_data.extend(sublist)
 
         # Create partitioning
         partitioning = Partitioning.from_list(lst, names)
 
         # Create unlist_data
-        unlist_data = BooleanList(data=flat_data)
+        if len(lst) == 0:
+            unlist_data = np.array([])
+        else:
+            unlist_data = np.hstack(lst)
 
         return cls(unlist_data, partitioning, metadata=metadata)
