@@ -1,6 +1,5 @@
 from typing import List
 
-import numpy as np
 import pytest
 
 from compressed_lists import CompressedList, Partitioning
