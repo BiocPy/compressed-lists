@@ -1,5 +1,3 @@
-from typing import List, Optional, Sequence
-
 from biocutils.BooleanList import BooleanList
 
 from .base import CompressedList
@@ -47,53 +45,5 @@ class CompressedBooleanList(CompressedList):
                 raise TypeError("'unlist_data' must be an `BooleanList`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type="boolean", element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=BooleanList, element_metadata=element_metadata, metadata=metadata
         )
-
-    def _extract_range(self, start: int, end: int) -> BooleanList:
-        """Extract a range from unlist_data.
-
-        Args:
-            start:
-                Start index (inclusive).
-
-            end:
-                End index (exclusive).
-
-        Returns:
-            Same type as unlist_data.
-        """
-        return self._unlist_data[start:end]
-
-    @classmethod
-    def from_list(
-        cls, lst: List[List[bool]], names: Optional[Sequence[str]] = None, metadata: dict = None
-    ) -> "CompressedBooleanList":
-        """
-        Create a `CompressedBooleanList` from a list of boolean lists.
-
-        Args:
-            lst:
-                List of boolean lists.
-
-            names:
-                Optional names for list elements.
-
-            metadata:
-                Optional metadata.
-
-        Returns:
-            A new `CompressedBooleanList`.
-        """
-        # Flatten the list
-        flat_data = []
-        for sublist in lst:
-            flat_data.extend(sublist)
-
-        # Create partitioning
-        partitioning = Partitioning.from_list(lst, names)
-
-        # Create unlist_data
-        unlist_data = BooleanList(data=flat_data)
-
-        return cls(unlist_data, partitioning, metadata=metadata)

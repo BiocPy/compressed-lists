@@ -1,7 +1,6 @@
 from typing import List, Optional, Sequence
 
 import numpy as np
-from biocutils.IntegerList import IntegerList
 
 from .base import CompressedList
 from .partition import Partitioning
@@ -49,23 +48,8 @@ class CompressedNumpyList(CompressedList):
 
         print(unlist_data)
         super().__init__(
-            unlist_data, partitioning, element_type="ndarray", element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=np.array, element_metadata=element_metadata, metadata=metadata
         )
-
-    def _extract_range(self, start: int, end: int) -> np.ndarray:
-        """Extract a range from unlist_data.
-
-        Args:
-            start:
-                Start index (inclusive).
-
-            end:
-                End index (exclusive).
-
-        Returns:
-            Same type as unlist_data.
-        """
-        return self._unlist_data[start:end]
 
     @classmethod
     def from_list(

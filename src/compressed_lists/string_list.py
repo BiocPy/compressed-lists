@@ -1,5 +1,3 @@
-from typing import List, Optional, Sequence
-
 from biocutils.StringList import StringList
 
 from .base import CompressedList
@@ -46,52 +44,8 @@ class CompressedStringList(CompressedList):
                 raise TypeError("'unlist_data' must be an `StringList`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type="string", element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=StringList, element_metadata=element_metadata, metadata=metadata
         )
-
-    def _extract_range(self, start: int, end: int) -> StringList:
-        """Extract a range from unlist_data.
-
-        Args:
-            start:
-                Start index (inclusive).
-
-            end:
-                End index (exclusive).
-
-        Returns:
-            List of strings.
-        """
-        return self._unlist_data[start:end]
-
-    @classmethod
-    def from_list(
-        cls, lst: List[List[str]], names: Optional[Sequence[str]] = None, metadata: dict = None
-    ) -> "CompressedStringList":
-        """Create a `CompressedStringList` from a list of string lists.
-
-        Args:
-            lst:
-                List of string lists.
-
-            names:
-                Optional names for list elements.
-
-            metadata:
-                Optional metadata.
-
-        Returns:
-            A new `CompressedStringList`.
-        """
-        # Flatten the list
-        flat_data = []
-        for sublist in lst:
-            flat_data.extend(sublist)
-
-        # Create partitioning
-        partitioning = Partitioning.from_list(lst, names)
-
-        return cls(StringList(flat_data), partitioning, metadata=metadata)
 
 
 class CompressedCharacterList(CompressedStringList):

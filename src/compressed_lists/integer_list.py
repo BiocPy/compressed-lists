@@ -1,5 +1,3 @@
-from typing import List, Optional, Sequence
-
 from biocutils.IntegerList import IntegerList
 
 from .base import CompressedList
@@ -47,53 +45,5 @@ class CompressedIntegerList(CompressedList):
                 raise TypeError("'unlist_data' must be an `IntegerList`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type="integer", element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=IntegerList, element_metadata=element_metadata, metadata=metadata
         )
-
-    def _extract_range(self, start: int, end: int) -> IntegerList:
-        """Extract a range from unlist_data.
-
-        Args:
-            start:
-                Start index (inclusive).
-
-            end:
-                End index (exclusive).
-
-        Returns:
-            Same type as unlist_data.
-        """
-        return self._unlist_data[start:end]
-
-    @classmethod
-    def from_list(
-        cls, lst: List[List[int]], names: Optional[Sequence[str]] = None, metadata: dict = None
-    ) -> "CompressedIntegerList":
-        """
-        Create a `CompressedIntegerList` from a list of integer lists.
-
-        Args:
-            lst:
-                List of integer lists.
-
-            names:
-                Optional names for list elements.
-
-            metadata:
-                Optional metadata.
-
-        Returns:
-            A new `CompressedIntegerList`.
-        """
-        # Flatten the list
-        flat_data = []
-        for sublist in lst:
-            flat_data.extend(sublist)
-
-        # Create partitioning
-        partitioning = Partitioning.from_list(lst, names)
-
-        # Create unlist_data
-        unlist_data = IntegerList(data=flat_data)
-
-        return cls(unlist_data, partitioning, metadata=metadata)

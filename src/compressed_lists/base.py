@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from typing import Any, Callable, Iterator, List, Optional, Sequence, Union
 from warnings import warn
 
@@ -20,7 +19,7 @@ def _validate_data_and_partitions(unlist_data, partition):
         )
 
 
-class CompressedList(ABC):
+class CompressedList:
     """Base class for compressed list objects.
 
     `CompressedList` stores list elements concatenated in a single vector-like object
@@ -31,7 +30,7 @@ class CompressedList(ABC):
         self,
         unlist_data: Any,
         partitioning: Partitioning,
-        element_type: str = None,
+        element_type: Any = None,
         element_metadata: dict = None,
         metadata: Optional[dict] = None,
         validate: bool = True,
@@ -46,7 +45,7 @@ class CompressedList(ABC):
                 Partitioning object defining element boundaries (exclusive).
 
             element_type:
-                String identifier for the type of elements.
+                class for the type of elements.
 
             element_metadata:
                 Optional metadata for elements.
@@ -414,7 +413,7 @@ class CompressedList(ABC):
                 raise IndexError(f"List index '{key}' out of range.")
 
             start, end = self._partitioning.get_partition_range(key)
-            return self._extract_range(start, end)
+            return self.extract_range(start, end)
 
         # slices
         elif isinstance(key, slice):
@@ -422,7 +421,7 @@ class CompressedList(ABC):
             result = []
             for i in indices:
                 start, end = self._partitioning.get_partition_range(i)
-                result.append(self._extract_range(start, end))
+                result.append(self.extract_range(start, end))
 
             # Create a new CompressedList from the result
             return self.__class__.from_list(
@@ -436,8 +435,7 @@ class CompressedList(ABC):
     ######>> abstract methods <<######
     ##################################
 
-    @abstractmethod
-    def _extract_range(self, start: int, end: int) -> Any:
+    def extract_range(self, start: int, end: int) -> Any:
         """Extract a range from `unlist_data`.
 
         This method must be implemented by subclasses to handle
@@ -453,10 +451,14 @@ class CompressedList(ABC):
         Returns:
             Extracted element.
         """
-        pass
+        try:
+            return self._unlist_data[start:end]
+        except Exception as e:
+            raise NotImplementedError(
+                "Custom classes should implement their own `extract_range` method for slice operations"
+            ) from e
 
     @classmethod
-    @abstractmethod
     def from_list(
         cls, lst: List[Any], names: Optional[Sequence[str]] = None, metadata: dict = None
     ) -> "CompressedList[Any]":
@@ -478,7 +480,18 @@ class CompressedList(ABC):
         Returns:
             A new `CompressedList`.
         """
-        pass
+        # Flatten the list
+        flat_data = []
+        for sublist in lst:
+            flat_data.extend(sublist)
+
+        # Create partitioning
+        partitioning = Partitioning.from_list(lst, names)
+
+        # Create unlist_data
+        # unlist_data = cls._element_type(data=flat_data)
+
+        return cls(flat_data, partitioning, metadata=metadata)
 
     ###########################
     ######>> coercions <<######
