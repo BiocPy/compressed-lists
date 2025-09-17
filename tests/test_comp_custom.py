@@ -55,3 +55,13 @@ def test_custom_class(CompressedCustomFloatList):
     assert rounded[0] == [1.0, 2.0, 3.0]
     assert rounded[1] == [4.0, 6.0]
     assert rounded[2] == [7.0, 8.0, 9.0, 10.0]
+
+
+def test_custom_plain_list():
+    list_of_bools = [[True, False], [False, True, False], [False]]
+    unclassed = CompressedList.from_list(list_of_bools)
+
+    assert unclassed is not None
+    assert isinstance(unclassed, CompressedList)
+    assert len(unclassed) == 3
+    assert list(unclassed.get_element_lengths()) == [2, 3, 1]
