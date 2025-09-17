@@ -1,8 +1,7 @@
 from functools import singledispatch
-from typing import Any, List, Optional, Sequence, Type, Union
+from typing import Any, List, Optional, Sequence
 
 import numpy as np
-import pandas as pd
 from base import CompressedList
 
 __author__ = "Jayaram Kancherla"
