@@ -1,7 +1,10 @@
+from typing import List, Union
+
 from biocutils.StringList import StringList
 
 from .base import CompressedList
 from .partition import Partitioning
+from .split_generic import splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -50,3 +53,11 @@ class CompressedStringList(CompressedList):
 
 class CompressedCharacterList(CompressedStringList):
     pass
+
+
+@splitAsCompressedList.register
+def _(
+    data: Union[List[List[str]], List[StringList]], names: List[str] = None, metadata: dict = None
+) -> CompressedStringList:
+    """Handle lists of strings."""
+    return CompressedStringList.from_list(data, names, metadata)

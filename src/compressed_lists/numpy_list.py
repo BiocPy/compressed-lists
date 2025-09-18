@@ -1,4 +1,4 @@
-from typing import List, Optional, Sequence
+from typing import List, Optional, Sequence, Union
 
 import numpy as np
 
@@ -46,14 +46,13 @@ class CompressedNumpyList(CompressedList):
             except Exception as e:
                 raise TypeError("'unlist_data' must be an `np.ndarray`, provided ", type(unlist_data)) from e
 
-        print(unlist_data)
         super().__init__(
             unlist_data, partitioning, element_type=np.array, element_metadata=element_metadata, metadata=metadata
         )
 
     @classmethod
     def from_list(
-        cls, lst: List[List[np.ndarray]], names: Optional[Sequence[str]] = None, metadata: dict = None
+        cls, lst: List[List[np.ndarray]], names: List[str] = None, metadata: dict = None
     ) -> "CompressedNumpyList":
         """
         Create a `CompressedNumpyList` from a list of NumPy vectors.
@@ -82,3 +81,9 @@ class CompressedNumpyList(CompressedList):
             unlist_data = np.hstack(lst)
 
         return cls(unlist_data, partitioning, metadata=metadata)
+
+
+@splitAsCompressedList.register
+def _(data: List[np.ndarray], names: List[str] = None, metadata: dict = None) -> CompressedNumpyList:
+    """Handle lists of numpy vectors."""
+    return CompressedNumpyList.from_list(data, names, metadata)

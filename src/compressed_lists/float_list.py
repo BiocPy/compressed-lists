@@ -1,7 +1,10 @@
+from typing import List, Union
+
 from biocutils.FloatList import FloatList
 
 from .base import CompressedList
 from .partition import Partitioning
+from .split_generic import splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -47,3 +50,11 @@ class CompressedFloatList(CompressedList):
         super().__init__(
             unlist_data, partitioning, element_type=FloatList, element_metadata=element_metadata, metadata=metadata
         )
+
+
+@splitAsCompressedList.register
+def _(
+    data: Union[List[List[float]], List[FloatList]], names: List[str] = None, metadata: dict = None
+) -> CompressedFloatList:
+    """Handle lists of floats."""
+    return CompressedFloatList.from_list(data, names, metadata)

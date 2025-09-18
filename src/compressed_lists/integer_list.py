@@ -1,7 +1,10 @@
+from typing import List, Union
+
 from biocutils.IntegerList import IntegerList
 
 from .base import CompressedList
 from .partition import Partitioning
+from .split_generic import splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -47,3 +50,11 @@ class CompressedIntegerList(CompressedList):
         super().__init__(
             unlist_data, partitioning, element_type=IntegerList, element_metadata=element_metadata, metadata=metadata
         )
+
+
+@splitAsCompressedList.register
+def _(
+    data: Union[List[List[int]], List[IntegerList]], names: List[str] = None, metadata: dict = None
+) -> CompressedIntegerList:
+    """Handle lists of integers."""
+    return CompressedIntegerList.from_list(data, names, metadata)

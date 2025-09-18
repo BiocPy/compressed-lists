@@ -1,8 +1,7 @@
 from functools import singledispatch
-from typing import Any, List, Optional, Sequence, Type, Union
+from typing import Any, List, Optional, Sequence
 
 import numpy as np
-import pandas as pd
 from base import CompressedList
 
 __author__ = "Jayaram Kancherla"
@@ -11,9 +10,7 @@ __license__ = "MIT"
 
 
 @singledispatch
-def splitAsCompressedList(
-    data: Any, names: Optional[List[str]] = None, metadata: Optional[dict] = None
-) -> CompressedList:
+def splitAsCompressedList(data: Any, names: List[str] = None, metadata: dict = None) -> CompressedList:
     """Generic function to split data into an appropriate `CompressedList` subclass.
 
     This function uses single dispatch to automatically choose the right
@@ -38,7 +35,7 @@ def splitAsCompressedList(
 
 
 @splitAsCompressedList.register
-def _(data: list, names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None) -> CompressedList:
+def _(data: list, names: List[str] = None, metadata: dict = None) -> CompressedList:
     """Handle regular Python lists by inspecting element types."""
     if not data:
         raise ValueError("Cannot create `CompressedList` from empty list.")
