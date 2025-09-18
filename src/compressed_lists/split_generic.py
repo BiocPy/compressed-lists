@@ -2,7 +2,7 @@ from functools import singledispatch
 from typing import Any, List
 
 import numpy as np
-from base import CompressedList
+from .base import CompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
