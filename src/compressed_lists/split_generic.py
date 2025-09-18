@@ -1,5 +1,5 @@
 from functools import singledispatch
-from typing import Any, List, Optional, Sequence
+from typing import Any, List
 
 import numpy as np
 from base import CompressedList
