@@ -1,10 +1,11 @@
-from typing import List, Union
+from typing import List, Optional, Sequence, Union
 
+import numpy as np
 from biocutils.FloatList import FloatList
 
 from .base import CompressedList
 from .partition import Partitioning
-from .split_generic import splitAsCompressedList
+from .split_generic import _generic_register_helper, splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -18,8 +19,8 @@ class CompressedFloatList(CompressedList):
         self,
         unlist_data: FloatList,
         partitioning: Partitioning,
-        element_metadata: dict = None,
-        metadata: dict = None,
+        element_metadata: Optional[dict] = None,
+        metadata: Optional[dict] = None,
         **kwargs,
     ):
         """Initialize a CompressedFloatList.
@@ -51,10 +52,47 @@ class CompressedFloatList(CompressedList):
             unlist_data, partitioning, element_type=FloatList, element_metadata=element_metadata, metadata=metadata
         )
 
+    @classmethod
+    def from_partitioned_data(
+        cls, partitioned_data: List[List], partitioning: Partitioning, metadata: Optional[dict] = None
+    ) -> "CompressedFloatList":
+        """Create `CompressedFloatList` from already-partitioned data.
+
+        Args:
+            partitioned_data:
+                List of lists, each containing floats for one partition.
+
+            partitioning:
+                Partitioning object defining the boundaries.
+
+            metadata:
+                Optional metadata.
+
+        Returns:
+            A new `CompressedFloatList`.
+        """
+        flat_data = []
+        for partition in partitioned_data:
+            flat_data.extend(partition)
+
+        unlist_data = FloatList(flat_data)
+
+        return cls(unlist_data, partitioning, metadata=metadata)
+
 
 @splitAsCompressedList.register
 def _(
-    data: Union[List[List[float]], List[FloatList]], names: List[str] = None, metadata: dict = None
+    data: FloatList,
+    groups_or_partitions: Union[list, Partitioning],
+    names: Optional[Sequence[str]] = None,
+    metadata: Optional[dict] = None,
 ) -> CompressedFloatList:
     """Handle lists of floats."""
-    return CompressedFloatList.from_list(data, names, metadata)
+
+    partitioned_data, groups_or_partitions = _generic_register_helper(
+        data=data, groups_or_partitions=groups_or_partitions, names=names
+    )
+
+    return CompressedFloatList.from_partitioned_data(
+        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
+    )

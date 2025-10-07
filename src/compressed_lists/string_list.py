@@ -1,10 +1,11 @@
-from typing import List, Union
+from typing import List, Optional, Sequence, Union
 
+import numpy as np
 from biocutils.StringList import StringList
 
 from .base import CompressedList
 from .partition import Partitioning
-from .split_generic import splitAsCompressedList
+from .split_generic import _generic_register_helper, splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -18,8 +19,8 @@ class CompressedStringList(CompressedList):
         self,
         unlist_data: StringList,
         partitioning: Partitioning,
-        element_metadata: dict = None,
-        metadata: dict = None,
+        element_metadata: Optional[dict] = None,
+        metadata: Optional[dict] = None,
         **kwargs,
     ):
         """Initialize a CompressedStringList.
@@ -50,6 +51,33 @@ class CompressedStringList(CompressedList):
             unlist_data, partitioning, element_type=StringList, element_metadata=element_metadata, metadata=metadata
         )
 
+    @classmethod
+    def from_partitioned_data(
+        cls, partitioned_data: List[List], partitioning: Partitioning, metadata: Optional[dict] = None
+    ) -> "CompressedStringList":
+        """Create `CompressedStringList` from already-partitioned data.
+
+        Args:
+            partitioned_data:
+                List of lists, each containing strings for one partition.
+
+            partitioning:
+                Partitioning object defining the boundaries.
+
+            metadata:
+                Optional metadata.
+
+        Returns:
+            A new `CompressedStringList`.
+        """
+        flat_data = []
+        for partition in partitioned_data:
+            flat_data.extend(partition)
+
+        unlist_data = StringList(flat_data)
+
+        return cls(unlist_data, partitioning, metadata=metadata)
+
 
 class CompressedCharacterList(CompressedStringList):
     pass
@@ -57,7 +85,17 @@ class CompressedCharacterList(CompressedStringList):
 
 @splitAsCompressedList.register
 def _(
-    data: Union[List[List[str]], List[StringList]], names: List[str] = None, metadata: dict = None
+    data: StringList,
+    groups_or_partitions: Union[list, Partitioning],
+    names: Optional[Sequence[str]] = None,
+    metadata: Optional[dict] = None,
 ) -> CompressedStringList:
-    """Handle lists of strings."""
-    return CompressedStringList.from_list(data, names, metadata)
+    """Handle lists of floats."""
+
+    partitioned_data, groups_or_partitions = _generic_register_helper(
+        data=data, groups_or_partitions=groups_or_partitions, names=names
+    )
+
+    return CompressedStringList.from_partitioned_data(
+        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
+    )

@@ -1,10 +1,11 @@
-from typing import List, Union
+from typing import Optional, Sequence, Union
 
+import numpy as np
 from biocutils.IntegerList import IntegerList
 
 from .base import CompressedList
 from .partition import Partitioning
-from .split_generic import splitAsCompressedList
+from .split_generic import splitAsCompressedList, _generic_register_helper
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -18,8 +19,8 @@ class CompressedIntegerList(CompressedList):
         self,
         unlist_data: IntegerList,
         partitioning: Partitioning,
-        element_metadata: dict = None,
-        metadata: dict = None,
+        element_metadata: Optional[dict] = None,
+        metadata: Optional[dict] = None,
         **kwargs,
     ):
         """Initialize a CompressedIntegerList.
@@ -51,10 +52,48 @@ class CompressedIntegerList(CompressedList):
             unlist_data, partitioning, element_type=IntegerList, element_metadata=element_metadata, metadata=metadata
         )
 
+    @classmethod
+    def from_partitioned_data(
+        cls, partitioned_data: Sequence[IntegerList], partitioning: Partitioning, metadata: Optional[dict] = None
+    ) -> "CompressedIntegerList":
+        """Create `CompressedIntegerList` from already-partitioned data.
+
+        Args:
+            partitioned_data:
+                List of `IntegerList`'s, each containing integers for one partition.
+
+            partitioning:
+                Partitioning object defining the boundaries.
+
+            metadata:
+                Optional metadata.
+
+        Returns:
+            A new `CompressedIntegerList`.
+        """
+
+        flat_data = []
+        for partition in partitioned_data:
+            flat_data.extend(partition)
+
+        unlist_data = IntegerList(flat_data)
+
+        return cls(unlist_data, partitioning, metadata=metadata)
+
 
 @splitAsCompressedList.register
 def _(
-    data: Union[List[List[int]], List[IntegerList]], names: List[str] = None, metadata: dict = None
+    data: IntegerList,
+    groups_or_partitions: Union[list, Partitioning],
+    names: Optional[Sequence[str]] = None,
+    metadata: Optional[dict] = None,
 ) -> CompressedIntegerList:
     """Handle lists of integers."""
-    return CompressedIntegerList.from_list(data, names, metadata)
+    
+    partitioned_data, groups_or_partitions = _generic_register_helper(
+        data=data, groups_or_partitions=groups_or_partitions, names=names
+    )
+    
+    return CompressedIntegerList.from_partitioned_data(
+        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
+    )
