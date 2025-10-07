@@ -1,6 +1,5 @@
 from typing import Optional, Sequence, Union
 
-import numpy as np
 from biocutils.IntegerList import IntegerList
 
 from .base import CompressedList
@@ -89,11 +88,11 @@ def _(
     metadata: Optional[dict] = None,
 ) -> CompressedIntegerList:
     """Handle lists of integers."""
-    
+
     partitioned_data, groups_or_partitions = _generic_register_helper(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
-    
+
     return CompressedIntegerList.from_partitioned_data(
         partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
     )
