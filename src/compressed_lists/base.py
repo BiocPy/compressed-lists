@@ -422,7 +422,7 @@ class CompressedList:
             for i in indices:
                 start, end = self._partitioning.get_partition_range(i)
                 result.append(self.extract_range(start, end))
-            
+
             current_class_const = type(self)
             return current_class_const.from_list(
                 result, names=[self.names[i] for i in indices] if self.names[0] is not None else None
@@ -594,6 +594,6 @@ class CompressedList:
             A new CompressedList with the results.
         """
         result = [func(elem) for elem in self]
-        
+
         current_class_const = type(self)
         return current_class_const.from_list(result, self.names, self._metadata)

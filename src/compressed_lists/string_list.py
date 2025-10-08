@@ -1,6 +1,5 @@
 from typing import List, Optional, Sequence, Union
 
-import numpy as np
 from biocutils.StringList import StringList
 
 from .base import CompressedList
