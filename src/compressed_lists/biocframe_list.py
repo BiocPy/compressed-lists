@@ -50,14 +50,16 @@ class CompressedBiocFrameList(CompressedList):
             return super().__getitem__(key)
 
     @classmethod
-    def _from_partitioned_data(cls, partitioned_data: List, partitioning: Partitioning, metadata: dict = None) -> "CompressedBiocFrameList":
+    def _from_partitioned_data(
+        cls, partitioned_data: List, partitioning: Partitioning, metadata: dict = None
+    ) -> "CompressedBiocFrameList":
         """Create CompressedBiocFrameList from already-partitioned data.
-        
+
         Args:
             partitioned_data: List of BiocFrame objects (already partitioned)
-            partitioning: Partitioning object defining the boundaries  
+            partitioning: Partitioning object defining the boundaries
             metadata: Optional metadata
-            
+
         Returns:
             A new CompressedBiocFrameList
         """

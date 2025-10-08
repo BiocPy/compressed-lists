@@ -1,6 +1,4 @@
 import biocutils as ut
-import numpy as np
-import pytest
 
 from compressed_lists import CompressedFloatList, CompressedIntegerList, Partitioning, splitAsCompressedList
 
