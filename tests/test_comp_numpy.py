@@ -29,7 +29,7 @@ def test_creation(numpy_data):
 
 
 def test_creation_from_parts():
-    numpy_list = CompressedNumpyList([1, 2, 3, 4, 5, 6, 7, 8, 9], Partitioning(ends=[3, 5, 9]))
+    numpy_list = CompressedNumpyList(np.array([1, 2, 3, 4, 5, 6, 7, 8, 9]), Partitioning(ends=[3, 5, 9]))
 
     assert len(numpy_list) == 3
     assert isinstance(numpy_list.unlist_data, np.ndarray)

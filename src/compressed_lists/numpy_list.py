@@ -1,10 +1,10 @@
-from typing import List, Optional
+from typing import List, Optional, Sequence, Union
 
 import numpy as np
 
 from .base import CompressedList
 from .partition import Partitioning
-from .split_generic import splitAsCompressedList
+from .split_generic import _generic_register_helper, splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -26,7 +26,7 @@ class CompressedNumpyList(CompressedList):
 
         Args:
             unlist_data:
-                NumPy vector.
+                List of NumPy vectors.
 
             partitioning:
                 Partitioning object defining element boundaries.
@@ -43,17 +43,17 @@ class CompressedNumpyList(CompressedList):
 
         if not isinstance(unlist_data, np.ndarray):
             try:
-                unlist_data = np.array(unlist_data)
+                unlist_data = np.concatenate(unlist_data)
             except Exception as e:
                 raise TypeError("'unlist_data' must be an `np.ndarray`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type=np.array, element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=np.ndarray, element_metadata=element_metadata, metadata=metadata
         )
 
     @classmethod
     def from_list(
-        cls, lst: List[List[np.ndarray]], names: Optional[List[str]] = None, metadata: Optional[dict] = None
+        cls, lst: List[np.ndarray], names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None
     ) -> "CompressedNumpyList":
         """
         Create a `CompressedNumpyList` from a list of NumPy vectors.
@@ -79,23 +79,28 @@ class CompressedNumpyList(CompressedList):
         if len(lst) == 0:
             unlist_data = np.array([])
         else:
-            unlist_data = np.hstack(lst)
+            unlist_data = np.concatenate(lst)
 
         return cls(unlist_data, partitioning, metadata=metadata)
 
     @classmethod
-    def _from_partitioned_data(
+    def from_partitioned_data(
         cls, partitioned_data: List[List], partitioning: Partitioning, metadata: Optional[dict] = None
     ) -> "CompressedNumpyList":
-        """Create CompressedNumpyList from already-partitioned data.
+        """Create `CompressedNumpyList` from already-partitioned data.
 
         Args:
-            partitioned_data: List of arrays, each containing numpy data for one partition
-            partitioning: Partitioning object defining the boundaries
-            metadata: Optional metadata
+            partitioned_data:
+                List of arrays, each containing numpy data for one partition.
+
+            partitioning:
+                Partitioning object defining the boundaries.
+
+            metadata:
+                Optional metadata.
 
         Returns:
-            A new CompressedNumpyList
+            A new `CompressedNumpyList`.
         """
         import numpy as np
 
@@ -111,24 +116,16 @@ class CompressedNumpyList(CompressedList):
 @splitAsCompressedList.register
 def _(
     data: np.ndarray,
-    names: Optional[List[str]] = None,
+    groups_or_partitions: Union[list, Partitioning],
+    names: Optional[Sequence[str]] = None,
     metadata: Optional[dict] = None,
-    groups: Optional[list] = None,
-    partitions: Optional[Partitioning] = None,
-):
+) -> CompressedNumpyList:
     """Handle NumPy arrays."""
 
-    if groups is not None:
-        return _splitAsCompressedList_by_groups(data, groups, names, metadata)
-    elif partitions is not None:
-        return _splitAsCompressedList_by_partitions(data, partitions, names, metadata)
-    else:
-        # Original behavior: convert single array to list of arrays
-        if data.ndim == 1:
-            list_data = [data]
-        else:
-            list_data = [row for row in data]
+    partitioned_data, groups_or_partitions = _generic_register_helper(
+        data=data, groups_or_partitions=groups_or_partitions, names=names
+    )
 
-        from .numpy_list import CompressedNumpyList
-
-        return CompressedNumpyList.from_list(list_data, names, metadata)
+    return CompressedNumpyList.from_partitioned_data(
+        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
+    )
