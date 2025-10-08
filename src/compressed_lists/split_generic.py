@@ -96,19 +96,22 @@ def _generic_register_helper(data, groups_or_partitions, names=None):
     if not data:
         raise ValueError("'data' cannot be empty.")
 
-    if isinstance(groups_or_partitions, (list, np.ndarray)):
+    if isinstance(groups_or_partitions, Partitioning):
+        if names is not None:
+            groups_or_partitions = groups_or_partitions.set_names(names, in_place=False)
+
+        # TODO: probably not necessary to split when groups is a partition object.
+        # unless ordering matters
+        # partitioned_data = []
+        # for i in range(len(groups_or_partitions)):
+        #     start, end = groups_or_partitions.get_partition_range(i)
+        #     partitioned_data.append(data[start:end])
+        partitioned_data = data
+    elif isinstance(groups_or_partitions, (list, np.ndarray)):
         partitioned_data, groups_or_partitions = groups_to_partition(data, groups=groups_or_partitions, names=names)
 
         if len(partitioned_data) == 0:
             raise ValueError("No data after grouping")
-    elif isinstance(groups_or_partitions, Partitioning):
-        if names is not None:
-            groups_or_partitions = groups_or_partitions.set_names(names, in_place=False)
-
-        partitioned_data = []
-        for i in range(len(groups_or_partitions)):
-            start, end = groups_or_partitions.get_partition_range(i)
-            partitioned_data.append(data[start:end])
     else:
         raise ValueError("'groups_or_paritions' must be a group vector or a Partition object.")
 

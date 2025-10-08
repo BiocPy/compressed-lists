@@ -1,4 +1,4 @@
-from typing import List, Optional, Sequence, Union
+from typing import Optional, Sequence, Union
 
 from biocutils.StringList import StringList
 
@@ -52,7 +52,7 @@ class CompressedStringList(CompressedList):
 
     @classmethod
     def from_partitioned_data(
-        cls, partitioned_data: List[List], partitioning: Partitioning, metadata: Optional[dict] = None
+        cls, partitioned_data: Sequence[StringList], partitioning: Partitioning, metadata: Optional[dict] = None
     ) -> "CompressedStringList":
         """Create `CompressedStringList` from already-partitioned data.
 
@@ -69,11 +69,13 @@ class CompressedStringList(CompressedList):
         Returns:
             A new `CompressedStringList`.
         """
-        flat_data = []
-        for partition in partitioned_data:
-            flat_data.extend(partition)
+        unlist_data = partitioned_data
+        if isinstance(partitioned_data, list):
+            flat_data = []
+            for partition in partitioned_data:
+                flat_data.extend(partition)
 
-        unlist_data = StringList(flat_data)
+            unlist_data = StringList(flat_data)
 
         return cls(unlist_data, partitioning, metadata=metadata)
 

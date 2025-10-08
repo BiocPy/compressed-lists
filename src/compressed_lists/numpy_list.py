@@ -71,11 +71,8 @@ class CompressedNumpyList(CompressedList):
         Returns:
             A new `CompressedNumpyList`.
         """
-
-        # Create partitioning
         partitioning = Partitioning.from_list(lst, names)
 
-        # Create unlist_data
         if len(lst) == 0:
             unlist_data = np.array([])
         else:
@@ -85,7 +82,7 @@ class CompressedNumpyList(CompressedList):
 
     @classmethod
     def from_partitioned_data(
-        cls, partitioned_data: List[List], partitioning: Partitioning, metadata: Optional[dict] = None
+        cls, partitioned_data: Sequence[np.ndarray], partitioning: Partitioning, metadata: Optional[dict] = None
     ) -> "CompressedNumpyList":
         """Create `CompressedNumpyList` from already-partitioned data.
 
@@ -102,9 +99,6 @@ class CompressedNumpyList(CompressedList):
         Returns:
             A new `CompressedNumpyList`.
         """
-        import numpy as np
-
-        # Concatenate the numpy arrays
         if not partitioned_data or not partitioned_data[0]:
             unlist_data = np.array([])
         else:

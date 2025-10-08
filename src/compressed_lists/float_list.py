@@ -1,4 +1,4 @@
-from typing import List, Optional, Sequence, Union
+from typing import Optional, Sequence, Union
 
 from biocutils.FloatList import FloatList
 
@@ -53,7 +53,7 @@ class CompressedFloatList(CompressedList):
 
     @classmethod
     def from_partitioned_data(
-        cls, partitioned_data: List[List], partitioning: Partitioning, metadata: Optional[dict] = None
+        cls, partitioned_data: Sequence[FloatList], partitioning: Partitioning, metadata: Optional[dict] = None
     ) -> "CompressedFloatList":
         """Create `CompressedFloatList` from already-partitioned data.
 
@@ -70,11 +70,13 @@ class CompressedFloatList(CompressedList):
         Returns:
             A new `CompressedFloatList`.
         """
-        flat_data = []
-        for partition in partitioned_data:
-            flat_data.extend(partition)
+        unlist_data = partitioned_data
+        if isinstance(partitioned_data, list):
+            flat_data = []
+            for partition in partitioned_data:
+                flat_data.extend(partition)
 
-        unlist_data = FloatList(flat_data)
+            unlist_data = FloatList(flat_data)
 
         return cls(unlist_data, partitioning, metadata=metadata)
 

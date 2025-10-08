@@ -1,4 +1,4 @@
-from typing import List, Optional, Sequence, Union
+from typing import Optional, Sequence, Union
 
 from biocutils.BooleanList import BooleanList
 
@@ -53,7 +53,7 @@ class CompressedBooleanList(CompressedList):
 
     @classmethod
     def from_partitioned_data(
-        cls, partitioned_data: List[List], partitioning: Partitioning, metadata: Optional[dict] = None
+        cls, partitioned_data: Sequence[BooleanList], partitioning: Partitioning, metadata: Optional[dict] = None
     ) -> "CompressedBooleanList":
         """Create `CompressedBooleanList` from already-partitioned data.
 
@@ -70,11 +70,13 @@ class CompressedBooleanList(CompressedList):
         Returns:
             A new `CompressedBooleanList`.
         """
-        flat_data = []
-        for partition in partitioned_data:
-            flat_data.extend(partition)
+        unlist_data = partitioned_data
+        if isinstance(partitioned_data, list):
+            flat_data = []
+            for partition in partitioned_data:
+                flat_data.extend(partition)
 
-        unlist_data = BooleanList(flat_data)
+            unlist_data = BooleanList(flat_data)
 
         return cls(unlist_data, partitioning, metadata=metadata)
 

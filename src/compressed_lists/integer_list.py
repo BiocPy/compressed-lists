@@ -70,12 +70,13 @@ class CompressedIntegerList(CompressedList):
         Returns:
             A new `CompressedIntegerList`.
         """
+        unlist_data = partitioned_data
+        if isinstance(partitioned_data, list):
+            flat_data = []
+            for partition in partitioned_data:
+                flat_data.extend(partition)
 
-        flat_data = []
-        for partition in partitioned_data:
-            flat_data.extend(partition)
-
-        unlist_data = IntegerList(flat_data)
+            unlist_data = IntegerList(flat_data)
 
         return cls(unlist_data, partitioning, metadata=metadata)
 

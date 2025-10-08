@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List, Optional, Sequence
 
 import pytest
 
@@ -14,10 +14,12 @@ def CompressedCustomFloatList():
     class CompressedCustomFloatList(CompressedList):
         def __init__(
             self,
-            unlist_data: List[float],
+            unlist_data: Any,
             partitioning: Partitioning,
-            element_metadata: dict = None,
-            metadata: dict = None,
+            element_type: Any = None,
+            element_metadata: Optional[dict] = None,
+            metadata: Optional[dict] = None,
+            validate: bool = True,
         ):
             super().__init__(
                 unlist_data, partitioning, element_type="float", element_metadata=element_metadata, metadata=metadata
@@ -28,7 +30,7 @@ def CompressedCustomFloatList():
 
         @classmethod
         def from_list(
-            cls, lst: List[List[float]], names: list = None, metadata: dict = None
+            cls, lst: List[Any], names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None
         ) -> "CompressedCustomFloatList":
             flat_data = []
             for sublist in lst:
