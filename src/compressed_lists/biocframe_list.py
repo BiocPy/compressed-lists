@@ -83,6 +83,29 @@ class CompressedBiocFrameList(CompressedList):
         else:
             return super().__getitem__(key)
 
+    def extract_range(self, start: int, end: int) -> BiocFrame:
+        """Extract a range from `unlist_data`.
+
+        This method must be implemented by subclasses to handle
+        type-specific extraction from `unlist_data`.
+
+        Args:
+            start:
+                Start index (inclusive).
+
+            end:
+                End index (exclusive).
+
+        Returns:
+            Extracted element.
+        """
+        try:
+            return self._unlist_data[start:end, :]
+        except Exception as e:
+            raise NotImplementedError(
+                "Custom classes should implement their own `extract_range` method for slice operations"
+            ) from e
+
 
 @splitAsCompressedList.register
 def _(

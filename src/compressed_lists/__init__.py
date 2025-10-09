@@ -22,4 +22,5 @@ from .string_list import CompressedStringList, CompressedCharacterList
 from .bool_list import CompressedBooleanList
 from .float_list import CompressedFloatList
 from .numpy_list import CompressedNumpyList
+from .biocframe_list import CompressedBiocFrameList
 from .split_generic import splitAsCompressedList
