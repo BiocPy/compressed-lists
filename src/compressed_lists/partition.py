@@ -46,7 +46,7 @@ class Partitioning:
 
         self._names = None
         if names is not None:
-            self._names = ut.NamedList(names)
+            self._names = ut.Names(names)
 
         if validate:
             _validate_names(names, len(ends))
@@ -212,11 +212,11 @@ class Partitioning:
     ######>> names <<#####
     ######################
 
-    def get_names(self) -> Optional[ut.NamedList]:
+    def get_names(self) -> Optional[ut.Names]:
         """Return the names of each partition."""
         return self._names
 
-    def set_names(self, names: Optional[List[str]], in_place: bool = False) -> "Partitioning":
+    def set_names(self, names: Optional[Sequence[str]], in_place: bool = False) -> "Partitioning":
         """Set the names of list elements.
 
         Args:
@@ -247,7 +247,7 @@ class Partitioning:
         return self.get_names()
 
     @names.setter
-    def names(self, names: Optional[List[str]]):
+    def names(self, names: Optional[Sequence[str]]):
         """Alias for :py:meth:`~set_names` with ``in_place = True``.
 
         As this mutates the original object, a warning is raised.
@@ -262,12 +262,12 @@ class Partitioning:
     ######>> ends <<#####
     #####################
 
-    def get_ends(self) -> Optional[ut.NamedList]:
+    def get_ends(self) -> np.ndarray:
         """Return the names of each partition."""
         return self._ends
 
     @property
-    def ends(self) -> Optional[ut.Names]:
+    def ends(self) -> np.ndarray:
         """Alias for :py:attr:`~get_ends`, provided for back-compatibility."""
         return self.get_ends()
 
@@ -275,11 +275,11 @@ class Partitioning:
     ######>> starts <<#####
     #######################
 
-    def get_starts(self) -> Optional[ut.NamedList]:
+    def get_starts(self) -> np.ndarray:
         """Return the starts of each partition."""
         return self._starts
 
     @property
-    def starts(self) -> Optional[ut.Names]:
+    def starts(self) -> np.ndarray:
         """Alias for :py:attr:`~get_starts`, provided for back-compatibility."""
         return self.get_starts()

@@ -17,9 +17,8 @@ pip install compressed-lists
 
 ## Usage
 
-
 ```py
-from compressed_lists import CompressedIntegerList, CompressedStringList
+from compressed_lists import CompressedIntegerList, CompressedStringList, Partitioning
 
 # Create a CompressedIntegerList
 int_data = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
@@ -38,9 +37,12 @@ print(squared[0])       # [1, 4, 9]
 # Convert to a regular Python list
 regular_list = int_list.to_list()
 
-# Create a CompressedStringList
-char_data = [["apple", "banana"], ["cherry", "date", "elderberry"], ["fig"]]
-char_list = CompressedStringList.from_list(char_data)
+# Create a CompressedStringList from lengths
+import biocutils as ut
+char_data = ut.StringList(["apple", "banana", "cherry", "date", "elderberry", "fig"])
+
+char_list = CompressedStringList(char_data, partitioning=Partitioning.from_lengths([2,3,1]))
+print(char_list)
 ```
 
 ### Partitioning
@@ -61,7 +63,7 @@ start, end = part[1]  # Returns (3, 5)
 
 > [!NOTE]
 >
-> Check out the [documentation](https://biocpy.github.io/compressed-lists) for extending CompressedLists to custom data types.
+> Check out the [documentation](https://biocpy.github.io/compressed-lists) for available compressed list implementations and extending `CompressedLists` to custom data types.
 
 <!-- biocsetup-notes -->
 

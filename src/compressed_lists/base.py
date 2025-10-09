@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 from typing import Any, Callable, Iterator, List, Optional, Sequence, Union
 from warnings import warn
 
@@ -20,7 +19,7 @@ def _validate_data_and_partitions(unlist_data, partition):
         )
 
 
-class CompressedList(ABC):
+class CompressedList:
     """Base class for compressed list objects.
 
     `CompressedList` stores list elements concatenated in a single vector-like object
@@ -31,8 +30,8 @@ class CompressedList(ABC):
         self,
         unlist_data: Any,
         partitioning: Partitioning,
-        element_type: str = None,
-        element_metadata: dict = None,
+        element_type: Any = None,
+        element_metadata: Optional[dict] = None,
         metadata: Optional[dict] = None,
         validate: bool = True,
     ):
@@ -43,10 +42,10 @@ class CompressedList(ABC):
                 Vector-like object containing concatenated elements.
 
             partitioning:
-                Partitioning object defining element boundaries.
+                Partitioning object defining element boundaries (exclusive).
 
             element_type:
-                String identifier for the type of elements.
+                class for the type of elements.
 
             element_metadata:
                 Optional metadata for elements.
@@ -66,7 +65,7 @@ class CompressedList(ABC):
         if validate:
             _validate_data_and_partitions(self._unlist_data, self._partitioning)
 
-    def _define_output(self, in_place: bool = False) -> "Partitioning":
+    def _define_output(self, in_place: bool = False) -> "CompressedList":
         if in_place is True:
             return self
         else:
@@ -208,7 +207,7 @@ class CompressedList(ABC):
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
-    def set_names(self, names: Sequence[str], in_place: bool = False) -> "CompressedList":
+    def set_names(self, names: List[str], in_place: bool = False) -> "CompressedList":
         """Set the names of list elements.
 
         names:
@@ -402,7 +401,7 @@ class CompressedList(ABC):
         """
         # string keys (names)
         if isinstance(key, str):
-            if key not in self.names:
+            if key not in list(self.get_names()):
                 raise KeyError(f"No element named '{key}'.")
             key = list(self.names).index(key)
 
@@ -414,7 +413,7 @@ class CompressedList(ABC):
                 raise IndexError(f"List index '{key}' out of range.")
 
             start, end = self._partitioning.get_partition_range(key)
-            return self._extract_range(start, end)
+            return self.extract_range(start, end)
 
         # slices
         elif isinstance(key, slice):
@@ -422,22 +421,21 @@ class CompressedList(ABC):
             result = []
             for i in indices:
                 start, end = self._partitioning.get_partition_range(i)
-                result.append(self._extract_range(start, end))
+                result.append(self.extract_range(start, end))
 
-            # Create a new CompressedList from the result
-            return self.__class__.from_list(
+            current_class_const = type(self)
+            return current_class_const.from_list(
                 result, names=[self.names[i] for i in indices] if self.names[0] is not None else None
             )
 
         else:
-            raise TypeError("Index must be int, str, or slice.")
+            raise TypeError("'key' must be int, str, or slice.")
 
     ##################################
     ######>> abstract methods <<######
     ##################################
 
-    @abstractmethod
-    def _extract_range(self, start: int, end: int) -> Any:
+    def extract_range(self, start: int, end: int) -> Any:
         """Extract a range from `unlist_data`.
 
         This method must be implemented by subclasses to handle
@@ -453,13 +451,17 @@ class CompressedList(ABC):
         Returns:
             Extracted element.
         """
-        pass
+        try:
+            return self._unlist_data[start:end]
+        except Exception as e:
+            raise NotImplementedError(
+                "Custom classes should implement their own `extract_range` method for slice operations"
+            ) from e
 
     @classmethod
-    @abstractmethod
     def from_list(
-        cls, lst: List[Any], names: Optional[Sequence[str]] = None, metadata: dict = None
-    ) -> "CompressedList[Any]":
+        cls, lst: List[Any], names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None
+    ) -> "CompressedList":
         """Create a CompressedList from a regular list.
 
         This method must be implemented by subclasses to handle
@@ -478,7 +480,18 @@ class CompressedList(ABC):
         Returns:
             A new `CompressedList`.
         """
-        pass
+        # Flatten the list
+        flat_data = []
+        for sublist in lst:
+            flat_data.extend(sublist)
+
+        # Create partitioning
+        partitioning = Partitioning.from_list(lst, names)
+
+        # Create unlist_data
+        # unlist_data = cls._element_type(data=flat_data)
+
+        return cls(flat_data, partitioning, metadata=metadata)
 
     ###########################
     ######>> coercions <<######
@@ -506,7 +519,7 @@ class CompressedList(ABC):
         """
         return self._unlist_data
 
-    def relist(self, unlist_data: Any) -> "CompressedList[Any]":
+    def relist(self, unlist_data: Any) -> "CompressedList":
         """Create a new `CompressedList` with the same partitioning but different data.
 
         Args:
@@ -518,7 +531,8 @@ class CompressedList(ABC):
         """
         _validate_data_and_partitions(unlist_data, self._partitioning)
 
-        return self.__class__(
+        current_class_const = type(self)
+        return current_class_const(
             unlist_data,
             self._partitioning.copy(),
             element_type=self._element_type,
@@ -526,7 +540,7 @@ class CompressedList(ABC):
             metadata=self._metadata.copy(),
         )
 
-    def extract_subset(self, indices: Sequence[int]) -> "CompressedList[Any]":
+    def extract_subset(self, indices: Sequence[int]) -> "CompressedList":
         """Extract a subset of elements by indices.
 
         Args:
@@ -542,8 +556,8 @@ class CompressedList(ABC):
                 raise IndexError(f"Index {i} out of range")
 
         # Extract element lengths and names
-        new_lengths = [self.get_element_lengths()[i] for i in indices]
-        new_names = [self.names[i] for i in indices] if self.names[0] is not None else None
+        new_lengths = ut.subset_sequence(self.get_element_lengths(), indices)
+        new_names = ut.subset_sequence(self.names, indices) if self.names is not None else None
 
         # Create new partitioning
         new_partitioning = Partitioning.from_lengths(new_lengths, new_names)
@@ -560,8 +574,8 @@ class CompressedList(ABC):
         if isinstance(self._unlist_data, np.ndarray):
             new_data = np.concatenate(new_data)
 
-        # Create new compressed list
-        return self.__class__(
+        current_class_const = type(self)
+        return current_class_const(
             new_data,
             new_partitioning,
             element_type=self._element_type,
@@ -569,7 +583,7 @@ class CompressedList(ABC):
             metadata=self._metadata.copy(),
         )
 
-    def lapply(self, func: Callable) -> "CompressedList[Any]":
+    def lapply(self, func: Callable) -> "CompressedList":
         """Apply a function to each element.
 
         Args:
@@ -580,4 +594,6 @@ class CompressedList(ABC):
             A new CompressedList with the results.
         """
         result = [func(elem) for elem in self]
-        return self.__class__.from_list(result, self.names, self._metadata)
+
+        current_class_const = type(self)
+        return current_class_const.from_list(result, self.names, self._metadata)
