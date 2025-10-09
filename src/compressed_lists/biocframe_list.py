@@ -78,7 +78,7 @@ class CompressedBiocFrameList(CompressedList):
         if isinstance(key, str):
             column_data = self._unlist_data.get_column(key)
             return splitAsCompressedList(
-                column_data, partition=self._partitioning, names=self.names, metadata=self.metadata
+                column_data, groups_or_partitions=self._partitioning, names=self.names, metadata=self.metadata
             )
         else:
             return super().__getitem__(key)
