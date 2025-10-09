@@ -1,5 +1,7 @@
 from typing import List, Optional, Sequence, Union
+from warnings import warn
 
+import biocutils as ut
 import numpy as np
 
 from .base import CompressedList
@@ -43,6 +45,7 @@ class CompressedNumpyList(CompressedList):
 
         if not isinstance(unlist_data, np.ndarray):
             try:
+                warn("trying to concatenate/coerce 'unlist_data' to a `np.ndarray`..")
                 unlist_data = np.concatenate(unlist_data)
             except Exception as e:
                 raise TypeError("'unlist_data' must be an `np.ndarray`, provided ", type(unlist_data)) from e
@@ -80,32 +83,6 @@ class CompressedNumpyList(CompressedList):
 
         return cls(unlist_data, partitioning, metadata=metadata)
 
-    @classmethod
-    def from_partitioned_data(
-        cls, partitioned_data: Sequence[np.ndarray], partitioning: Partitioning, metadata: Optional[dict] = None
-    ) -> "CompressedNumpyList":
-        """Create `CompressedNumpyList` from already-partitioned data.
-
-        Args:
-            partitioned_data:
-                List of arrays, each containing numpy data for one partition.
-
-            partitioning:
-                Partitioning object defining the boundaries.
-
-            metadata:
-                Optional metadata.
-
-        Returns:
-            A new `CompressedNumpyList`.
-        """
-        if not partitioned_data or not partitioned_data[0]:
-            unlist_data = np.array([])
-        else:
-            unlist_data = np.concatenate(partitioned_data)
-
-        return cls(unlist_data, partitioning, metadata=metadata)
-
 
 @splitAsCompressedList.register
 def _(
@@ -120,6 +97,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    return CompressedNumpyList.from_partitioned_data(
-        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
-    )
+    if not isinstance(partitioned_data, np.ndarray):
+        partitioned_data = ut.combine_sequences(*partitioned_data)
+
+    return CompressedNumpyList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)

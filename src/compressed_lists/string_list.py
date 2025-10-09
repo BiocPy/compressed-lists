@@ -1,6 +1,7 @@
 from typing import Optional, Sequence, Union
+from warnings import warn
 
-from biocutils.StringList import StringList
+import biocutils as ut
 
 from .base import CompressedList
 from .partition import Partitioning
@@ -16,7 +17,7 @@ class CompressedStringList(CompressedList):
 
     def __init__(
         self,
-        unlist_data: StringList,
+        unlist_data: ut.StringList,
         partitioning: Partitioning,
         element_metadata: Optional[dict] = None,
         metadata: Optional[dict] = None,
@@ -40,44 +41,16 @@ class CompressedStringList(CompressedList):
             kwargs:
                 Additional arguments.
         """
-        if not isinstance(unlist_data, StringList):
+        if not isinstance(unlist_data, ut.StringList):
             try:
-                unlist_data = StringList(unlist_data)
+                warn("trying to coerce 'unlist_data' to `StringList`..")
+                unlist_data = ut.StringList(unlist_data)
             except Exception as e:
                 raise TypeError("'unlist_data' must be an `StringList`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type=StringList, element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=ut.StringList, element_metadata=element_metadata, metadata=metadata
         )
-
-    @classmethod
-    def from_partitioned_data(
-        cls, partitioned_data: Sequence[StringList], partitioning: Partitioning, metadata: Optional[dict] = None
-    ) -> "CompressedStringList":
-        """Create `CompressedStringList` from already-partitioned data.
-
-        Args:
-            partitioned_data:
-                List of lists, each containing strings for one partition.
-
-            partitioning:
-                Partitioning object defining the boundaries.
-
-            metadata:
-                Optional metadata.
-
-        Returns:
-            A new `CompressedStringList`.
-        """
-        unlist_data = partitioned_data
-        if isinstance(partitioned_data, list):
-            flat_data = []
-            for partition in partitioned_data:
-                flat_data.extend(partition)
-
-            unlist_data = StringList(flat_data)
-
-        return cls(unlist_data, partitioning, metadata=metadata)
 
 
 class CompressedCharacterList(CompressedStringList):
@@ -86,7 +59,7 @@ class CompressedCharacterList(CompressedStringList):
 
 @splitAsCompressedList.register
 def _(
-    data: StringList,
+    data: ut.StringList,
     groups_or_partitions: Union[list, Partitioning],
     names: Optional[Sequence[str]] = None,
     metadata: Optional[dict] = None,
@@ -97,6 +70,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    return CompressedStringList.from_partitioned_data(
-        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
-    )
+    if not isinstance(partitioned_data, ut.StringList):
+        partitioned_data = ut.combine_sequences(*partitioned_data)
+
+    return CompressedStringList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)

@@ -1,10 +1,11 @@
 from typing import Optional, Sequence, Union
+from warnings import warn
 
-from biocutils.IntegerList import IntegerList
+import biocutils as ut
 
 from .base import CompressedList
 from .partition import Partitioning
-from .split_generic import splitAsCompressedList, _generic_register_helper
+from .split_generic import _generic_register_helper, splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -16,7 +17,7 @@ class CompressedIntegerList(CompressedList):
 
     def __init__(
         self,
-        unlist_data: IntegerList,
+        unlist_data: ut.IntegerList,
         partitioning: Partitioning,
         element_metadata: Optional[dict] = None,
         metadata: Optional[dict] = None,
@@ -41,49 +42,21 @@ class CompressedIntegerList(CompressedList):
                 Additional arguments.
         """
 
-        if not isinstance(unlist_data, IntegerList):
+        if not isinstance(unlist_data, ut.IntegerList):
             try:
-                unlist_data = IntegerList(unlist_data)
+                warn("trying to coerce 'unlist_data' to `IntegerList`..")
+                unlist_data = ut.IntegerList(unlist_data)
             except Exception as e:
                 raise TypeError("'unlist_data' must be an `IntegerList`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type=IntegerList, element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=ut.IntegerList, element_metadata=element_metadata, metadata=metadata
         )
-
-    @classmethod
-    def from_partitioned_data(
-        cls, partitioned_data: Sequence[IntegerList], partitioning: Partitioning, metadata: Optional[dict] = None
-    ) -> "CompressedIntegerList":
-        """Create `CompressedIntegerList` from already-partitioned data.
-
-        Args:
-            partitioned_data:
-                List of `IntegerList`'s, each containing integers for one partition.
-
-            partitioning:
-                Partitioning object defining the boundaries.
-
-            metadata:
-                Optional metadata.
-
-        Returns:
-            A new `CompressedIntegerList`.
-        """
-        unlist_data = partitioned_data
-        if isinstance(partitioned_data, list):
-            flat_data = []
-            for partition in partitioned_data:
-                flat_data.extend(partition)
-
-            unlist_data = IntegerList(flat_data)
-
-        return cls(unlist_data, partitioning, metadata=metadata)
 
 
 @splitAsCompressedList.register
 def _(
-    data: IntegerList,
+    data: ut.IntegerList,
     groups_or_partitions: Union[list, Partitioning],
     names: Optional[Sequence[str]] = None,
     metadata: Optional[dict] = None,
@@ -94,6 +67,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    return CompressedIntegerList.from_partitioned_data(
-        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
-    )
+    if not isinstance(partitioned_data, ut.IntegerList):
+        partitioned_data = ut.combine_sequences(*partitioned_data)
+
+    return CompressedIntegerList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)

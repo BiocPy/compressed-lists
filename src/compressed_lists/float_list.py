@@ -1,6 +1,7 @@
 from typing import Optional, Sequence, Union
+from warnings import warn
 
-from biocutils.FloatList import FloatList
+import biocutils as ut
 
 from .base import CompressedList
 from .partition import Partitioning
@@ -16,7 +17,7 @@ class CompressedFloatList(CompressedList):
 
     def __init__(
         self,
-        unlist_data: FloatList,
+        unlist_data: ut.FloatList,
         partitioning: Partitioning,
         element_metadata: Optional[dict] = None,
         metadata: Optional[dict] = None,
@@ -41,49 +42,21 @@ class CompressedFloatList(CompressedList):
                 Additional arguments.
         """
 
-        if not isinstance(unlist_data, FloatList):
+        if not isinstance(unlist_data, ut.FloatList):
             try:
-                unlist_data = FloatList(unlist_data)
+                warn("trying to coerce 'unlist_data' to `FloatList`..")
+                unlist_data = ut.FloatList(unlist_data)
             except Exception as e:
                 raise TypeError("'unlist_data' must be an `FloatList`, provided ", type(unlist_data)) from e
 
         super().__init__(
-            unlist_data, partitioning, element_type=FloatList, element_metadata=element_metadata, metadata=metadata
+            unlist_data, partitioning, element_type=ut.FloatList, element_metadata=element_metadata, metadata=metadata
         )
-
-    @classmethod
-    def from_partitioned_data(
-        cls, partitioned_data: Sequence[FloatList], partitioning: Partitioning, metadata: Optional[dict] = None
-    ) -> "CompressedFloatList":
-        """Create `CompressedFloatList` from already-partitioned data.
-
-        Args:
-            partitioned_data:
-                List of lists, each containing floats for one partition.
-
-            partitioning:
-                Partitioning object defining the boundaries.
-
-            metadata:
-                Optional metadata.
-
-        Returns:
-            A new `CompressedFloatList`.
-        """
-        unlist_data = partitioned_data
-        if isinstance(partitioned_data, list):
-            flat_data = []
-            for partition in partitioned_data:
-                flat_data.extend(partition)
-
-            unlist_data = FloatList(flat_data)
-
-        return cls(unlist_data, partitioning, metadata=metadata)
 
 
 @splitAsCompressedList.register
 def _(
-    data: FloatList,
+    data: ut.FloatList,
     groups_or_partitions: Union[list, Partitioning],
     names: Optional[Sequence[str]] = None,
     metadata: Optional[dict] = None,
@@ -94,6 +67,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    return CompressedFloatList.from_partitioned_data(
-        partitioned_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
-    )
+    if not isinstance(partitioned_data, ut.FloatList):
+        partitioned_data = ut.combine_sequences(*partitioned_data)
+
+    return CompressedFloatList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)
