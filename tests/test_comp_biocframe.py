@@ -42,4 +42,3 @@ def test_bframe_typed_list_column():
     ens_col = frame_list["ensembl"]
     assert isinstance(ens_col, CompressedStringList)
     assert len(ens_col) == 2
-
