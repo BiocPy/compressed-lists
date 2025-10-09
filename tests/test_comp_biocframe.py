@@ -25,7 +25,7 @@ def test_creation(frame_data):
     assert len(frame_list) == 2
     assert isinstance(frame_list.unlist_data, BiocFrame)
     assert len(frame_list.get_unlist_data()) == 3
-    assert list(frame_list.get_element_lengths()) == [1,2]
+    assert list(frame_list.get_element_lengths()) == [1, 2]
     print(frame_list._unlist_data)
     print(frame_list[0])
     assert frame_list[0].get_column("symbol") == ["MAP1A"]
