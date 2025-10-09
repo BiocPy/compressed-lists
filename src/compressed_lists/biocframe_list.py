@@ -100,6 +100,4 @@ def _(
     if not isinstance(partitioned_data, BiocFrame):
         partitioned_data = ut.relaxed_combine_rows(*partitioned_data)
 
-    return CompressedBiocFrameList(
-        unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
-    )
+    return CompressedBiocFrameList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)
