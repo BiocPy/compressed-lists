@@ -1,14 +1,14 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="compressed_lists package" href="compressed_lists.html" /><link rel="prev" title="Changelog" href="../changelog.html" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="next" title="compressed_lists package" href="compressed_lists.html"><link rel="prev" title="Changelog" href="../changelog.html">
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>compressed_lists - compressed-lists 0.1.1 documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>compressed_lists - compressed-lists 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
@@ -23,14 +23,14 @@
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #2b2b2b;
-  --color-code-foreground: #f8f8f2;
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #2b2b2b;
-  --color-code-foreground: #f8f8f2;
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
   
       }
     }
@@ -145,14 +145,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -162,17 +158,15 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">compressed-lists 0.1.1 documentation</div></a>
+      <a href="../index.html"><div class="brand">compressed-lists 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -180,8 +174,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -190,7 +183,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">compressed-lists 0.1.1 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.2.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -206,7 +199,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Module Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Module Reference</a><input aria-label="Toggle navigation of Module Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="compressed_lists.html">compressed_lists package</a></li>
 </ul>
 </li>
@@ -236,8 +229,7 @@
   </a>
 </div>
 <div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -245,8 +237,7 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
@@ -256,60 +247,84 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="compressed_lists.html">compressed_lists package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.CompressedIntegerList">compressed_lists.CompressedIntegerList module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedIntegerList.CompressedIntegerList"><code class="docutils literal notranslate"><span class="pre">CompressedIntegerList</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedIntegerList.CompressedIntegerList.__abstractmethods__"><code class="docutils literal notranslate"><span class="pre">CompressedIntegerList.__abstractmethods__</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedIntegerList.CompressedIntegerList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedIntegerList.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedIntegerList.CompressedIntegerList.from_list"><code class="docutils literal notranslate"><span class="pre">CompressedIntegerList.from_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.base">compressed_lists.base module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList"><code class="docutils literal notranslate"><span class="pre">CompressedList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.__copy__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__copy__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.__deepcopy__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__deepcopy__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.__getitem__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__getitem__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.__iter__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__iter__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.__len__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__len__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.__repr__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__repr__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.copy"><code class="docutils literal notranslate"><span class="pre">CompressedList.copy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.element_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.element_metadata</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.element_type"><code class="docutils literal notranslate"><span class="pre">CompressedList.element_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.extract_range"><code class="docutils literal notranslate"><span class="pre">CompressedList.extract_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.extract_subset"><code class="docutils literal notranslate"><span class="pre">CompressedList.extract_subset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.from_list"><code class="docutils literal notranslate"><span class="pre">CompressedList.from_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.get_element_lengths"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_element_lengths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.get_element_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_element_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.get_element_type"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_element_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.get_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.get_names"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.get_partitioning"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_partitioning()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.get_unlist_data"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_unlist_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.lapply"><code class="docutils literal notranslate"><span class="pre">CompressedList.lapply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.metadata</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.names"><code class="docutils literal notranslate"><span class="pre">CompressedList.names</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.paritioning"><code class="docutils literal notranslate"><span class="pre">CompressedList.paritioning</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.relist"><code class="docutils literal notranslate"><span class="pre">CompressedList.relist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.set_element_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_element_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.set_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_metadata()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.set_names"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_names()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.set_unlist_data"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_unlist_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.to_list"><code class="docutils literal notranslate"><span class="pre">CompressedList.to_list()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.unlist"><code class="docutils literal notranslate"><span class="pre">CompressedList.unlist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.base.CompressedList.unlist_data"><code class="docutils literal notranslate"><span class="pre">CompressedList.unlist_data</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.CompressedList">compressed_lists.CompressedList module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList"><code class="docutils literal notranslate"><span class="pre">CompressedList</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__abstractmethods__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__abstractmethods__</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__annotations__</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__copy__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__copy__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__deepcopy__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__deepcopy__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__getitem__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__getitem__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__iter__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__iter__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__len__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__len__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.__repr__"><code class="docutils literal notranslate"><span class="pre">CompressedList.__repr__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.copy"><code class="docutils literal notranslate"><span class="pre">CompressedList.copy()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.element_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.element_metadata</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.element_type"><code class="docutils literal notranslate"><span class="pre">CompressedList.element_type</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.extract_subset"><code class="docutils literal notranslate"><span class="pre">CompressedList.extract_subset()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.from_list"><code class="docutils literal notranslate"><span class="pre">CompressedList.from_list()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_element_lengths"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_element_lengths()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_element_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_element_metadata()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_element_type"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_element_type()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_metadata()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_names"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_names()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_partitioning"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_partitioning()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_unlist_data"><code class="docutils literal notranslate"><span class="pre">CompressedList.get_unlist_data()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.lapply"><code class="docutils literal notranslate"><span class="pre">CompressedList.lapply()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.metadata</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.names"><code class="docutils literal notranslate"><span class="pre">CompressedList.names</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.paritioning"><code class="docutils literal notranslate"><span class="pre">CompressedList.paritioning</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.relist"><code class="docutils literal notranslate"><span class="pre">CompressedList.relist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_element_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_element_metadata()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_metadata()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_names"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_names()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_unlist_data"><code class="docutils literal notranslate"><span class="pre">CompressedList.set_unlist_data()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.to_list"><code class="docutils literal notranslate"><span class="pre">CompressedList.to_list()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.unlist"><code class="docutils literal notranslate"><span class="pre">CompressedList.unlist()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedList.CompressedList.unlist_data"><code class="docutils literal notranslate"><span class="pre">CompressedList.unlist_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.biocframe_list">compressed_lists.biocframe_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.biocframe_list.CompressedBiocFrameList"><code class="docutils literal notranslate"><span class="pre">CompressedBiocFrameList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.biocframe_list.CompressedBiocFrameList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedBiocFrameList.__annotations__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.biocframe_list.CompressedBiocFrameList.__getitem__"><code class="docutils literal notranslate"><span class="pre">CompressedBiocFrameList.__getitem__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.biocframe_list.CompressedBiocFrameList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedBiocFrameList.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.biocframe_list.CompressedBiocFrameList.extract_range"><code class="docutils literal notranslate"><span class="pre">CompressedBiocFrameList.extract_range()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.biocframe_list.CompressedBiocFrameList.from_list"><code class="docutils literal notranslate"><span class="pre">CompressedBiocFrameList.from_list()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.CompressedStringList">compressed_lists.CompressedStringList module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedStringList.CompressedStringList"><code class="docutils literal notranslate"><span class="pre">CompressedStringList</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedStringList.CompressedStringList.__abstractmethods__"><code class="docutils literal notranslate"><span class="pre">CompressedStringList.__abstractmethods__</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedStringList.CompressedStringList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedStringList.__annotations__</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedStringList.CompressedStringList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedStringList.__init__()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.CompressedStringList.CompressedStringList.from_list"><code class="docutils literal notranslate"><span class="pre">CompressedStringList.from_list()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.bool_list">compressed_lists.bool_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.bool_list.CompressedBooleanList"><code class="docutils literal notranslate"><span class="pre">CompressedBooleanList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.bool_list.CompressedBooleanList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedBooleanList.__annotations__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.bool_list.CompressedBooleanList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedBooleanList.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.float_list">compressed_lists.float_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.float_list.CompressedFloatList"><code class="docutils literal notranslate"><span class="pre">CompressedFloatList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.float_list.CompressedFloatList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedFloatList.__annotations__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.float_list.CompressedFloatList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedFloatList.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.integer_list">compressed_lists.integer_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.integer_list.CompressedIntegerList"><code class="docutils literal notranslate"><span class="pre">CompressedIntegerList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.integer_list.CompressedIntegerList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedIntegerList.__annotations__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.integer_list.CompressedIntegerList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedIntegerList.__init__()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.numpy_list">compressed_lists.numpy_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.numpy_list.CompressedNumpyList"><code class="docutils literal notranslate"><span class="pre">CompressedNumpyList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.numpy_list.CompressedNumpyList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedNumpyList.__annotations__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.numpy_list.CompressedNumpyList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedNumpyList.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.numpy_list.CompressedNumpyList.from_list"><code class="docutils literal notranslate"><span class="pre">CompressedNumpyList.from_list()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -337,6 +352,23 @@
 <li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.partition.Partitioning.nobj"><code class="docutils literal notranslate"><span class="pre">Partitioning.nobj()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.partition.Partitioning.set_names"><code class="docutils literal notranslate"><span class="pre">Partitioning.set_names()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.partition.Partitioning.starts"><code class="docutils literal notranslate"><span class="pre">Partitioning.starts</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.split_generic">compressed_lists.split_generic module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.split_generic.groups_to_partition"><code class="docutils literal notranslate"><span class="pre">groups_to_partition()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.split_generic.splitAsCompressedList"><code class="docutils literal notranslate"><span class="pre">splitAsCompressedList()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="compressed_lists.html#module-compressed_lists.string_list">compressed_lists.string_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.string_list.CompressedCharacterList"><code class="docutils literal notranslate"><span class="pre">CompressedCharacterList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.string_list.CompressedCharacterList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedCharacterList.__annotations__</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="compressed_lists.html#compressed_lists.string_list.CompressedStringList"><code class="docutils literal notranslate"><span class="pre">CompressedStringList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.string_list.CompressedStringList.__annotations__"><code class="docutils literal notranslate"><span class="pre">CompressedStringList.__annotations__</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="compressed_lists.html#compressed_lists.string_list.CompressedStringList.__init__"><code class="docutils literal notranslate"><span class="pre">CompressedStringList.__init__()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -397,7 +429,7 @@
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=a58bc63e"></script>
+</div><script src="../_static/documentation_options.js?v=938c9ccc"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>

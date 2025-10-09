@@ -1,13 +1,13 @@
 <!doctype html>
 <html class="no-js" lang="en" data-content_root="../../">
-  <head><meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
 
-    <!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
-        <title>compressed_lists.CompressedList - compressed-lists 0.1.1 documentation</title>
+    <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
+        <title>compressed_lists.base - compressed-lists 0.2.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=25af2a20" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
@@ -22,14 +22,14 @@
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #2b2b2b;
-  --color-code-foreground: #f8f8f2;
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #2b2b2b;
-  --color-code-foreground: #f8f8f2;
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
   
       }
     }
@@ -144,14 +144,10 @@
   </symbol>
 </svg>
 
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
-<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
-<label class="overlay sidebar-overlay" for="__navigation">
-  <div class="visually-hidden">Hide navigation sidebar</div>
-</label>
-<label class="overlay toc-overlay" for="__toc">
-  <div class="visually-hidden">Hide table of contents sidebar</div>
-</label>
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
 
 <a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
 
@@ -161,17 +157,15 @@
   <header class="mobile-header">
     <div class="header-left">
       <label class="nav-overlay-icon" for="__navigation">
-        <div class="visually-hidden">Toggle site navigation sidebar</div>
-        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">compressed-lists 0.1.1 documentation</div></a>
+      <a href="../../index.html"><div class="brand">compressed-lists 0.2.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
-        <button class="theme-toggle">
-          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
           <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
           <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
           <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -179,8 +173,7 @@
         </button>
       </div>
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
-        <div class="visually-hidden">Toggle table of contents sidebar</div>
-        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
   </header>
@@ -189,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
-  <span class="sidebar-brand-text">compressed-lists 0.1.1 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.2.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -205,7 +198,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/modules.html">Module Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/modules.html">Module Reference</a><input aria-label="Toggle navigation of Module Reference" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../api/compressed_lists.html">compressed_lists package</a></li>
 </ul>
 </li>
@@ -229,8 +222,7 @@
         </a>
         <div class="content-icon-container">
           <div class="theme-toggle-container theme-toggle-content">
-            <button class="theme-toggle">
-              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
               <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
               <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
               <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
@@ -238,14 +230,12 @@
             </button>
           </div>
           <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
-            <div class="visually-hidden">Toggle table of contents sidebar</div>
-            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <h1>Source code for compressed_lists.CompressedList</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
+          <h1>Source code for compressed_lists.base</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">warnings</span><span class="w"> </span><span class="kn">import</span> <span class="n">warn</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">biocutils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ut</span>
@@ -267,8 +257,8 @@
 
 
 <div class="viewcode-block" id="CompressedList">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">CompressedList</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CompressedList</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for compressed list objects.</span>
 
 <span class="sd">    `CompressedList` stores list elements concatenated in a single vector-like object</span>
@@ -276,13 +266,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="CompressedList.__init__">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.__init__">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
         <span class="n">partitioning</span><span class="p">:</span> <span class="n">Partitioning</span><span class="p">,</span>
-        <span class="n">element_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">element_metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">element_type</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">element_metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
@@ -293,10 +283,10 @@
 <span class="sd">                Vector-like object containing concatenated elements.</span>
 
 <span class="sd">            partitioning:</span>
-<span class="sd">                Partitioning object defining element boundaries.</span>
+<span class="sd">                Partitioning object defining element boundaries (exclusive).</span>
 
 <span class="sd">            element_type:</span>
-<span class="sd">                String identifier for the type of elements.</span>
+<span class="sd">                class for the type of elements.</span>
 
 <span class="sd">            element_metadata:</span>
 <span class="sd">                Optional metadata for elements.</span>
@@ -317,7 +307,7 @@
             <span class="n">_validate_data_and_partitions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_define_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Partitioning&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_define_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">in_place</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">else</span><span class="p">:</span>
@@ -328,7 +318,7 @@
     <span class="c1">#########################</span>
 
 <div class="viewcode-block" id="CompressedList.__deepcopy__">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.__deepcopy__">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__deepcopy__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">_nil</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
@@ -353,7 +343,7 @@
 
 
 <div class="viewcode-block" id="CompressedList.__copy__">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.__copy__">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__copy__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
@@ -370,7 +360,7 @@
 
 
 <div class="viewcode-block" id="CompressedList.copy">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.copy">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.copy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:meth:`~__copy__`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span></div>
@@ -381,21 +371,21 @@
     <span class="c1">######################################</span>
 
 <div class="viewcode-block" id="CompressedList.__len__">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.__len__">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__len__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of list elements.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.get_element_lengths">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_element_lengths">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_element_lengths">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_element_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the lengths of each list element.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_element_lengths</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.__iter__">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.__iter__">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__iter__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate over list elements.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
@@ -407,7 +397,7 @@
     <span class="c1">##########################</span>
 
 <div class="viewcode-block" id="CompressedList.__repr__">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.__repr__">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__repr__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
@@ -451,7 +441,7 @@
     <span class="c1">#############################</span>
 
 <div class="viewcode-block" id="CompressedList.get_element_type">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_element_type">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_element_type">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_element_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the element_type.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span></div>
@@ -467,7 +457,7 @@
     <span class="c1">###########################</span>
 
 <div class="viewcode-block" id="CompressedList.get_partitioning">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_partitioning">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_partitioning">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_partitioning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the paritioning info.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span></div>
@@ -483,15 +473,15 @@
     <span class="c1">#######################</span>
 
 <div class="viewcode-block" id="CompressedList.get_names">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_names">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_names">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">NamedList</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the names of list elements.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.set_names">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_names">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.set_names">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the names of list elements.</span>
 
 <span class="sd">        names:</span>
@@ -533,14 +523,14 @@
     <span class="c1">#############################</span>
 
 <div class="viewcode-block" id="CompressedList.get_unlist_data">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_unlist_data">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_unlist_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_unlist_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all elements.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.set_unlist_data">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_unlist_data">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.set_unlist_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_unlist_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set new list elements.</span>
 
@@ -585,7 +575,7 @@
     <span class="c1">###################################</span>
 
 <div class="viewcode-block" id="CompressedList.get_element_metadata">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_element_metadata">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_element_metadata">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_element_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
@@ -595,7 +585,7 @@
 
 
 <div class="viewcode-block" id="CompressedList.set_element_metadata">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_element_metadata">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.set_element_metadata">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_element_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_metadata</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set new element metadata.</span>
 
@@ -639,7 +629,7 @@
     <span class="c1">###########################</span>
 
 <div class="viewcode-block" id="CompressedList.get_metadata">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.get_metadata">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_metadata">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns:</span>
@@ -649,7 +639,7 @@
 
 
 <div class="viewcode-block" id="CompressedList.set_metadata">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.set_metadata">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.set_metadata">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set additional metadata.</span>
 
@@ -693,7 +683,7 @@
     <span class="c1">##########################</span>
 
 <div class="viewcode-block" id="CompressedList.__getitem__">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.__getitem__">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__getitem__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">slice</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an element or slice of elements from the list.</span>
 
@@ -706,7 +696,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># string keys (names)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_names</span><span class="p">()):</span>
                 <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No element named &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
             <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
@@ -718,7 +708,7 @@
                 <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List index &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; out of range.&quot;</span><span class="p">)</span>
 
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_partition_range</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
 
         <span class="c1"># slices</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
@@ -726,23 +716,24 @@
             <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
                 <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_partition_range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_extract_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extract_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">))</span>
 
-            <span class="c1"># Create a new CompressedList from the result</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
+            <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">current_class_const</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span>
                 <span class="n">result</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
             <span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Index must be int, str, or slice.&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;key&#39; must be int, str, or slice.&quot;</span><span class="p">)</span></div>
 
 
     <span class="c1">##################################</span>
     <span class="c1">######&gt;&gt; abstract methods &lt;&lt;######</span>
     <span class="c1">##################################</span>
 
-    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_extract_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<div class="viewcode-block" id="CompressedList.extract_range">
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.extract_range">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a range from `unlist_data`.</span>
 
 <span class="sd">        This method must be implemented by subclasses to handle</span>
@@ -758,15 +749,20 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Extracted element.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+                <span class="s2">&quot;Custom classes should implement their own `extract_range` method for slice operations&quot;</span>
+            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
+
 
 <div class="viewcode-block" id="CompressedList.from_list">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.from_list">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.from_list">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList[Any]&quot;</span><span class="p">:</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a CompressedList from a regular list.</span>
 
 <span class="sd">        This method must be implemented by subclasses to handle</span>
@@ -785,7 +781,18 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A new `CompressedList`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
+        <span class="c1"># Flatten the list</span>
+        <span class="n">flat_data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+            <span class="n">flat_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sublist</span><span class="p">)</span>
+
+        <span class="c1"># Create partitioning</span>
+        <span class="n">partitioning</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+
+        <span class="c1"># Create unlist_data</span>
+        <span class="c1"># unlist_data = cls._element_type(data=flat_data)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">flat_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span></div>
 
 
     <span class="c1">###########################</span>
@@ -793,7 +800,7 @@
     <span class="c1">###########################</span>
 
 <div class="viewcode-block" id="CompressedList.to_list">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.to_list">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.to_list">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to a regular Python list.</span>
 
@@ -804,7 +811,7 @@
 
 
 <div class="viewcode-block" id="CompressedList.unlist">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.unlist">[docs]</a>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.unlist">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">unlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_names</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the underlying unlisted data.</span>
 
@@ -821,8 +828,8 @@
 
 
 <div class="viewcode-block" id="CompressedList.relist">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.relist">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">relist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList[Any]&quot;</span><span class="p">:</span>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.relist">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">relist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new `CompressedList` with the same partitioning but different data.</span>
 
 <span class="sd">        Args:</span>
@@ -834,7 +841,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">_validate_data_and_partitions</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span>
+        <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_class_const</span><span class="p">(</span>
             <span class="n">unlist_data</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
             <span class="n">element_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="p">,</span>
@@ -844,8 +852,8 @@
 
 
 <div class="viewcode-block" id="CompressedList.extract_subset">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.extract_subset">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">extract_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList[Any]&quot;</span><span class="p">:</span>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.extract_subset">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a subset of elements by indices.</span>
 
 <span class="sd">        Args:</span>
@@ -861,8 +869,8 @@
                 <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> out of range&quot;</span><span class="p">)</span>
 
         <span class="c1"># Extract element lengths and names</span>
-        <span class="n">new_lengths</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_element_lengths</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
-        <span class="n">new_names</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">new_lengths</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">subset_sequence</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_element_lengths</span><span class="p">(),</span> <span class="n">indices</span><span class="p">)</span>
+        <span class="n">new_names</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">subset_sequence</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
 
         <span class="c1"># Create new partitioning</span>
         <span class="n">new_partitioning</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="o">.</span><span class="n">from_lengths</span><span class="p">(</span><span class="n">new_lengths</span><span class="p">,</span> <span class="n">new_names</span><span class="p">)</span>
@@ -879,8 +887,8 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="n">new_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
 
-        <span class="c1"># Create new compressed list</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span>
+        <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_class_const</span><span class="p">(</span>
             <span class="n">new_data</span><span class="p">,</span>
             <span class="n">new_partitioning</span><span class="p">,</span>
             <span class="n">element_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="p">,</span>
@@ -890,8 +898,8 @@
 
 
 <div class="viewcode-block" id="CompressedList.lapply">
-<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.CompressedList.CompressedList.lapply">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList[Any]&quot;</span><span class="p">:</span>
+<a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.lapply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CompressedList&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply a function to each element.</span>
 
 <span class="sd">        Args:</span>
@@ -902,7 +910,9 @@
 <span class="sd">            A new CompressedList with the results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">func</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span></div>
+
+        <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">current_class_const</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span></div>
 </div>
 
 </pre></div>
@@ -937,7 +947,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=a58bc63e"></script>
+</div><script src="../../_static/documentation_options.js?v=938c9ccc"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

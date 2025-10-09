@@ -4,26 +4,50 @@ compressed\_lists package
 Submodules
 ----------
 
-compressed\_lists.CompressedIntegerList module
-----------------------------------------------
+compressed\_lists.base module
+-----------------------------
 
-.. automodule:: compressed_lists.CompressedIntegerList
+.. automodule:: compressed_lists.base
    :members:
    :show-inheritance:
    :undoc-members:
 
-compressed\_lists.CompressedList module
----------------------------------------
+compressed\_lists.biocframe\_list module
+----------------------------------------
 
-.. automodule:: compressed_lists.CompressedList
+.. automodule:: compressed_lists.biocframe_list
    :members:
    :show-inheritance:
    :undoc-members:
 
-compressed\_lists.CompressedStringList module
----------------------------------------------
+compressed\_lists.bool\_list module
+-----------------------------------
 
-.. automodule:: compressed_lists.CompressedStringList
+.. automodule:: compressed_lists.bool_list
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.float\_list module
+------------------------------------
+
+.. automodule:: compressed_lists.float_list
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.integer\_list module
+--------------------------------------
+
+.. automodule:: compressed_lists.integer_list
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.numpy\_list module
+------------------------------------
+
+.. automodule:: compressed_lists.numpy_list
    :members:
    :show-inheritance:
    :undoc-members:
@@ -32,6 +56,22 @@ compressed\_lists.partition module
 ----------------------------------
 
 .. automodule:: compressed_lists.partition
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.split\_generic module
+---------------------------------------
+
+.. automodule:: compressed_lists.split_generic
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+compressed\_lists.string\_list module
+-------------------------------------
+
+.. automodule:: compressed_lists.string_list
    :members:
    :show-inheritance:
    :undoc-members:
