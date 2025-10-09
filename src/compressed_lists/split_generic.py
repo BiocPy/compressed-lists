@@ -30,7 +30,6 @@ def groups_to_partition(
     Returns:
         Tuple of (partitioned_data_list, partitioning_object)
     """
-    print(data, groups)
     if len(data) != len(groups):
         raise ValueError(f"Length of data ({len(data)}) must match length of groups ({len(groups)})")
 
@@ -39,9 +38,8 @@ def groups_to_partition(
         group_dict[group].append(item)
 
     sorted_groups = sorted(group_dict.keys())
-    print(sorted_groups)
     partitioned_data = [group_dict[group] for group in sorted_groups]
-    print("pdata", partitioned_data)
+
     if names is None:
         group_names = [str(group) for group in sorted_groups]
     else:

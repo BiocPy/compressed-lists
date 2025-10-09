@@ -87,7 +87,6 @@ def test_getitem_by_slice(int_list):
 
 def test_iteration(int_list, int_data):
     items = list(int_list)
-    print(items, int_data)
     for i, lst in enumerate(items):
         assert np.allclose(list(lst), int_data[i])
 

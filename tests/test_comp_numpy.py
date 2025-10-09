@@ -86,7 +86,6 @@ def test_getitem_by_slice(numpy_list):
 
 def test_iteration(numpy_list, numpy_data):
     items = list(numpy_list)
-    print(items, numpy_data)
     for i, lst in enumerate(items):
         assert np.allclose(lst, numpy_data[i])
 
