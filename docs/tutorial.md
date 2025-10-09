@@ -7,7 +7,7 @@ kernelspec:
 # Basic Usage
 
 ```{code-cell}
-from compressed_lists import CompressedIntegerList, CompressedStringList
+from compressed_lists import CompressedIntegerList, CompressedStringList, Partitioning
 
 # Create a CompressedIntegerList
 int_data = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]
@@ -15,20 +15,23 @@ names = ["A", "B", "C"]
 int_list = CompressedIntegerList.from_list(int_data, names)
 
 # Access elements
-print(int_list[0])      # [1, 2, 3]
-print(int_list["B"])    # [4, 5]
-print(int_list[1:3])    # Slice of elements
+print(int_list[0])
+print(int_list["B"])
+print(int_list[1:3])
 
 # Apply a function to each element
 squared = int_list.lapply(lambda x: [i**2 for i in x])
-print(squared[0])       # [1, 4, 9]
+print(squared[0])
 
 # Convert to a regular Python list
 regular_list = int_list.to_list()
 
-# Create a CompressedStringList
-char_data = [["apple", "banana"], ["cherry", "date", "elderberry"], ["fig"]]
-char_list = CompressedStringList.from_list(char_data)
+# Create a CompressedStringList from lengths
+import biocutils as ut
+char_data = ut.StringList(["apple", "banana", "cherry", "date", "elderberry", "fig"])
+
+char_list = CompressedStringList(char_data, partitioning=Partitioning.from_lengths([2,3,1]))
+print(char_list)
 ```
 
 ## Partitioning
@@ -57,7 +60,7 @@ print(start, end)
 Create a new class that inherits from `CompressedList` with appropriate type annotations:
 
 ```python
-from typing import List, TypeVar, Generic
+from typing import List
 from compressed_lists import CompressedList, Partitioning
 import numpy as np
 
@@ -72,31 +75,32 @@ The constructor should initialize the superclass with the appropriate data:
 
 ```python
 def __init__(self,
-             unlist_data: Any,  # Replace with your data type
-             partitioning: Partitioning,
-             element_metadata: dict = None,
-             metadata: dict = None):
+        unlist_data: Any,  # Replace with your data type
+        partitioning: Partitioning,
+        element_type: Any = None,
+        element_metadata: Optional[dict] = None,
+        metadata: Optional[dict] = None):
     super().__init__(unlist_data, partitioning,
-                    element_type="custom_type",  # Set your element type
-                    element_metadata=element_metadata,
-                    metadata=metadata)
+        element_type="custom_type",  # Set your element type
+        element_metadata=element_metadata,
+        metadata=metadata)
 ```
 
-## 3. Implement _extract_range Method
+## 3. Implement `extract_range` Method
 
 This method defines how to extract a range of elements from your unlisted data:
 
 ```python
-def _extract_range(self, start: int, end: int) -> List[T]:
+def extract_range(self, start: int, end: int) -> List[T]:
     """Extract a range from unlisted data."""
     # For example, with numpy arrays:
-    return self.unlist_data[start:end].tolist()
+    return self.unlist_data[start:end]
 
     # Or for other data types:
-    # return self.unlist_data[start:end]
+    # return self.unlist_data[start:end, :]
 ```
 
-## 4. Implement from_list Class Method
+## 4. Implement `from_list` Class Method
 
 This factory method creates a new instance from a list:
 
@@ -140,7 +144,7 @@ class CompressedFloatList(CompressedList):
                         element_metadata=element_metadata,
                         metadata=metadata)
 
-    def _extract_range(self, start: int, end: int) -> List[float]:
+    def extract_range(self, start: int, end: int) -> List[float]:
         return self.unlist_data[start:end].tolist()
 
     @classmethod
@@ -176,10 +180,10 @@ class MyObject:
     def __init__(self, value):
         self.value = value
 
-class CompressedMyObjectList(CompressedList[List[MyObject]]):
+class CompressedMyObjectList(CompressedList):
     # Implementation details...
 
-    def _extract_range(self, start: int, end: int) -> List[MyObject]:
+    def extract_range(self, start: int, end: int) -> List[MyObject]:
         return self.unlist_data[start:end]
 
     @classmethod
@@ -187,3 +191,5 @@ class CompressedMyObjectList(CompressedList[List[MyObject]]):
         # Custom flattening and storage logic
         # ...
 ```
+
+Check out the `CompressedBiocFrameList` for a complete example of this usecase.
