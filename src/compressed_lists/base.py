@@ -504,7 +504,7 @@ class CompressedList:
             A regular Python list with all elements.
         """
         return self._unlist_data
-    
+
     def as_list(self) -> List[Any]:
         """Alias to :py:meth:`~to_list`"""
         return self.to_list()
