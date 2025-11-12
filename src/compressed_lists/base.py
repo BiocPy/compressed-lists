@@ -516,19 +516,21 @@ class CompressedList:
         """Alias to :py:meth:`~to_list`"""
         return self.to_list()
 
-    def unlist(self, use_names: bool = True) -> Any:
+    def unlist(self, use_names: bool = False) -> Any:
         """Get the underlying unlisted data.
 
         Args:
             use_names:
                 Whether to include names in the result if applicable.
 
-                Currently not used.
-
         Returns:
             The unlisted data.
         """
-        return self._unlist_data
+        return (
+            self._unlist_data
+            if use_names is False
+            else self._unlist_data.set_names(self.get_partitioning().get_names(), in_place=False)
+        )
 
     def relist(self, unlist_data: Any) -> "CompressedList":
         """Create a new `CompressedList` with the same partitioning but different data.
