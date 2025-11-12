@@ -50,7 +50,10 @@ class CompressedBiocFrameList(CompressedList):
 
     @classmethod
     def from_list(
-        cls, lst: List[BiocFrame], names: Optional[Union[ut.Names, Sequence[str]]] = None, metadata: Optional[dict] = None
+        cls,
+        lst: List[BiocFrame],
+        names: Optional[Union[ut.Names, Sequence[str]]] = None,
+        metadata: Optional[dict] = None,
     ) -> "CompressedBiocFrameList":
         """Create a `CompressedBiocFrameList` from a regular list.
 
