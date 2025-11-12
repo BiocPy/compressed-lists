@@ -64,7 +64,7 @@ def _(
     names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedStringList:
-    """Handle lists of floats."""
+    """Handle lists of strings."""
 
     partitioned_data, groups_or_partitions = _generic_register_helper(
         data=data, groups_or_partitions=groups_or_partitions, names=names
