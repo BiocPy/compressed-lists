@@ -503,8 +503,15 @@ class CompressedList:
         Returns:
             A regular Python list with all elements.
         """
-        return self._unlist_data
-    
+        result = []
+        for i in range(len(self)):
+            _subset = list(self[i])
+            if len(_subset) == 0:
+                _subset = [None]
+            result.extend(_subset)
+
+        return result
+
     def as_list(self) -> List[Any]:
         """Alias to :py:meth:`~to_list`"""
         return self.to_list()
