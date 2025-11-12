@@ -12,7 +12,7 @@ __copyright__ = "Jayaram Kancherla"
 __license__ = "MIT"
 
 
-class CompressedBiocFrameList(CompressedList):
+class CompressedSplitBiocFrameList(CompressedList):
     """CompressedList for BiocFrames."""
 
     def __init__(
@@ -23,7 +23,7 @@ class CompressedBiocFrameList(CompressedList):
         metadata: Optional[dict] = None,
         **kwargs,
     ):
-        """Initialize a CompressedBiocFrameList.
+        """Initialize a CompressedSplitBiocFrameList.
 
         Args:
             unlist_data:
@@ -54,14 +54,16 @@ class CompressedBiocFrameList(CompressedList):
         lst: List[BiocFrame],
         names: Optional[Union[ut.Names, Sequence[str]]] = None,
         metadata: Optional[dict] = None,
-    ) -> "CompressedBiocFrameList":
-        """Create a `CompressedBiocFrameList` from a regular list.
+    ) -> "CompressedSplitBiocFrameList":
+        """Create a `CompressedSplitBiocFrameList` from a regular list.
 
         This concatenates the list of `BiocFrame` objects.
 
         Args:
             lst:
                 List of `BiocFrame` objects.
+
+                Must have the same number and names of columns.
 
             names:
                 Optional names for list elements.
@@ -116,7 +118,7 @@ def _(
     groups_or_partitions: Union[list, Partitioning],
     names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
-) -> CompressedBiocFrameList:
+) -> CompressedSplitBiocFrameList:
     """Handle lists of BiocFrame objects."""
 
     partitioned_data, groups_or_partitions = _generic_register_helper(
@@ -126,4 +128,6 @@ def _(
     if not isinstance(partitioned_data, BiocFrame):
         partitioned_data = ut.relaxed_combine_rows(*partitioned_data)
 
-    return CompressedBiocFrameList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)
+    return CompressedSplitBiocFrameList(
+        unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata
+    )

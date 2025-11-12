@@ -2,7 +2,7 @@ import pytest
 from biocframe import BiocFrame
 import biocutils as ut
 
-from compressed_lists import CompressedBiocFrameList, Partitioning, CompressedStringList
+from compressed_lists import CompressedSplitBiocFrameList, Partitioning, CompressedStringList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -20,9 +20,9 @@ def frame_data():
 
 
 def test_creation(frame_data):
-    frame_list = CompressedBiocFrameList(frame_data, partitioning=Partitioning.from_lengths([1, 2]))
+    frame_list = CompressedSplitBiocFrameList(frame_data, partitioning=Partitioning.from_lengths([1, 2]))
 
-    assert isinstance(frame_list, CompressedBiocFrameList)
+    assert isinstance(frame_list, CompressedSplitBiocFrameList)
     assert len(frame_list) == 2
     assert isinstance(frame_list.unlist_data, BiocFrame)
     assert len(frame_list.get_unlist_data()) == 3
@@ -37,7 +37,7 @@ def test_bframe_typed_list_column():
             "symbol": ["MAP1A", "BIN1", "ESR1"],
         }
     )
-    frame_list = CompressedBiocFrameList(bframe, partitioning=Partitioning.from_lengths([1, 2]))
+    frame_list = CompressedSplitBiocFrameList(bframe, partitioning=Partitioning.from_lengths([1, 2]))
 
     ens_col = frame_list["ensembl"]
     assert isinstance(ens_col, CompressedStringList)

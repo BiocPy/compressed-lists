@@ -497,7 +497,7 @@ class CompressedList:
     ######>> coercions <<######
     ###########################
 
-    def to_list(self) -> List[Any]:
+    def to_list(self) -> List[List[Any]]:
         """Convert to a regular Python list.
 
         Returns:
@@ -508,11 +508,11 @@ class CompressedList:
             _subset = list(self[i])
             if len(_subset) == 0:
                 _subset = [None]
-            result.extend(_subset)
+            result.append(_subset)
 
         return result
 
-    def as_list(self) -> List[Any]:
+    def as_list(self) -> List[List[Any]]:
         """Alias to :py:meth:`~to_list`"""
         return self.to_list()
 
