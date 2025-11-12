@@ -58,7 +58,7 @@ class CompressedBooleanList(CompressedList):
 def _(
     data: ut.BooleanList,
     groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Sequence[str]] = None,
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedBooleanList:
     """Handle lists of booleans."""

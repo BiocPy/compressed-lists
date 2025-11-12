@@ -2,6 +2,7 @@ from collections import defaultdict
 from functools import singledispatch
 from typing import Any, List, Optional, Sequence, Tuple, Union
 
+import biocutils as ut
 import numpy as np
 
 from .base import CompressedList
@@ -13,7 +14,7 @@ __license__ = "MIT"
 
 
 def groups_to_partition(
-    data: Any, groups: list, names: Optional[Sequence[str]] = None
+    data: Any, groups: list, names: Optional[Union[ut.Names, Sequence[str]]] = None
 ) -> Tuple[List[Any], Partitioning]:
     """Convert group membership vector to partitioned data and Partitioning object.
 
@@ -58,7 +59,7 @@ def groups_to_partition(
 def splitAsCompressedList(
     data: Any,
     groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Sequence[str]] = None,
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedList:
     """Generic function to split data into an appropriate `CompressedList` subclass.
@@ -107,6 +108,9 @@ def _generic_register_helper(data, groups_or_partitions, names=None):
         #     partitioned_data.append(data[start:end])
         partitioned_data = data
     elif isinstance(groups_or_partitions, (list, np.ndarray)):
+        if isinstance(groups_or_partitions, np.ndarray):
+            groups_or_partitions = groups_or_partitions.tolist()
+
         partitioned_data, groups_or_partitions = groups_to_partition(data, groups=groups_or_partitions, names=names)
 
         if len(partitioned_data) == 0:

@@ -58,7 +58,7 @@ class CompressedFloatList(CompressedList):
 def _(
     data: ut.FloatList,
     groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Sequence[str]] = None,
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedFloatList:
     """Handle lists of floats."""

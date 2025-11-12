@@ -144,7 +144,7 @@ class CompressedList:
         output = f"{type(self).__name__}(number_of_elements={len(self)}"
         output += ", unlist_data=" + ut.print_truncated_list(self._unlist_data)
         output += ", partitioning=" + self._partitioning.__repr__()
-        output += ", element_type=" + self._element_type
+        output += ", element_type=" + self._element_type.__name__
 
         if len(self._element_metadata) > 0:
             output += ", element_metadata=" + ut.print_truncated_dict(self._element_metadata)
@@ -162,7 +162,7 @@ class CompressedList:
         """
         output = f"class: {type(self).__name__}\n"
 
-        output += f"number of elements: ({len(self)}) of type: {self._element_type}\n"
+        output += f"number of elements: ({len(self)}) of type: {self._element_type.__name__}\n"
 
         output += f"unlist_data: {ut.print_truncated_list(self._unlist_data)}\n"
 
@@ -203,11 +203,11 @@ class CompressedList:
     ######>> names <<######
     #######################
 
-    def get_names(self) -> Optional[ut.NamedList]:
+    def get_names(self) -> Optional[ut.Names]:
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
-    def set_names(self, names: List[str], in_place: bool = False) -> "CompressedList":
+    def set_names(self, names: Sequence[str], in_place: bool = False) -> "CompressedList":
         """Set the names of list elements.
 
         names:
@@ -227,7 +227,7 @@ class CompressedList:
         return output
 
     @property
-    def names(self) -> Optional[ut.NamedList]:
+    def names(self) -> Optional[ut.Names]:
         """Alias for :py:attr:`~get_names`."""
         return self._partitioning.get_names()
 
@@ -460,7 +460,7 @@ class CompressedList:
 
     @classmethod
     def from_list(
-        cls, lst: List[Any], names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None
+        cls, lst: Any, names: Optional[Union[ut.Names, Sequence[str]]] = None, metadata: Optional[dict] = None
     ) -> "CompressedList":
         """Create a CompressedList from a regular list.
 

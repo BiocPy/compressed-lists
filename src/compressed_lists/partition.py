@@ -24,7 +24,9 @@ class Partitioning:
     It keeps track of where each element begins and ends in the unlisted data.
     """
 
-    def __init__(self, ends: Sequence[int], names: Optional[Sequence[str]] = None, validate: bool = True):
+    def __init__(
+        self, ends: Sequence[int], names: Optional[Union[ut.Names, Sequence[str]]] = None, validate: bool = True
+    ):
         """Initialize a Partitioning object.
 
         Args:
@@ -52,7 +54,9 @@ class Partitioning:
             _validate_names(names, len(ends))
 
     @classmethod
-    def from_lengths(cls, lengths: Sequence[int], names: Optional[Sequence[str]] = None) -> "Partitioning":
+    def from_lengths(
+        cls, lengths: Sequence[int], names: Optional[Union[ut.Names, Sequence[str]]] = None
+    ) -> "Partitioning":
         """Create a Partitioning from a sequence of lengths.
 
         Args:
@@ -69,7 +73,7 @@ class Partitioning:
         return cls(ends, names)
 
     @classmethod
-    def from_list(cls, lst: List, names: Optional[Sequence[str]] = None) -> "Partitioning":
+    def from_list(cls, lst: List, names: Optional[Union[ut.Names, Sequence[str]]] = None) -> "Partitioning":
         """Create a Partitioning from a list by using the lengths of each element.
 
         Args:
@@ -146,7 +150,7 @@ class Partitioning:
         """Return the lengths of each partition."""
         return self._ends - self._starts
 
-    def element_lengths(self) -> int:
+    def element_lengths(self) -> np.ndarray:
         """Alias for :py:attr:`~get_element_lengths`."""
         return self.get_element_lengths()
 
@@ -216,7 +220,7 @@ class Partitioning:
         """Return the names of each partition."""
         return self._names
 
-    def set_names(self, names: Optional[Sequence[str]], in_place: bool = False) -> "Partitioning":
+    def set_names(self, names: Optional[Union[ut.Names, Sequence[str]]], in_place: bool = False) -> "Partitioning":
         """Set the names of list elements.
 
         Args:
@@ -247,7 +251,7 @@ class Partitioning:
         return self.get_names()
 
     @names.setter
-    def names(self, names: Optional[Sequence[str]]):
+    def names(self, names: Optional[Union[ut.Names, Sequence[str]]]):
         """Alias for :py:meth:`~set_names` with ``in_place = True``.
 
         As this mutates the original object, a warning is raised.

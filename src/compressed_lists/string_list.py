@@ -61,7 +61,7 @@ class CompressedCharacterList(CompressedStringList):
 def _(
     data: ut.StringList,
     groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Sequence[str]] = None,
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedStringList:
     """Handle lists of floats."""

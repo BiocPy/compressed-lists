@@ -56,7 +56,7 @@ class CompressedNumpyList(CompressedList):
 
     @classmethod
     def from_list(
-        cls, lst: List[np.ndarray], names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None
+        cls, lst: List[np.ndarray], names: Optional[Union[ut.Names, Sequence[str]]] = None, metadata: Optional[dict] = None
     ) -> "CompressedNumpyList":
         """
         Create a `CompressedNumpyList` from a list of NumPy vectors.
@@ -88,7 +88,7 @@ class CompressedNumpyList(CompressedList):
 def _(
     data: np.ndarray,
     groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Sequence[str]] = None,
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedNumpyList:
     """Handle NumPy arrays."""

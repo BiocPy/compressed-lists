@@ -58,7 +58,7 @@ class CompressedIntegerList(CompressedList):
 def _(
     data: ut.IntegerList,
     groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Sequence[str]] = None,
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedIntegerList:
     """Handle lists of integers."""
