@@ -70,7 +70,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    if not isinstance(partitioned_data, ut.StringList):
+    if not isinstance(partitioned_data, ut.StringList) and len(partitioned_data) != 0:
         partitioned_data = ut.combine_sequences(*partitioned_data)
 
     return CompressedStringList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)

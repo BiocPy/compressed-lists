@@ -119,7 +119,7 @@ def _generic_register_helper(data, groups_or_partitions, names=None):
     if groups_or_partitions is None:
         raise ValueError("'groups_or_paritions' cannot be 'None'.")
 
-    if not data:
+    if data is None:
         raise ValueError("'data' cannot be empty.")
 
     if isinstance(groups_or_partitions, Partitioning):
@@ -139,7 +139,7 @@ def _generic_register_helper(data, groups_or_partitions, names=None):
 
         partitioned_data, groups_or_partitions = groups_to_partition(data, groups=groups_or_partitions, names=names)
 
-        if len(partitioned_data) == 0:
+        if partitioned_data is None:
             raise ValueError("No data after grouping")
     else:
         raise ValueError("'groups_or_paritions' must be a group vector or a Partition object.")

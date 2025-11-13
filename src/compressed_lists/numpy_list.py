@@ -44,11 +44,14 @@ class CompressedNumpyList(CompressedList):
         """
 
         if not isinstance(unlist_data, np.ndarray):
-            try:
-                warn("trying to concatenate/coerce 'unlist_data' to a `np.ndarray`..")
-                unlist_data = np.concatenate(unlist_data)
-            except Exception as e:
-                raise TypeError("'unlist_data' must be an `np.ndarray`, provided ", type(unlist_data)) from e
+            if len(unlist_data) == 0:
+                unlist_data = np.asarray([])
+            else:
+                try:
+                    warn("trying to concatenate/coerce 'unlist_data' to a `np.ndarray`..")
+                    unlist_data = np.concatenate(unlist_data)
+                except Exception as e:
+                    raise TypeError("'unlist_data' must be an `np.ndarray`, provided ", type(unlist_data)) from e
 
         super().__init__(
             unlist_data, partitioning, element_type=np.ndarray, element_metadata=element_metadata, metadata=metadata
@@ -100,7 +103,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    if not isinstance(partitioned_data, np.ndarray):
+    if not isinstance(partitioned_data, np.ndarray) and len(partitioned_data) != 0:
         partitioned_data = ut.combine_sequences(*partitioned_data)
 
     return CompressedNumpyList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)

@@ -1,6 +1,15 @@
 import biocutils as ut
+import numpy as np
+import pytest
 
-from compressed_lists import CompressedFloatList, CompressedIntegerList, Partitioning, splitAsCompressedList
+from compressed_lists import (
+    CompressedFloatList,
+    CompressedIntegerList,
+    CompressedNumpyList,
+    Partitioning,
+    splitAsCompressedList,
+)
+from compressed_lists.split_generic import _generic_register_helper, groups_to_partition
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -22,3 +31,56 @@ def test_partitions():
     )
 
     assert isinstance(int_list, CompressedIntegerList)
+
+
+def test_groups_to_partition_value_error():
+    with pytest.raises(ValueError, match="must match length of groups"):
+        groups_to_partition([1, 2, 3], [1, 2], None)
+
+
+def test_groups_to_partition_empty():
+    data = []
+    groups = []
+    part_data, part = groups_to_partition(data, groups)
+    assert part_data == []
+    assert len(part) == 0
+
+
+def test_splitAsCompressedList_unsupported_type():
+    class UnregisteredType:
+        def __init__(self):
+            self.data = [1, 2]
+
+        def __len__(self):
+            return len(self.data)
+
+        def __getitem__(self, i):
+            return self.data[i]
+
+    data = UnregisteredType()
+    with pytest.raises(NotImplementedError, match="No `splitAsCompressedList` dispatcher found"):
+        splitAsCompressedList(data, groups_or_partitions=[0, 0])
+
+
+def test_splitAsCompressedList_empty():
+    data_int = ut.IntegerList([])
+    groups_int = []
+    clist_int = splitAsCompressedList(data_int, groups_int)
+    assert isinstance(clist_int, CompressedIntegerList)
+    assert len(clist_int) == 0
+    assert len(clist_int.unlist_data) == 0
+
+    data_np = np.array([])
+    groups_np = []
+    clist_np = splitAsCompressedList(data_np, groups_np)
+    assert isinstance(clist_np, CompressedNumpyList)
+    assert len(clist_np) == 0
+    assert len(clist_np.unlist_data) == 0
+
+
+def test_generic_register_helper_errors():
+    with pytest.raises(ValueError, match="'groups_or_paritions' cannot be 'None'"):
+        _generic_register_helper([1, 2, 3], None)
+
+    with pytest.raises(ValueError, match="'groups_or_paritions' must be a group vector or a Partition object"):
+        _generic_register_helper([1, 2, 3], {"a": 1})

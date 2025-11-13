@@ -172,7 +172,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    if not isinstance(partitioned_data, BiocFrame):
+    if not isinstance(partitioned_data, BiocFrame) and len(partitioned_data) != 0:
         partitioned_data = ut.relaxed_combine_rows(*partitioned_data)
 
     return CompressedSplitBiocFrameList(
