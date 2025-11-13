@@ -78,3 +78,41 @@ def test_getitem():
 
     with pytest.raises(TypeError):
         part["invalid"]
+
+
+def test_partitioning_empty():
+    part = Partitioning([])
+    assert len(part) == 0
+    assert part.nobj() == 0
+    assert list(part.get_element_lengths()) == []
+    assert part.get_names() is None
+
+
+def test_partitioning_from_list_non_sequence():
+    # The implementation checks for __len__ or assumes 1
+    lst = [1, [2, 3], "foo", (4, 5, 6)]
+    part = Partitioning.from_list(lst)
+    assert list(part.get_element_lengths()) == [1, 2, 3, 3]
+    assert list(part.ends) == [1, 3, 6, 9]
+
+
+def test_partitioning_getitem_slices():
+    part = Partitioning.from_lengths([2, 3, 5, 1])
+
+    assert part[:] == [(0, 2), (2, 5), (5, 10), (10, 11)]
+    assert part[-2:] == [(5, 10), (10, 11)]
+    assert part[::2] == [(0, 2), (5, 10)]
+
+
+def test_partitioning_set_names_inplace():
+    part = Partitioning.from_lengths([2, 3], names=["A", "B"])
+
+    part_new = part.set_names(["X", "Y"], in_place=False)
+    assert list(part.names) == ["A", "B"]
+    assert list(part_new.names) == ["X", "Y"]
+
+    part.set_names(["X", "Y"], in_place=True)
+    assert list(part.names) == ["X", "Y"]
+
+    with pytest.raises(ValueError, match="Length of names must match"):
+        part.set_names(["X"], in_place=True)

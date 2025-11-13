@@ -144,7 +144,13 @@ class CompressedList:
         output = f"{type(self).__name__}(number_of_elements={len(self)}"
         output += ", unlist_data=" + ut.print_truncated_list(self._unlist_data)
         output += ", partitioning=" + self._partitioning.__repr__()
-        output += ", element_type=" + self._element_type
+
+        _etype_name = "__unknown_class__"
+        if isinstance(self._element_type, str):
+            _etype_name = self._element_type
+        elif hasattr(self._element_type, "__name__"):
+            _etype_name = self._element_type.__name__
+        output += ", element_type=" + _etype_name
 
         if len(self._element_metadata) > 0:
             output += ", element_metadata=" + ut.print_truncated_dict(self._element_metadata)
@@ -162,7 +168,13 @@ class CompressedList:
         """
         output = f"class: {type(self).__name__}\n"
 
-        output += f"number of elements: ({len(self)}) of type: {self._element_type}\n"
+        _etype_name = "__unknown_class__"
+        if isinstance(self._element_type, str):
+            _etype_name = self._element_type
+        elif hasattr(self._element_type, "__name__"):
+            _etype_name = self._element_type.__name__
+
+        output += f"number of elements: ({len(self)}) of type: {_etype_name}\n"
 
         output += f"unlist_data: {ut.print_truncated_list(self._unlist_data)}\n"
 
@@ -203,11 +215,11 @@ class CompressedList:
     ######>> names <<######
     #######################
 
-    def get_names(self) -> Optional[ut.NamedList]:
+    def get_names(self) -> Optional[ut.Names]:
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
-    def set_names(self, names: List[str], in_place: bool = False) -> "CompressedList":
+    def set_names(self, names: Sequence[str], in_place: bool = False) -> "CompressedList":
         """Set the names of list elements.
 
         names:
@@ -227,7 +239,7 @@ class CompressedList:
         return output
 
     @property
-    def names(self) -> Optional[ut.NamedList]:
+    def names(self) -> Optional[ut.Names]:
         """Alias for :py:attr:`~get_names`."""
         return self._partitioning.get_names()
 
@@ -460,7 +472,7 @@ class CompressedList:
 
     @classmethod
     def from_list(
-        cls, lst: List[Any], names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None
+        cls, lst: Any, names: Optional[Union[ut.Names, Sequence[str]]] = None, metadata: Optional[dict] = None
     ) -> "CompressedList":
         """Create a CompressedList from a regular list.
 
@@ -497,27 +509,40 @@ class CompressedList:
     ######>> coercions <<######
     ###########################
 
-    def to_list(self) -> List[Any]:
+    def to_list(self) -> List[List[Any]]:
         """Convert to a regular Python list.
 
         Returns:
             A regular Python list with all elements.
         """
-        return list(self)
+        result = []
+        for i in range(len(self)):
+            _subset = list(self[i])
+            if len(_subset) == 0:
+                _subset = [None]
+            result.append(_subset)
 
-    def unlist(self, use_names: bool = True) -> Any:
+        return result
+
+    def as_list(self) -> List[List[Any]]:
+        """Alias to :py:meth:`~to_list`"""
+        return self.to_list()
+
+    def unlist(self, use_names: bool = False) -> Any:
         """Get the underlying unlisted data.
 
         Args:
             use_names:
                 Whether to include names in the result if applicable.
 
-                Currently not used.
-
         Returns:
             The unlisted data.
         """
-        return self._unlist_data
+        return (
+            self._unlist_data
+            if use_names is False
+            else self._unlist_data.set_names(self.get_partitioning().get_names(), in_place=False)
+        )
 
     def relist(self, unlist_data: Any) -> "CompressedList":
         """Create a new `CompressedList` with the same partitioning but different data.

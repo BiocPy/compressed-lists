@@ -88,13 +88,13 @@ def test_getitem_by_slice(int_list):
 def test_iteration(int_list, int_data):
     items = list(int_list)
     for i, lst in enumerate(items):
-        assert np.allclose(list(lst), int_data[i])
+        assert np.allclose(lst, int_data[i])
 
 
 def test_to_list(int_list, int_data):
     regular_list = int_list.to_list()
     for i, lst in enumerate(regular_list):
-        assert np.allclose(list(lst), int_data[i])
+        assert np.allclose(lst, int_data[i])
 
 
 def test_unlist(int_list):

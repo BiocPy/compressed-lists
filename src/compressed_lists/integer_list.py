@@ -58,7 +58,7 @@ class CompressedIntegerList(CompressedList):
 def _(
     data: ut.IntegerList,
     groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Sequence[str]] = None,
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
 ) -> CompressedIntegerList:
     """Handle lists of integers."""
@@ -67,7 +67,7 @@ def _(
         data=data, groups_or_partitions=groups_or_partitions, names=names
     )
 
-    if not isinstance(partitioned_data, ut.IntegerList):
+    if not isinstance(partitioned_data, ut.IntegerList) and len(partitioned_data) != 0:
         partitioned_data = ut.combine_sequences(*partitioned_data)
 
     return CompressedIntegerList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)
