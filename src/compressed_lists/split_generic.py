@@ -5,7 +5,6 @@ from typing import Any, List, Optional, Sequence, Tuple, Union
 import biocutils as ut
 import numpy as np
 
-from .base import CompressedList
 from .partition import Partitioning
 
 __author__ = "Jayaram Kancherla"
