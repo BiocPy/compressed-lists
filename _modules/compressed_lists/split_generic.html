@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>compressed_lists.split_generic - compressed-lists 0.2.0 documentation</title>
+        <title>compressed_lists.split_generic - compressed-lists 0.3.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
@@ -161,7 +161,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">compressed-lists 0.2.0 documentation</div></a>
+      <a href="../../index.html"><div class="brand">compressed-lists 0.3.0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +182,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
-  <span class="sidebar-brand-text">compressed-lists 0.2.0 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.3.0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -239,9 +239,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">singledispatch</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">biocutils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ut</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompressedList</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.partition</span><span class="w"> </span><span class="kn">import</span> <span class="n">Partitioning</span>
 
 <span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Jayaram Kancherla&quot;</span>
@@ -252,7 +252,7 @@
 <div class="viewcode-block" id="groups_to_partition">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.split_generic.groups_to_partition">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">groups_to_partition</span><span class="p">(</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">groups</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Partitioning</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert group membership vector to partitioned data and Partitioning object.</span>
 
@@ -272,9 +272,13 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Length of data (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">) must match length of groups (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
 
+    <span class="n">group_idx_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">groups</span><span class="p">):</span>
+        <span class="n">group_idx_dict</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
     <span class="n">group_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">groups</span><span class="p">):</span>
-        <span class="n">group_dict</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">group_idx_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">group_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
 
     <span class="n">sorted_groups</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">group_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="n">partitioned_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">group_dict</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">sorted_groups</span><span class="p">]</span>
@@ -289,7 +293,6 @@
         <span class="n">group_names</span> <span class="o">=</span> <span class="n">names</span>
 
     <span class="n">partitioning</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">partitioned_data</span><span class="p">,</span> <span class="n">group_names</span><span class="p">)</span>
-
     <span class="k">return</span> <span class="n">partitioned_data</span><span class="p">,</span> <span class="n">partitioning</span></div>
 
 
@@ -300,9 +303,9 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">splitAsCompressedList</span><span class="p">(</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="n">groups_or_partitions</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="n">Partitioning</span><span class="p">],</span>
-    <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic function to split data into an appropriate `CompressedList` subclass.</span>
 
 <span class="sd">    This function can work in two modes:</span>
@@ -327,7 +330,31 @@
 <span class="sd">        An appropriate `CompressedList` subclass instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">element_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No `splitAsCompressedList` dispatcher found for element type </span><span class="si">{</span><span class="n">element_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">groups_or_partitions</span><span class="p">,</span> <span class="n">Partitioning</span><span class="p">):</span>
+            <span class="n">partitioned_data</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups_or_partitions</span><span class="p">)):</span>
+                <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">groups_or_partitions</span><span class="o">.</span><span class="n">get_partition_range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">_part</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+                <span class="n">partitioned_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_part</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">groups_or_partitions</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">groups_or_partitions</span> <span class="o">=</span> <span class="n">groups_or_partitions</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+            <span class="n">group_idx_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">groups_or_partitions</span><span class="p">):</span>
+                <span class="n">group_idx_dict</span><span class="p">[</span><span class="n">group</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+            <span class="n">group_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">group_idx_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">group_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">subset</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+            <span class="n">sorted_groups</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">group_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">partitioned_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">group_dict</span><span class="p">[</span><span class="n">group</span><span class="p">]</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">sorted_groups</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">partitioned_data</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No `splitAsCompressedList` dispatcher found for element type </span><span class="si">{</span><span class="n">element_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
 
 
 
@@ -335,7 +362,7 @@
     <span class="k">if</span> <span class="n">groups_or_partitions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;groups_or_paritions&#39; cannot be &#39;None&#39;.&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;data&#39; cannot be empty.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">groups_or_partitions</span><span class="p">,</span> <span class="n">Partitioning</span><span class="p">):</span>
@@ -350,9 +377,12 @@
         <span class="c1">#     partitioned_data.append(data[start:end])</span>
         <span class="n">partitioned_data</span> <span class="o">=</span> <span class="n">data</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">groups_or_partitions</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">groups_or_partitions</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">groups_or_partitions</span> <span class="o">=</span> <span class="n">groups_or_partitions</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
         <span class="n">partitioned_data</span><span class="p">,</span> <span class="n">groups_or_partitions</span> <span class="o">=</span> <span class="n">groups_to_partition</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups_or_partitions</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">partitioned_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">partitioned_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No data after grouping&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;groups_or_paritions&#39; must be a group vector or a Partition object.&quot;</span><span class="p">)</span>
@@ -390,7 +420,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=938c9ccc"></script>
+</div><script src="../../_static/documentation_options.js?v=e259d695"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

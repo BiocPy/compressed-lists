@@ -192,4 +192,4 @@ class CompressedMyObjectList(CompressedList):
         # ...
 ```
 
-Check out the `CompressedBiocFrameList` for a complete example of this usecase.
+Check out the `CompressedSplitBiocFrameList` for a complete example of this usecase.
