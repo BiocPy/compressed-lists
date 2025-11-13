@@ -111,6 +111,51 @@ class CompressedSplitBiocFrameList(CompressedList):
                 "Custom classes should implement their own `extract_range` method for slice operations"
             ) from e
 
+    ##########################
+    ######>> Printing <<######
+    ##########################
+
+    def __repr__(self) -> str:
+        """
+        Returns:
+            A string representation.
+        """
+        output = f"{type(self).__name__}(number_of_elements={len(self)}"
+        output += ", unlist_data=" + self._unlist_data.__repr__()
+        output += ", partitioning=" + self._partitioning.__repr__()
+        output += (
+            ", element_type=" + self._element_type.__name__
+            if not isinstance(self._element_type, str)
+            else self._element_type
+        )
+
+        if len(self._element_metadata) > 0:
+            output += ", element_metadata=" + ut.print_truncated_dict(self._element_metadata)
+
+        if len(self._metadata) > 0:
+            output += ", metadata=" + ut.print_truncated_dict(self._metadata)
+
+        output += ")"
+        return output
+
+    def __str__(self) -> str:
+        """
+        Returns:
+            A pretty-printed string containing the contents of this object.
+        """
+        output = f"class: {type(self).__name__}\n"
+
+        output += f"number of elements: ({len(self)}) of type: {self._element_type.__name__ if not isinstance(self._element_type, str) else self._element_type}\n"
+
+        output += f"unlist_data: {ut.print_truncated_list(self._unlist_data.get_column_names())}\n"
+
+        output += f"partitioning: {ut.print_truncated_list(self._partitioning)}\n"
+
+        output += f"element_metadata({str(len(self._element_metadata))}): {ut.print_truncated_list(list(self._element_metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+        output += f"metadata({str(len(self._metadata))}): {ut.print_truncated_list(list(self._metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+
+        return output
+
 
 @splitAsCompressedList.register
 def _(

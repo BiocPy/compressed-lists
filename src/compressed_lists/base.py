@@ -144,7 +144,11 @@ class CompressedList:
         output = f"{type(self).__name__}(number_of_elements={len(self)}"
         output += ", unlist_data=" + ut.print_truncated_list(self._unlist_data)
         output += ", partitioning=" + self._partitioning.__repr__()
-        output += ", element_type=" + self._element_type.__name__
+        output += (
+            ", element_type=" + self._element_type.__name__
+            if not isinstance(self._element_type, str)
+            else self._element_type
+        )
 
         if len(self._element_metadata) > 0:
             output += ", element_metadata=" + ut.print_truncated_dict(self._element_metadata)
@@ -162,7 +166,7 @@ class CompressedList:
         """
         output = f"class: {type(self).__name__}\n"
 
-        output += f"number of elements: ({len(self)}) of type: {self._element_type.__name__}\n"
+        output += f"number of elements: ({len(self)}) of type: {self._element_type.__name__ if not isinstance(self._element_type, str) else self._element_type}\n"
 
         output += f"unlist_data: {ut.print_truncated_list(self._unlist_data)}\n"
 

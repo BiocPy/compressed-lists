@@ -1,8 +1,8 @@
+import biocutils as ut
 import pytest
 from biocframe import BiocFrame
-import biocutils as ut
 
-from compressed_lists import CompressedSplitBiocFrameList, Partitioning, CompressedStringList
+from compressed_lists import CompressedSplitBiocFrameList, CompressedStringList, Partitioning, splitAsCompressedList
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -42,3 +42,11 @@ def test_bframe_typed_list_column():
     ens_col = frame_list["ensembl"]
     assert isinstance(ens_col, CompressedStringList)
     assert len(ens_col) == 2
+
+
+def test_split_biocframe(frame_data):
+    frame_data.set_column("groups", [0, 0, 1], in_place=True)
+    print(frame_data)
+    clist = splitAsCompressedList(frame_data, groups_or_partitions=frame_data.get_column("groups"))
+
+    assert isinstance(clist, CompressedSplitBiocFrameList)

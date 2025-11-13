@@ -34,9 +34,13 @@ def groups_to_partition(
     if len(data) != len(groups):
         raise ValueError(f"Length of data ({len(data)}) must match length of groups ({len(groups)})")
 
+    group_idx_dict = defaultdict(list)
+    for idx, group in enumerate(groups):
+        group_idx_dict[group].append(idx)
+
     group_dict = defaultdict(list)
-    for item, group in zip(data, groups):
-        group_dict[group].append(item)
+    for key, val in group_idx_dict.items():
+        group_dict[key] = ut.subset(data, val)
 
     sorted_groups = sorted(group_dict.keys())
     partitioned_data = [group_dict[group] for group in sorted_groups]
@@ -51,7 +55,6 @@ def groups_to_partition(
         group_names = names
 
     partitioning = Partitioning.from_list(partitioned_data, group_names)
-
     return partitioned_data, partitioning
 
 
@@ -61,7 +64,7 @@ def splitAsCompressedList(
     groups_or_partitions: Union[list, Partitioning],
     names: Optional[Union[ut.Names, Sequence[str]]] = None,
     metadata: Optional[dict] = None,
-) -> CompressedList:
+) -> Any:
     """Generic function to split data into an appropriate `CompressedList` subclass.
 
     This function can work in two modes:
@@ -86,7 +89,31 @@ def splitAsCompressedList(
         An appropriate `CompressedList` subclass instance.
     """
     element_type = type(data)
-    raise NotImplementedError(f"No `splitAsCompressedList` dispatcher found for element type {element_type}")
+    try:
+        if isinstance(groups_or_partitions, Partitioning):
+            partitioned_data = []
+            for i in range(len(groups_or_partitions)):
+                start, end = groups_or_partitions.get_partition_range(i)
+                _part = data[start:end]
+                partitioned_data.append(_part)
+        else:
+            if isinstance(groups_or_partitions, np.ndarray):
+                groups_or_partitions = groups_or_partitions.tolist()
+
+            group_idx_dict = defaultdict(list)
+            for idx, group in enumerate(groups_or_partitions):
+                group_idx_dict[group].append(idx)
+
+            group_dict = defaultdict(list)
+            for key, val in group_idx_dict.items():
+                group_dict[key] = ut.subset(data, val)
+
+            sorted_groups = sorted(group_dict.keys())
+            partitioned_data = [group_dict[group] for group in sorted_groups]
+
+        return partitioned_data
+    except Exception as e:
+        raise NotImplementedError(f"No `splitAsCompressedList` dispatcher found for element type {element_type}") from e
 
 
 def _generic_register_helper(data, groups_or_partitions, names=None):
