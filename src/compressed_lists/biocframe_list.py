@@ -13,7 +13,9 @@ __license__ = "MIT"
 
 
 class CompressedSplitBiocFrameList(CompressedList):
-    """CompressedList for BiocFrames."""
+    """CompressedList for BiocFrames.
+
+    All BiocFrames are expected to have the same number and names of columns."""
 
     def __init__(
         self,
