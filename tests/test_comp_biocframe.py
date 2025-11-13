@@ -50,3 +50,9 @@ def test_split_biocframe(frame_data):
     clist = splitAsCompressedList(frame_data, groups_or_partitions=frame_data.get_column("groups"))
 
     assert isinstance(clist, CompressedSplitBiocFrameList)
+
+    val = clist.__repr__()
+    assert isinstance(val, str)
+
+    val = clist.__str__()
+    assert isinstance(val, str)
