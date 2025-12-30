@@ -1,4 +1,4 @@
-from typing import Optional, Sequence, Union
+from typing import Any, Dict, Optional, Sequence, Union
 from warnings import warn
 
 import biocutils as ut
@@ -20,7 +20,7 @@ class CompressedBooleanList(CompressedList):
         unlist_data: ut.BooleanList,
         partitioning: Partitioning,
         element_metadata: Optional[dict] = None,
-        metadata: Optional[dict] = None,
+        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
         **kwargs,
     ):
         """Initialize a CompressedBooleanList.

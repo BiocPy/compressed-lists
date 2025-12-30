@@ -1,4 +1,4 @@
-from typing import List, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 import biocutils as ut
 from biocframe import BiocFrame
@@ -22,7 +22,7 @@ class CompressedSplitBiocFrameList(CompressedList):
         unlist_data: BiocFrame,
         partitioning: Partitioning,
         element_metadata: Optional[dict] = None,
-        metadata: Optional[dict] = None,
+        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
         **kwargs,
     ):
         """Initialize a CompressedSplitBiocFrameList.

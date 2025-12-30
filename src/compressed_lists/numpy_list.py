@@ -1,4 +1,4 @@
-from typing import List, Optional, Sequence, Union
+from typing import Any, Dict, List, Optional, Sequence, Union
 from warnings import warn
 
 import biocutils as ut
@@ -21,7 +21,7 @@ class CompressedNumpyList(CompressedList):
         unlist_data: np.ndarray,
         partitioning: Partitioning,
         element_metadata: Optional[dict] = None,
-        metadata: Optional[dict] = None,
+        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
         **kwargs,
     ):
         """Initialize a CompressedNumpyList.

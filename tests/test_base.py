@@ -1,5 +1,6 @@
 from copy import copy, deepcopy
 
+import biocutils as ut
 import pytest
 
 from compressed_lists import CompressedList
@@ -73,12 +74,12 @@ def test_base_set_unlist_data_error(base_list):
 def test_base_metadata(base_list):
     meta = {"source": "test"}
     cl_meta = base_list.set_metadata(meta, in_place=False)
-    assert base_list.metadata == {}
-    assert cl_meta.metadata == {"source": "test"}
+    assert base_list.metadata == ut.NamedList()
+    assert cl_meta.metadata == ut.NamedList.from_dict({"source": "test"})
 
     with pytest.warns(UserWarning, match="Setting property 'metadata'"):
         base_list.metadata = meta
-    assert base_list.metadata == {"source": "test"}
+    assert base_list.metadata == ut.NamedList.from_dict({"source": "test"})
 
     el_meta = {"info": "details"}
     cl_el_meta = base_list.set_element_metadata(el_meta, in_place=False)
