@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any, Dict, List, Optional, Sequence, Union
 from warnings import warn
 
@@ -63,7 +65,7 @@ class CompressedNumpyList(CompressedList):
         lst: List[np.ndarray],
         names: Optional[Union[ut.Names, Sequence[str]]] = None,
         metadata: Optional[dict] = None,
-    ) -> "CompressedNumpyList":
+    ) -> CompressedNumpyList:
         """
         Create a `CompressedNumpyList` from a list of NumPy vectors.
 

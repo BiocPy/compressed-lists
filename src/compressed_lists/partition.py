@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import List, Optional, Sequence, Union
 from warnings import warn
 
@@ -56,7 +58,7 @@ class Partitioning:
     @classmethod
     def from_lengths(
         cls, lengths: Sequence[int], names: Optional[Union[ut.Names, Sequence[str]]] = None
-    ) -> "Partitioning":
+    ) -> Partitioning:
         """Create a Partitioning from a sequence of lengths.
 
         Args:
@@ -73,7 +75,7 @@ class Partitioning:
         return cls(ends, names)
 
     @classmethod
-    def from_list(cls, lst: List, names: Optional[Union[ut.Names, Sequence[str]]] = None) -> "Partitioning":
+    def from_list(cls, lst: List, names: Optional[Union[ut.Names, Sequence[str]]] = None) -> Partitioning:
         """Create a Partitioning from a list by using the lengths of each element.
 
         Args:
@@ -89,7 +91,7 @@ class Partitioning:
         lengths = [len(item) if hasattr(item, "__len__") else 1 for item in lst]
         return cls.from_lengths(lengths, names)
 
-    def _define_output(self, in_place: bool = False) -> "Partitioning":
+    def _define_output(self, in_place: bool = False) -> Partitioning:
         if in_place is True:
             return self
         else:
@@ -220,7 +222,7 @@ class Partitioning:
         """Return the names of each partition."""
         return self._names
 
-    def set_names(self, names: Optional[Union[ut.Names, Sequence[str]]], in_place: bool = False) -> "Partitioning":
+    def set_names(self, names: Optional[Union[ut.Names, Sequence[str]]], in_place: bool = False) -> Partitioning:
         """Set the names of list elements.
 
         Args:

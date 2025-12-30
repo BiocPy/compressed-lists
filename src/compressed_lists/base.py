@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any, Callable, Dict, Iterator, List, Optional, Sequence, Union
 from warnings import warn
 
@@ -215,7 +217,7 @@ class CompressedList(ut.BiocObject):
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
-    def set_names(self, names: Sequence[str], in_place: bool = False) -> "CompressedList":
+    def set_names(self, names: Sequence[str], in_place: bool = False) -> CompressedList:
         """Set the names of list elements.
 
         names:
@@ -259,7 +261,7 @@ class CompressedList(ut.BiocObject):
         """Get all elements."""
         return self._unlist_data
 
-    def set_unlist_data(self, unlist_data: Any, in_place: bool = False) -> "CompressedList":
+    def set_unlist_data(self, unlist_data: Any, in_place: bool = False) -> CompressedList:
         """Set new list elements.
 
         Args:
@@ -308,7 +310,7 @@ class CompressedList(ut.BiocObject):
         """
         return self._element_metadata
 
-    def set_element_metadata(self, element_metadata: dict, in_place: bool = False) -> "CompressedList":
+    def set_element_metadata(self, element_metadata: dict, in_place: bool = False) -> CompressedList:
         """Set new element metadata.
 
         Args:
@@ -424,7 +426,7 @@ class CompressedList(ut.BiocObject):
         lst: Any,
         names: Optional[Union[ut.Names, Sequence[str]]] = None,
         metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
-    ) -> "CompressedList":
+    ) -> CompressedList:
         """Create a CompressedList from a regular list.
 
         This method must be implemented by subclasses to handle
@@ -495,7 +497,7 @@ class CompressedList(ut.BiocObject):
             else self._unlist_data.set_names(self.get_partitioning().get_names(), in_place=False)
         )
 
-    def relist(self, unlist_data: Any) -> "CompressedList":
+    def relist(self, unlist_data: Any) -> CompressedList:
         """Create a new `CompressedList` with the same partitioning but different data.
 
         Args:
@@ -516,7 +518,7 @@ class CompressedList(ut.BiocObject):
             metadata=self._metadata.copy(),
         )
 
-    def extract_subset(self, indices: Sequence[int]) -> "CompressedList":
+    def extract_subset(self, indices: Sequence[int]) -> CompressedList:
         """Extract a subset of elements by indices.
 
         Args:
@@ -559,7 +561,7 @@ class CompressedList(ut.BiocObject):
             metadata=self._metadata.copy(),
         )
 
-    def lapply(self, func: Callable) -> "CompressedList":
+    def lapply(self, func: Callable) -> CompressedList:
         """Apply a function to each element.
 
         Args:
