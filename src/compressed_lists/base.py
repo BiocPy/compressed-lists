@@ -1,4 +1,6 @@
-from typing import Any, Callable, Iterator, List, Optional, Sequence, Union
+from __future__ import annotations
+
+from typing import Any, Callable, Dict, Iterator, List, Optional, Sequence, Union
 from warnings import warn
 
 import biocutils as ut
@@ -19,7 +21,7 @@ def _validate_data_and_partitions(unlist_data, partition):
         )
 
 
-class CompressedList:
+class CompressedList(ut.BiocObject):
     """Base class for compressed list objects.
 
     `CompressedList` stores list elements concatenated in a single vector-like object
@@ -32,8 +34,8 @@ class CompressedList:
         partitioning: Partitioning,
         element_type: Any = None,
         element_metadata: Optional[dict] = None,
-        metadata: Optional[dict] = None,
-        validate: bool = True,
+        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+        _validate: bool = True,
     ):
         """Initialize a CompressedList.
 
@@ -53,23 +55,19 @@ class CompressedList:
             metadata:
                 Optional general metadata.
 
-            validate:
+            _validate:
                 Internal use only.
         """
+
+        super().__init__(metadata=metadata, _validate=_validate)
+
         self._unlist_data = unlist_data
         self._partitioning = partitioning
         self._element_type = element_type
         self._element_metadata = element_metadata or {}
-        self._metadata = metadata or {}
 
-        if validate:
+        if _validate:
             _validate_data_and_partitions(self._unlist_data, self._partitioning)
-
-    def _define_output(self, in_place: bool = False) -> "CompressedList":
-        if in_place is True:
-            return self
-        else:
-            return self.__copy__()
 
     #########################
     ######>> Copying <<######
@@ -219,7 +217,7 @@ class CompressedList:
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
-    def set_names(self, names: Sequence[str], in_place: bool = False) -> "CompressedList":
+    def set_names(self, names: Sequence[str], in_place: bool = False) -> CompressedList:
         """Set the names of list elements.
 
         names:
@@ -263,7 +261,7 @@ class CompressedList:
         """Get all elements."""
         return self._unlist_data
 
-    def set_unlist_data(self, unlist_data: Any, in_place: bool = False) -> "CompressedList":
+    def set_unlist_data(self, unlist_data: Any, in_place: bool = False) -> CompressedList:
         """Set new list elements.
 
         Args:
@@ -312,7 +310,7 @@ class CompressedList:
         """
         return self._element_metadata
 
-    def set_element_metadata(self, element_metadata: dict, in_place: bool = False) -> "CompressedList":
+    def set_element_metadata(self, element_metadata: dict, in_place: bool = False) -> CompressedList:
         """Set new element metadata.
 
         Args:
@@ -348,54 +346,6 @@ class CompressedList:
             UserWarning,
         )
         self.set_element_metadata(element_metadata, in_place=True)
-
-    ###########################
-    ######>> metadata <<#######
-    ###########################
-
-    def get_metadata(self) -> dict:
-        """
-        Returns:
-            Dictionary of metadata for this object.
-        """
-        return self._metadata
-
-    def set_metadata(self, metadata: dict, in_place: bool = False) -> "CompressedList":
-        """Set additional metadata.
-
-        Args:
-            metadata:
-                New metadata for this object.
-
-            in_place:
-                Whether to modify the ``CompressedList`` in place.
-
-        Returns:
-            A modified ``CompressedList`` object, either as a copy of the original
-            or as a reference to the (in-place-modified) original.
-        """
-        if not isinstance(metadata, dict):
-            raise TypeError(f"`metadata` must be a dictionary, provided {type(metadata)}.")
-        output = self._define_output(in_place)
-        output._metadata = metadata
-        return output
-
-    @property
-    def metadata(self) -> dict:
-        """Alias for :py:attr:`~get_metadata`."""
-        return self.get_metadata()
-
-    @metadata.setter
-    def metadata(self, metadata: dict):
-        """Alias for :py:attr:`~set_metadata` with ``in_place = True``.
-
-        As this mutates the original object, a warning is raised.
-        """
-        warn(
-            "Setting property 'metadata' is an in-place operation, use 'set_metadata' instead",
-            UserWarning,
-        )
-        self.set_metadata(metadata, in_place=True)
 
     ##########################
     ######>> accessors <<#####
@@ -472,8 +422,11 @@ class CompressedList:
 
     @classmethod
     def from_list(
-        cls, lst: Any, names: Optional[Union[ut.Names, Sequence[str]]] = None, metadata: Optional[dict] = None
-    ) -> "CompressedList":
+        cls,
+        lst: Any,
+        names: Optional[Union[ut.Names, Sequence[str]]] = None,
+        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+    ) -> CompressedList:
         """Create a CompressedList from a regular list.
 
         This method must be implemented by subclasses to handle
@@ -544,7 +497,7 @@ class CompressedList:
             else self._unlist_data.set_names(self.get_partitioning().get_names(), in_place=False)
         )
 
-    def relist(self, unlist_data: Any) -> "CompressedList":
+    def relist(self, unlist_data: Any) -> CompressedList:
         """Create a new `CompressedList` with the same partitioning but different data.
 
         Args:
@@ -565,7 +518,7 @@ class CompressedList:
             metadata=self._metadata.copy(),
         )
 
-    def extract_subset(self, indices: Sequence[int]) -> "CompressedList":
+    def extract_subset(self, indices: Sequence[int]) -> CompressedList:
         """Extract a subset of elements by indices.
 
         Args:
@@ -608,7 +561,7 @@ class CompressedList:
             metadata=self._metadata.copy(),
         )
 
-    def lapply(self, func: Callable) -> "CompressedList":
+    def lapply(self, func: Callable) -> CompressedList:
         """Apply a function to each element.
 
         Args:

@@ -1,5 +1,5 @@
 import pytest
-from biocutils.FloatList import FloatList
+from biocutils.float_list import FloatList
 
 from compressed_lists import CompressedFloatList
 

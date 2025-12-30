@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.4.0
+
+- Classes extend `BiocObject` from biocutils. `metadata` is a named list.
+- Update actions to run from 3.10-3.14
+
 ## Version 0.3.0
 
 - Renamed `CompressedBiocFrameList` to `CompressedSplitBiocFrameList` since the current implementation can only handle dataframes with the same number and names of columns.

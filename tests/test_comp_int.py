@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from biocutils.IntegerList import IntegerList
+from biocutils.integer_list import IntegerList
 
 from compressed_lists import CompressedIntegerList, Partitioning
 

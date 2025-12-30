@@ -1,4 +1,6 @@
-from typing import List, Optional, Sequence, Union
+from __future__ import annotations
+
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 import biocutils as ut
 from biocframe import BiocFrame
@@ -22,7 +24,7 @@ class CompressedSplitBiocFrameList(CompressedList):
         unlist_data: BiocFrame,
         partitioning: Partitioning,
         element_metadata: Optional[dict] = None,
-        metadata: Optional[dict] = None,
+        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
         **kwargs,
     ):
         """Initialize a CompressedSplitBiocFrameList.
@@ -56,7 +58,7 @@ class CompressedSplitBiocFrameList(CompressedList):
         lst: List[BiocFrame],
         names: Optional[Union[ut.Names, Sequence[str]]] = None,
         metadata: Optional[dict] = None,
-    ) -> "CompressedSplitBiocFrameList":
+    ) -> CompressedSplitBiocFrameList:
         """Create a `CompressedSplitBiocFrameList` from a regular list.
 
         This concatenates the list of `BiocFrame` objects.
