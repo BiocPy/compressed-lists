@@ -387,11 +387,14 @@ class CompressedList(ut.BiocObject):
 
             current_class_const = type(self)
             return current_class_const.from_list(
-                result, names=[self.names[i] for i in indices] if self.names[0] is not None else None
+                result, names=[self.names[i] for i in indices] if self.names is not None else None
             )
 
         else:
-            raise TypeError("'key' must be int, str, or slice.")
+            try:
+                return self.extract_subset(indices=key)
+            except Exception as e:
+                raise TypeError("'key' must be int, str, slice or list of indices.") from e
 
     ##################################
     ######>> abstract methods <<######
@@ -575,3 +578,19 @@ class CompressedList(ut.BiocObject):
 
         current_class_const = type(self)
         return current_class_const.from_list(result, self.names, self._metadata)
+
+    @classmethod
+    def empty(cls, n: int):
+        """Create an zero-length `CompressedGenomicRangesList` object.
+
+        Args:
+            n:
+                Number of elements.
+
+        Returns:
+            same type as caller, in this case a `CompressedGenomicRangesList`.
+        """
+
+        _range_lengths = [0] * n
+
+        return CompressedList(unlist_data=[], partitioning=Partitioning(ends=_range_lengths))

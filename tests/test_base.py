@@ -39,6 +39,19 @@ def test_base_list_of_empty():
     assert list(cl_list_empty[2]) == []
 
 
+def test_base_list_empty_classmeth():
+    cl_list_empty = CompressedList.empty(n=3)
+    assert len(cl_list_empty) == 3
+    assert len(cl_list_empty.unlist_data) == 0
+    assert list(cl_list_empty.get_element_lengths()) == [0, 0, 0]
+    assert list(cl_list_empty[0]) == []
+    assert list(cl_list_empty[1]) == []
+    assert list(cl_list_empty[2]) == []
+
+    subset = cl_list_empty[[0, 2]]
+    assert isinstance(subset, CompressedList)
+    assert len(subset) == 2
+
 def test_base_set_names(base_list):
     new_names = ["X", "Y", "Z"]
 
