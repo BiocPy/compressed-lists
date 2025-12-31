@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html"><link rel="prev" title="compressed_lists" href="modules.html">
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
-        <title>compressed_lists package - compressed-lists 0.4.0 documentation</title>
+        <title>compressed_lists package - compressed-lists 0.4.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
@@ -162,7 +162,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">compressed-lists 0.4.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">compressed-lists 0.4.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -183,7 +183,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
-  <span class="sidebar-brand-text">compressed-lists 0.4.0 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.4.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -372,6 +372,20 @@ with partitioning information that defines where each list element starts and en
 <dt class="sig sig-object py" id="compressed_lists.base.CompressedList.element_type">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">element_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#compressed_lists.base.CompressedList.element_type" title="Link to this definition">¶</a></dt>
 <dd><p>Alias for <a class="reference internal" href="#compressed_lists.base.CompressedList.get_element_type" title="compressed_lists.base.CompressedList.get_element_type"><code class="xref py py-attr docutils literal notranslate"><span class="pre">get_element_type</span></code></a>, provided for back-compatibility.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="compressed_lists.base.CompressedList.empty">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/compressed_lists/base.html#CompressedList.empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#compressed_lists.base.CompressedList.empty" title="Link to this definition">¶</a></dt>
+<dd><p>Create an zero-length <cite>CompressedGenomicRangesList</cite> object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of elements.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>same type as caller, in this case a <cite>CompressedGenomicRangesList</cite>.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1324,6 +1338,7 @@ explicit partitioning object.</p></li>
 <li><a class="reference internal" href="#compressed_lists.base.CompressedList.copy"><code class="docutils literal notranslate"><span class="pre">CompressedList.copy()</span></code></a></li>
 <li><a class="reference internal" href="#compressed_lists.base.CompressedList.element_metadata"><code class="docutils literal notranslate"><span class="pre">CompressedList.element_metadata</span></code></a></li>
 <li><a class="reference internal" href="#compressed_lists.base.CompressedList.element_type"><code class="docutils literal notranslate"><span class="pre">CompressedList.element_type</span></code></a></li>
+<li><a class="reference internal" href="#compressed_lists.base.CompressedList.empty"><code class="docutils literal notranslate"><span class="pre">CompressedList.empty()</span></code></a></li>
 <li><a class="reference internal" href="#compressed_lists.base.CompressedList.extract_range"><code class="docutils literal notranslate"><span class="pre">CompressedList.extract_range()</span></code></a></li>
 <li><a class="reference internal" href="#compressed_lists.base.CompressedList.extract_subset"><code class="docutils literal notranslate"><span class="pre">CompressedList.extract_subset()</span></code></a></li>
 <li><a class="reference internal" href="#compressed_lists.base.CompressedList.from_list"><code class="docutils literal notranslate"><span class="pre">CompressedList.from_list()</span></code></a></li>
@@ -1448,7 +1463,7 @@ explicit partitioning object.</p></li>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=6c02275b"></script>
+</div><script src="../_static/documentation_options.js?v=c87aa342"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
