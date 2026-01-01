@@ -594,3 +594,40 @@ class CompressedList(ut.BiocObject):
         _range_lengths = [0] * n
 
         return CompressedList(unlist_data=[], partitioning=Partitioning(ends=_range_lengths))
+
+    #######################
+    ######>> extend <<#####
+    #######################
+
+    def extend(self, other: CompressedList, in_place: bool = False) -> CompressedList:
+        """
+        Args:
+            other:
+                Some CompressedList object.
+
+            in_place:
+                Whether to perform the modification in place.
+
+        Returns:
+            A ``CompressedList`` where items in ``other`` are added to the end. If
+            ``in_place = False``, this is a new object, otherwise a reference
+            to the current object is returned.
+        """
+        output = self._define_output(in_place)
+
+        output._unlist_data = ut.combine_sequences(output._unlist_data, other._unlist_data)
+        output._partitioning = ut.combine_sequences(output._partitioning, other._partitioning)
+
+        return output
+
+
+@ut.combine_sequences.register(CompressedList)
+def _register_combine_patitioning(*x: CompressedList) -> CompressedList:
+    if not x:
+        raise ValueError("Cannot combine an empty object")
+
+    output = x[0].copy()
+    for i in range(1, len(x)):
+        output.extend(x[i], in_place=True)
+
+    return output

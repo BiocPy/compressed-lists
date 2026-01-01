@@ -27,7 +27,7 @@ class Partitioning:
     """
 
     def __init__(
-        self, ends: Sequence[int], names: Optional[Union[ut.Names, Sequence[str]]] = None, validate: bool = True
+        self, ends: Sequence[int], names: Optional[Union[ut.Names, Sequence[str]]] = None, _validate: bool = True
     ):
         """Initialize a Partitioning object.
 
@@ -38,7 +38,7 @@ class Partitioning:
             names:
                 Optional names for each partition.
 
-            validate:
+            _validate:
                 Internal use only.
         """
         self._ends = np.array(ends, dtype=np.int64)
@@ -52,7 +52,7 @@ class Partitioning:
         if names is not None:
             self._names = ut.Names(names)
 
-        if validate:
+        if _validate:
             _validate_names(names, len(ends))
 
     @classmethod
@@ -115,6 +115,7 @@ class Partitioning:
         return current_class_const(
             ends=_ends_copy,
             names=_names_copy,
+            _validate=False,
         )
 
     def __copy__(self):
@@ -126,6 +127,7 @@ class Partitioning:
         return current_class_const(
             ends=self._ends,
             names=self._names,
+            _validate=False,
         )
 
     def copy(self):
@@ -289,3 +291,53 @@ class Partitioning:
     def starts(self) -> np.ndarray:
         """Alias for :py:attr:`~get_starts`, provided for back-compatibility."""
         return self.get_starts()
+
+    #######################
+    ######>> extend <<#####
+    #######################
+
+    def extend(self, other: Partitioning, in_place: bool = False) -> Partitioning:
+        """
+        Args:
+            other:
+                Some Paritioning object.
+
+            in_place:
+                Whether to perform the modification in place.
+
+        Returns:
+            A ``Partitioning`` where items in ``other`` are added to the end. If
+            ``in_place = False``, this is a new object, otherwise a reference
+            to the current object is returned.
+        """
+        output = self._define_output(in_place)
+        previous_len = output.get_nobj()
+
+        output._ends = ut.combine_sequences(output._ends, (other._ends + previous_len))
+        output._starts = ut.combine_sequences(output._starts, (other._starts + previous_len))
+
+        if output._names is None and other._names is None:
+            output._names = None
+        else:
+            if output._names is None:
+                output._names = ut.Names([""] * previous_len)
+                output._names.extend(other._names)
+            elif other._names is None:
+                _names = ut.Names([""] * len(other))
+                output._names.extend(_names)
+            else:
+                output._names.extend(other._names)
+
+        return output
+
+
+@ut.combine_sequences.register(Partitioning)
+def _register_combine_patitioning(*x: Partitioning) -> Partitioning:
+    if not x:
+        raise ValueError("Cannot combine an empty sequence")
+
+    output = x[0].copy()
+    for i in range(1, len(x)):
+        output.extend(x[i], in_place=True)
+
+    return output
