@@ -100,10 +100,11 @@ def test_paritioning_combine():
 
 def test_compressed_list_combine():
     f1 = CompressedFloatList.from_list([[1.1, 1.2], [2.1, 2.2, 2.3], [3]], ["fruits1", "fruits2", "fruits3"])
+    f2 = CompressedFloatList.from_list([[1.1, 1.2], [2.1, 2.2, 2.3], [3]])
 
-    combi = ut.combine_sequences(f1, f1)
+    combi = ut.combine_sequences(f1, f2)
 
     assert isinstance(combi, CompressedFloatList)
     assert len(combi) == 6
     assert np.allclose(combi.get_partitioning().get_ends(), [2, 5, 6, 8, 11, 12])
-    assert list(combi.get_names()) == ["fruits1", "fruits2", "fruits3", "fruits1", "fruits2", "fruits3"]
+    assert list(combi.get_names()) == ["fruits1", "fruits2", "fruits3", "", "", ""]
