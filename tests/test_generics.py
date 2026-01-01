@@ -84,3 +84,27 @@ def test_generic_register_helper_errors():
 
     with pytest.raises(ValueError, match="'groups_or_paritions' must be a group vector or a Partition object"):
         _generic_register_helper([1, 2, 3], {"a": 1})
+
+
+def test_paritioning_combine():
+    p1 = Partitioning(ends=[3, 5, 9], names=["1", "2", "3"])
+    p2 = Partitioning(ends=[3, 5, 9])
+
+    combi = ut.combine_sequences(p1, p2)
+
+    assert isinstance(combi, Partitioning)
+    assert len(combi) == 6
+    assert np.allclose(combi.get_ends(), [3, 5, 9, 12, 14, 18])
+    assert list(combi.get_names()) == ["1", "2", "3", "", "", ""]
+
+
+def test_compressed_list_combine():
+    f1 = CompressedFloatList.from_list([[1.1, 1.2], [2.1, 2.2, 2.3], [3]], ["fruits1", "fruits2", "fruits3"])
+    f2 = CompressedFloatList.from_list([[1.1, 1.2], [2.1, 2.2, 2.3], [3]])
+
+    combi = ut.combine_sequences(f1, f2)
+
+    assert isinstance(combi, CompressedFloatList)
+    assert len(combi) == 6
+    assert np.allclose(combi.get_partitioning().get_ends(), [2, 5, 6, 8, 11, 12])
+    assert list(combi.get_names()) == ["fruits1", "fruits2", "fruits3", "", "", ""]

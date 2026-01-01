@@ -52,6 +52,7 @@ def test_base_list_empty_classmeth():
     assert isinstance(subset, CompressedList)
     assert len(subset) == 2
 
+
 def test_base_set_names(base_list):
     new_names = ["X", "Y", "Z"]
 
