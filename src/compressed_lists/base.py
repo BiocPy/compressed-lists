@@ -378,7 +378,10 @@ class CompressedList(ut.BiocObject):
             return self.extract_range(start, end)
 
         # slices
-        elif isinstance(key, slice):
+        elif isinstance(key, (range, slice)):
+            if isinstance(key, range):
+                key = slice(key.start, key.stop, key.step)
+
             indices = range(*key.indices(len(self)))
             result = []
             for i in indices:
@@ -531,6 +534,10 @@ class CompressedList(ut.BiocObject):
         Returns:
             A new CompressedList with only the selected elements.
         """
+        print("here", indices, type(indices))
+        if isinstance(indices, np.ndarray):
+            indices = indices.tolist()
+
         # Validate indices
         for i in indices:
             if i < 0 or i >= len(self):
@@ -544,16 +551,25 @@ class CompressedList(ut.BiocObject):
         new_partitioning = Partitioning.from_lengths(new_lengths, new_names)
 
         # Extract data
-        new_data = []
+        _new_data = []
         for i in indices:
             start, end = self._partitioning.get_partition_range(i)
-            if isinstance(self._unlist_data, np.ndarray):
-                new_data.append(self._unlist_data[start:end])
-            else:
-                new_data.extend(self._unlist_data[start:end])
+            _subset = ut.subset_sequence(self._unlist_data, [j for j in range(start, end)])
+            _new_data.append(_subset)
+        #     if isinstance(self._unlist_data, np.ndarray):
+        #         new_data.append(self._unlist_data[start:end])
+        #     else:
+        #         new_data.extend(self._unlist_data[start:end])
 
-        if isinstance(self._unlist_data, np.ndarray):
-            new_data = np.concatenate(new_data)
+        # if isinstance(self._unlist_data, np.ndarray):
+        #     new_data = np.concatenate(new_data)
+
+        if len(_new_data) == 1:
+            new_data = _new_data[0]
+        elif len(_new_data) > 0:
+            new_data = ut.combine_sequences(*_new_data)
+        else:
+            new_data = []
 
         current_class_const = type(self)
         return current_class_const(
