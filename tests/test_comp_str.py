@@ -1,5 +1,5 @@
 import pytest
-from biocutils.string_list import StringList
+from biocutils import StringList
 
 from compressed_lists import CompressedStringList
 

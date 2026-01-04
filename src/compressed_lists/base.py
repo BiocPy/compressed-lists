@@ -4,6 +4,7 @@ from typing import Any, Callable, Dict, Iterator, List, Optional, Sequence, Unio
 from warnings import warn
 
 import biocutils as ut
+from biocframe import BiocFrame
 import numpy as np
 
 from .partition import Partitioning
@@ -11,6 +12,31 @@ from .partition import Partitioning
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
 __license__ = "MIT"
+
+
+def is_pandas(x: Any) -> bool:
+    """Check if ``x`` is a :py:class:`~pandas.DataFrame`.
+
+    Args:
+        x:
+            Any object.
+
+    Returns:
+        True if ``x`` is a :py:class:`~pandas.DataFrame`.
+    """
+    if hasattr(x, "dtypes"):
+        return True
+
+    return False
+
+
+def _sanitize_frame(frame, num_rows: int):
+    frame = frame if frame is not None else BiocFrame({}, number_of_rows=num_rows)
+
+    if is_pandas(frame):
+        frame = BiocFrame.from_pandas(frame)
+
+    return frame
 
 
 def _validate_data_and_partitions(unlist_data, partition):
@@ -33,7 +59,7 @@ class CompressedList(ut.BiocObject):
         unlist_data: Any,
         partitioning: Partitioning,
         element_type: Any = None,
-        element_metadata: Optional[dict] = None,
+        element_metadata: Optional[BiocFrame] = None,
         metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
         _validate: bool = True,
     ):
@@ -64,7 +90,7 @@ class CompressedList(ut.BiocObject):
         self._unlist_data = unlist_data
         self._partitioning = partitioning
         self._element_type = element_type
-        self._element_metadata = element_metadata or {}
+        self._element_metadata = _sanitize_frame(element_metadata, len(partitioning))
 
         if _validate:
             _validate_data_and_partitions(self._unlist_data, self._partitioning)
@@ -93,6 +119,7 @@ class CompressedList(ut.BiocObject):
             element_type=_elem_type_copy,
             element_metadata=_elem_metadata_copy,
             metadata=_metadata_copy,
+            _validate=False,
         )
 
     def __copy__(self):
@@ -107,6 +134,7 @@ class CompressedList(ut.BiocObject):
             element_type=self._element_type,
             element_metadata=self._element_metadata,
             metadata=self._metadata,
+            _validate=False,
         )
 
     def copy(self):
@@ -150,8 +178,7 @@ class CompressedList(ut.BiocObject):
             _etype_name = self._element_type.__name__
         output += ", element_type=" + _etype_name
 
-        if len(self._element_metadata) > 0:
-            output += ", element_metadata=" + ut.print_truncated_dict(self._element_metadata)
+        output += ", element_metadata=" + self._element_metadata.__repr__()
 
         if len(self._metadata) > 0:
             output += ", metadata=" + ut.print_truncated_dict(self._metadata)
@@ -178,7 +205,7 @@ class CompressedList(ut.BiocObject):
 
         output += f"partitioning: {ut.print_truncated_list(self._partitioning)}\n"
 
-        output += f"element_metadata({str(len(self._element_metadata))}): {ut.print_truncated_list(list(self._element_metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+        output += f"element_metadata({str(len(self._element_metadata))} rows): {ut.print_truncated_list(list(self._element_metadata.get_column_names()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
         output += f"metadata({str(len(self._metadata))}): {ut.print_truncated_list(list(self._metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
 
         return output
@@ -303,14 +330,14 @@ class CompressedList(ut.BiocObject):
     ######>> element metadata <<#######
     ###################################
 
-    def get_element_metadata(self) -> dict:
+    def get_element_metadata(self) -> BiocFrame:
         """
         Returns:
             Dictionary of metadata for each element in this object.
         """
         return self._element_metadata
 
-    def set_element_metadata(self, element_metadata: dict, in_place: bool = False) -> CompressedList:
+    def set_element_metadata(self, element_metadata: BiocFrame, in_place: bool = False) -> CompressedList:
         """Set new element metadata.
 
         Args:
@@ -324,19 +351,20 @@ class CompressedList(ut.BiocObject):
             A modified ``CompressedList`` object, either as a copy of the original
             or as a reference to the (in-place-modified) original.
         """
-        if not isinstance(element_metadata, dict):
-            raise TypeError(f"`element_metadata` must be a dictionary, provided {type(element_metadata)}.")
+        if not isinstance(element_metadata, BiocFrame):
+            raise TypeError(f"`element_metadata` must be a BiocFrame, provided {type(element_metadata)}.")
+
         output = self._define_output(in_place)
-        output._element_metadata = element_metadata
+        output._element_metadata = _sanitize_frame(element_metadata, len(self._partitioning))
         return output
 
     @property
-    def element_metadata(self) -> dict:
+    def element_metadata(self) -> BiocFrame:
         """Alias for :py:attr:`~get_element_metadata`."""
         return self.get_element_metadata()
 
     @element_metadata.setter
-    def element_metadata(self, element_metadata: dict):
+    def element_metadata(self, element_metadata: BiocFrame):
         """Alias for :py:attr:`~set_element_metadata` with ``in_place = True``.
 
         As this mutates the original object, a warning is raised.
@@ -576,7 +604,7 @@ class CompressedList(ut.BiocObject):
             new_data,
             new_partitioning,
             element_type=self._element_type,
-            element_metadata={k: v for k, v in self._element_metadata.items() if k in indices},
+            element_metadata=self._element_metadata[indices,],
             metadata=self._metadata.copy(),
         )
 

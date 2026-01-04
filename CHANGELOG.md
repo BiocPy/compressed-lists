@@ -1,11 +1,12 @@
 # Changelog
 
-## Version 0.4.0 - 0.4.3
+## Version 0.4.0 - 0.4.4
 
 - Classes extend `BiocObject` from biocutils. `metadata` is a named list.
 - Update actions to run from 3.10-3.14
 - Support empty compressed list objects of size `n`.
 - Implement combine generic for compressed lists.
+- element metadata slot is a `BiocFrame`.
 
 ## Version 0.3.0
 

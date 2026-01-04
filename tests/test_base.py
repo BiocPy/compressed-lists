@@ -4,6 +4,7 @@ import biocutils as ut
 import pytest
 
 from compressed_lists import CompressedList
+from biocframe import BiocFrame
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
@@ -95,14 +96,13 @@ def test_base_metadata(base_list):
         base_list.metadata = meta
     assert base_list.metadata == ut.NamedList.from_dict({"source": "test"})
 
-    el_meta = {"info": "details"}
+    el_meta = BiocFrame({"score": [1, 2, 3]})
     cl_el_meta = base_list.set_element_metadata(el_meta, in_place=False)
-    assert base_list.element_metadata == {}
-    assert cl_el_meta.element_metadata == {"info": "details"}
+    assert len(base_list.element_metadata) == 3
+    assert cl_el_meta.element_metadata.get_column("score") == el_meta.get_column("score")
 
-    with pytest.warns(UserWarning, match="Setting property 'element_metadata'"):
-        base_list.element_metadata = el_meta
-    assert base_list.element_metadata == {"info": "details"}
+    with pytest.raises(Exception):
+        base_list.element_metadata = {"info": "details"}
 
 
 def test_base_copying(base_list):
