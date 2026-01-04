@@ -1,5 +1,5 @@
 import pytest
-from biocutils.boolean_list import BooleanList
+from biocutils import BooleanList
 
 from compressed_lists import CompressedBooleanList
 
