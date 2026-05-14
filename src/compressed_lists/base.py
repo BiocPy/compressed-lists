@@ -637,7 +637,7 @@ class CompressedList(ut.BiocObject):
 
         _range_lengths = [0] * n
 
-        return CompressedList(unlist_data=[], partitioning=Partitioning(ends=_range_lengths))
+        return cls(unlist_data=[], partitioning=Partitioning(ends=_range_lengths))
 
     #######################
     ######>> extend <<#####

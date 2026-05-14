@@ -1,6 +1,6 @@
 # Changelog
 
-## Version 0.4.0 - 0.4.4
+## Version 0.4.0 - 0.4.5
 
 - Classes extend `BiocObject` from biocutils. `metadata` is a named list.
 - Update actions to run from 3.10-3.14
