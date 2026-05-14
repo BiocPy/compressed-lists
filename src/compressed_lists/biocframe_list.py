@@ -175,6 +175,7 @@ class CompressedSplitBiocFrameList(CompressedList):
 
         return cls(unlist_data=BiocFrame({}), partitioning=Partitioning(ends=_range_lengths))
 
+
 @splitAsCompressedList.register
 def _(
     data: BiocFrame,
