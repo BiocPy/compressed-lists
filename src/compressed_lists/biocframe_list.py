@@ -159,6 +159,21 @@ class CompressedSplitBiocFrameList(CompressedList):
 
         return output
 
+    @classmethod
+    def empty(cls, n: int):
+        """Create an zero-length `CompressedSplitBiocFrameList` object.
+
+        Args:
+            n:
+                Number of elements.
+
+        Returns:
+            same type as caller, in this case a `CompressedSplitBiocFrameList`.
+        """
+
+        _range_lengths = [0] * n
+
+        return cls(unlist_data=BiocFrame({}), partitioning=Partitioning(ends=_range_lengths))
 
 @splitAsCompressedList.register
 def _(
