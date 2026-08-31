@@ -2,9 +2,9 @@ from copy import copy, deepcopy
 
 import biocutils as ut
 import pytest
+from biocframe import BiocFrame
 
 from compressed_lists import CompressedList
-from biocframe import BiocFrame
 
 __author__ = "Jayaram Kancherla"
 __copyright__ = "Jayaram Kancherla"
