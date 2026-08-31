@@ -1,4 +1,5 @@
-from typing import Any, List, Optional, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 import pytest
 
@@ -17,20 +18,20 @@ def CompressedCustomFloatList():
             unlist_data: Any,
             partitioning: Partitioning,
             element_type: Any = None,
-            element_metadata: Optional[dict] = None,
-            metadata: Optional[dict] = None,
+            element_metadata: dict | None = None,
+            metadata: dict | None = None,
             validate: bool = True,
         ):
             super().__init__(
                 unlist_data, partitioning, element_type="float", element_metadata=element_metadata, metadata=metadata
             )
 
-        def extract_range(self, start: int, end: int) -> List[float]:
+        def extract_range(self, start: int, end: int) -> list[float]:
             return self._unlist_data[start:end]
 
         @classmethod
         def from_list(
-            cls, lst: List[Any], names: Optional[Sequence[str]] = None, metadata: Optional[dict] = None
+            cls, lst: list[Any], names: Sequence[str] | None = None, metadata: dict | None = None
         ) -> "CompressedCustomFloatList":
             flat_data = []
             for sublist in lst:
