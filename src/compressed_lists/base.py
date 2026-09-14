@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Iterator, List, Optional, Sequence, Union
+from collections.abc import Callable, Iterator, Sequence
+from typing import Any
 from warnings import warn
 
 import biocutils as ut
-from biocframe import BiocFrame
 import numpy as np
+from biocframe import BiocFrame
 
 from .partition import Partitioning
 
@@ -59,8 +60,8 @@ class CompressedList(ut.BiocObject):
         unlist_data: Any,
         partitioning: Partitioning,
         element_type: Any = None,
-        element_metadata: Optional[BiocFrame] = None,
-        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+        element_metadata: BiocFrame | None = None,
+        metadata: dict[str, Any] | ut.NamedList | None = None,
         _validate: bool = True,
     ):
         """Initialize a CompressedList.
@@ -205,8 +206,8 @@ class CompressedList(ut.BiocObject):
 
         output += f"partitioning: {ut.print_truncated_list(self._partitioning)}\n"
 
-        output += f"element_metadata({str(len(self._element_metadata))} rows): {ut.print_truncated_list(list(self._element_metadata.get_column_names()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
-        output += f"metadata({str(len(self._metadata))}): {ut.print_truncated_list(list(self._metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+        output += f"element_metadata({len(self._element_metadata)!s} rows): {ut.print_truncated_list(list(self._element_metadata.get_column_names()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+        output += f"metadata({len(self._metadata)!s}): {ut.print_truncated_list(list(self._metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
 
         return output
 
@@ -240,7 +241,7 @@ class CompressedList(ut.BiocObject):
     ######>> names <<######
     #######################
 
-    def get_names(self) -> Optional[ut.Names]:
+    def get_names(self) -> ut.Names | None:
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
@@ -264,7 +265,7 @@ class CompressedList(ut.BiocObject):
         return output
 
     @property
-    def names(self) -> Optional[ut.Names]:
+    def names(self) -> ut.Names | None:
         """Alias for :py:attr:`~get_names`."""
         return self._partitioning.get_names()
 
@@ -379,7 +380,7 @@ class CompressedList(ut.BiocObject):
     ######>> accessors <<#####
     ##########################
 
-    def __getitem__(self, key: Union[int, str, slice]) -> Any:
+    def __getitem__(self, key: int | str | slice) -> Any:
         """Get an element or slice of elements from the list.
 
         Args:
@@ -458,8 +459,8 @@ class CompressedList(ut.BiocObject):
     def from_list(
         cls,
         lst: Any,
-        names: Optional[Union[ut.Names, Sequence[str]]] = None,
-        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+        names: ut.Names | Sequence[str] | None = None,
+        metadata: dict[str, Any] | ut.NamedList | None = None,
     ) -> CompressedList:
         """Create a CompressedList from a regular list.
 
@@ -496,7 +497,7 @@ class CompressedList(ut.BiocObject):
     ######>> coercions <<######
     ###########################
 
-    def to_list(self) -> List[List[Any]]:
+    def to_list(self) -> list[list[Any]]:
         """Convert to a regular Python list.
 
         Returns:
@@ -511,7 +512,7 @@ class CompressedList(ut.BiocObject):
 
         return result
 
-    def as_list(self) -> List[List[Any]]:
+    def as_list(self) -> list[list[Any]]:
         """Alias to :py:meth:`~to_list`"""
         return self.to_list()
 

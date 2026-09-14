@@ -1,4 +1,5 @@
-from typing import Any, Dict, Optional, Sequence, Union
+from collections.abc import Sequence
+from typing import Any
 from warnings import warn
 
 import biocutils as ut
@@ -19,8 +20,8 @@ class CompressedStringList(CompressedList):
         self,
         unlist_data: ut.StringList,
         partitioning: Partitioning,
-        element_metadata: Optional[dict] = None,
-        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+        element_metadata: dict | None = None,
+        metadata: dict[str, Any] | ut.NamedList | None = None,
         **kwargs,
     ):
         """Initialize a CompressedStringList.
@@ -60,9 +61,9 @@ class CompressedCharacterList(CompressedStringList):
 @splitAsCompressedList.register
 def _(
     data: ut.StringList,
-    groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Union[ut.Names, Sequence[str]]] = None,
-    metadata: Optional[dict] = None,
+    groups_or_partitions: list | Partitioning,
+    names: ut.Names | Sequence[str] | None = None,
+    metadata: dict | None = None,
 ) -> CompressedStringList:
     """Handle lists of strings."""
 
