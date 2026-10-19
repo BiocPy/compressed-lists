@@ -64,8 +64,10 @@ from typing import List
 from compressed_lists import CompressedList, Partitioning
 import numpy as np
 
+
 class CustomCompressedList(CompressedList):
     """A custom CompressedList for your data type."""
+
     pass
 ```
 
@@ -74,16 +76,21 @@ class CustomCompressedList(CompressedList):
 The constructor should initialize the superclass with the appropriate data:
 
 ```python
-def __init__(self,
-        unlist_data: Any,  # Replace with your data type
-        partitioning: Partitioning,
-        element_type: Any = None,
-        element_metadata: Optional[dict] = None,
-        metadata: Optional[dict] = None):
-    super().__init__(unlist_data, partitioning,
+def __init__(
+    self,
+    unlist_data: Any,  # Replace with your data type
+    partitioning: Partitioning,
+    element_type: Any = None,
+    element_metadata: Optional[dict] = None,
+    metadata: Optional[dict] = None,
+):
+    super().__init__(
+        unlist_data,
+        partitioning,
         element_type="custom_type",  # Set your element type
         element_metadata=element_metadata,
-        metadata=metadata)
+        metadata=metadata,
+    )
 ```
 
 ## 3. Implement `extract_range` Method
@@ -106,8 +113,7 @@ This factory method creates a new instance from a list:
 
 ```python
 @classmethod
-def from_list(cls, lst: List[List[T]], names: list = None,
-             metadata: dict = None) -> 'CustomCompressedList':
+def from_list(cls, lst: List[List[T]], names: list = None, metadata: dict = None) -> "CustomCompressedList":
     """Create a new CustomCompressedList from a list."""
     # Flatten the list
     flat_data = []
