@@ -15,12 +15,12 @@ except PackageNotFoundError:  # pragma: no cover
 finally:
     del version, PackageNotFoundError
 
-from .partition import Partitioning
 from .base import CompressedList
-from .integer_list import CompressedIntegerList
-from .string_list import CompressedStringList, CompressedCharacterList
+from .biocframe_list import CompressedSplitBiocFrameList
 from .bool_list import CompressedBooleanList
 from .float_list import CompressedFloatList
+from .integer_list import CompressedIntegerList
 from .numpy_list import CompressedNumpyList
-from .biocframe_list import CompressedSplitBiocFrameList
+from .partition import Partitioning
 from .split_generic import splitAsCompressedList
+from .string_list import CompressedCharacterList, CompressedStringList
