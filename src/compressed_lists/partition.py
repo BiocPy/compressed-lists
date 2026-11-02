@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional, Sequence, Union
+from collections.abc import Sequence
 from warnings import warn
 
 import biocutils as ut
@@ -26,9 +26,7 @@ class Partitioning:
     It keeps track of where each element begins and ends in the unlisted data.
     """
 
-    def __init__(
-        self, ends: Sequence[int], names: Optional[Union[ut.Names, Sequence[str]]] = None, _validate: bool = True
-    ):
+    def __init__(self, ends: Sequence[int], names: ut.Names | Sequence[str] | None = None, _validate: bool = True):
         """Initialize a Partitioning object.
 
         Args:
@@ -56,9 +54,7 @@ class Partitioning:
             _validate_names(names, len(ends))
 
     @classmethod
-    def from_lengths(
-        cls, lengths: Sequence[int], names: Optional[Union[ut.Names, Sequence[str]]] = None
-    ) -> Partitioning:
+    def from_lengths(cls, lengths: Sequence[int], names: ut.Names | Sequence[str] | None = None) -> Partitioning:
         """Create a Partitioning from a sequence of lengths.
 
         Args:
@@ -75,7 +71,7 @@ class Partitioning:
         return cls(ends, names)
 
     @classmethod
-    def from_list(cls, lst: List, names: Optional[Union[ut.Names, Sequence[str]]] = None) -> Partitioning:
+    def from_list(cls, lst: list, names: ut.Names | Sequence[str] | None = None) -> Partitioning:
         """Create a Partitioning from a list by using the lengths of each element.
 
         Args:
@@ -198,7 +194,7 @@ class Partitioning:
             raise IndexError(f"Partition index {i} out of range.")
         return (self._starts[i], self._ends[i])
 
-    def __getitem__(self, key: Union[int, slice]) -> Union[tuple, List[tuple]]:
+    def __getitem__(self, key: int | slice) -> tuple | list[tuple]:
         """Get partition range(s) by index or slice.
 
         Args:
@@ -220,11 +216,11 @@ class Partitioning:
     ######>> names <<#####
     ######################
 
-    def get_names(self) -> Optional[ut.Names]:
+    def get_names(self) -> ut.Names | None:
         """Return the names of each partition."""
         return self._names
 
-    def set_names(self, names: Optional[Union[ut.Names, Sequence[str]]], in_place: bool = False) -> Partitioning:
+    def set_names(self, names: ut.Names | Sequence[str] | None, in_place: bool = False) -> Partitioning:
         """Set the names of list elements.
 
         Args:
@@ -250,12 +246,12 @@ class Partitioning:
         return output
 
     @property
-    def names(self) -> Optional[ut.Names]:
+    def names(self) -> ut.Names | None:
         """Alias for :py:attr:`~get_names`, provided for back-compatibility."""
         return self.get_names()
 
     @names.setter
-    def names(self, names: Optional[Union[ut.Names, Sequence[str]]]):
+    def names(self, names: ut.Names | Sequence[str] | None):
         """Alias for :py:meth:`~set_names` with ``in_place = True``.
 
         As this mutates the original object, a warning is raised.

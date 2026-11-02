@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional, Sequence, Union
+from collections.abc import Sequence
+from typing import Any
 
 import biocutils as ut
 from biocframe import BiocFrame
@@ -23,8 +24,8 @@ class CompressedSplitBiocFrameList(CompressedList):
         self,
         unlist_data: BiocFrame,
         partitioning: Partitioning,
-        element_metadata: Optional[dict] = None,
-        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+        element_metadata: dict | None = None,
+        metadata: dict[str, Any] | ut.NamedList | None = None,
         **kwargs,
     ):
         """Initialize a CompressedSplitBiocFrameList.
@@ -55,9 +56,9 @@ class CompressedSplitBiocFrameList(CompressedList):
     @classmethod
     def from_list(
         cls,
-        lst: List[BiocFrame],
-        names: Optional[Union[ut.Names, Sequence[str]]] = None,
-        metadata: Optional[dict] = None,
+        lst: list[BiocFrame],
+        names: ut.Names | Sequence[str] | None = None,
+        metadata: dict | None = None,
     ) -> CompressedSplitBiocFrameList:
         """Create a `CompressedSplitBiocFrameList` from a regular list.
 
@@ -82,7 +83,7 @@ class CompressedSplitBiocFrameList(CompressedList):
         partitioning = Partitioning.from_list(lst, names)
         return cls(unlist_data, partitioning, metadata=metadata)
 
-    def __getitem__(self, key: Union[int, str, slice]):
+    def __getitem__(self, key: int | str | slice):
         """Override to handle column extraction using `splitAsCompressedList`."""
         if isinstance(key, str):
             column_data = self._unlist_data.get_column(key)
@@ -154,8 +155,8 @@ class CompressedSplitBiocFrameList(CompressedList):
 
         output += f"partitioning: {ut.print_truncated_list(self._partitioning)}\n"
 
-        output += f"element_metadata({str(len(self._element_metadata))} rows): {ut.print_truncated_list(list(self._element_metadata.get_column_names()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
-        output += f"metadata({str(len(self._metadata))}): {ut.print_truncated_list(list(self._metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+        output += f"element_metadata({len(self._element_metadata)!s} rows): {ut.print_truncated_list(list(self._element_metadata.get_column_names()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+        output += f"metadata({len(self._metadata)!s}): {ut.print_truncated_list(list(self._metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
 
         return output
 
@@ -179,9 +180,9 @@ class CompressedSplitBiocFrameList(CompressedList):
 @splitAsCompressedList.register
 def _(
     data: BiocFrame,
-    groups_or_partitions: Union[list, Partitioning],
-    names: Optional[Union[ut.Names, Sequence[str]]] = None,
-    metadata: Optional[dict] = None,
+    groups_or_partitions: list | Partitioning,
+    names: ut.Names | Sequence[str] | None = None,
+    metadata: dict | None = None,
 ) -> CompressedSplitBiocFrameList:
     """Handle lists of BiocFrame objects."""
 
