@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.4.6
+
+- Matches printing of compressed list objects to the R implementation
+- from_list tries to keep the names from the original object when creating compressed list instances
+- Preserve type when coercing to list. 
+
 ## Version 0.4.0 - 0.4.5
 
 - Classes extend `BiocObject` from biocutils. `metadata` is a named list.
