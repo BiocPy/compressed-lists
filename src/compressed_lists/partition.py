@@ -88,6 +88,19 @@ class Partitioning:
         Returns:
             A new Partitioning object.
         """
+        if names is None:
+            if isinstance(lst, dict):
+                names = list(lst.keys())
+                lst = list(lst.values())
+            elif hasattr(lst, "get_names") and callable(lst.get_names) and lst.get_names() is not None:
+                names = lst.get_names()
+                lst = list(lst)
+            elif hasattr(lst, "names") and not callable(lst.names) and lst.names is not None:
+                names = lst.names
+                lst = list(lst)
+        elif isinstance(lst, dict):
+            lst = list(lst.values())
+
         lengths = [len(item) if hasattr(item, "__len__") else 1 for item in lst]
         return cls.from_lengths(lengths, names)
 

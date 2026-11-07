@@ -15,6 +15,8 @@ __license__ = "MIT"
 class CompressedStringList(CompressedList):
     """CompressedList implementation for lists of strings."""
 
+    _element_type = ut.StringList
+
     def __init__(
         self,
         unlist_data: ut.StringList,

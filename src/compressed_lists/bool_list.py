@@ -15,6 +15,8 @@ __license__ = "MIT"
 class CompressedBooleanList(CompressedList):
     """CompressedList implementation for lists of booleans."""
 
+    _element_type = ut.BooleanList
+
     def __init__(
         self,
         unlist_data: ut.BooleanList,

@@ -82,6 +82,19 @@ class CompressedNumpyList(CompressedList):
         Returns:
             A new `CompressedNumpyList`.
         """
+        if names is None:
+            if isinstance(lst, dict):
+                names = list(lst.keys())
+                lst = list(lst.values())
+            elif hasattr(lst, "get_names") and callable(lst.get_names) and lst.get_names() is not None:
+                names = lst.get_names()
+                lst = list(lst)
+            elif hasattr(lst, "names") and not callable(lst.names) and lst.names is not None:
+                names = lst.names
+                lst = list(lst)
+        elif isinstance(lst, dict):
+            lst = list(lst.values())
+
         partitioning = Partitioning.from_list(lst, names)
 
         if len(lst) == 0:
