@@ -4,11 +4,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
 
-    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>compressed_lists.base - compressed-lists 0.4.5 documentation</title>
+    <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>compressed_lists.base - compressed-lists 0.4.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -161,7 +162,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">compressed-lists 0.4.5 documentation</div></a>
+      <a href="../../index.html"><div class="brand">compressed-lists 0.4.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +183,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
-  <span class="sidebar-brand-text">compressed-lists 0.4.5 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.4.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -246,15 +247,15 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.partition</span><span class="w"> </span><span class="kn">import</span> <span class="n">Partitioning</span>
 
-<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Jayaram Kancherla&quot;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Jayaram Kancherla&quot;</span>
-<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">"Jayaram Kancherla"</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">"Jayaram Kancherla"</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">"MIT"</span>
 
 
 <div class="viewcode-block" id="is_pandas">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.is_pandas">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">is_pandas</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if ``x`` is a :py:class:`~pandas.DataFrame`.</span>
+<span class="w">    </span><span class="sd">"""Check if ``x`` is a :py:class:`~pandas.DataFrame`.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        x:</span>
@@ -262,8 +263,8 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        True if ``x`` is a :py:class:`~pandas.DataFrame`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">&quot;dtypes&quot;</span><span class="p">):</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s2">"dtypes"</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">return</span> <span class="kc">False</span></div>
@@ -282,19 +283,21 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_data_and_partitions</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partition</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">)</span> <span class="o">!=</span> <span class="n">partition</span><span class="o">.</span><span class="n">nobj</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Length of &#39;unlist_data&#39; (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">)</span><span class="si">}</span><span class="s2">) &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;doesn&#39;t match &#39;partitioning&#39; total length (</span><span class="si">{</span><span class="n">partition</span><span class="o">.</span><span class="n">nobj</span><span class="p">()</span><span class="si">}</span><span class="s2">).&quot;</span>
+            <span class="sa">f</span><span class="s2">"Length of 'unlist_data' (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">)</span><span class="si">}</span><span class="s2">) "</span>
+            <span class="sa">f</span><span class="s2">"doesn't match 'partitioning' total length (</span><span class="si">{</span><span class="n">partition</span><span class="o">.</span><span class="n">nobj</span><span class="p">()</span><span class="si">}</span><span class="s2">)."</span>
         <span class="p">)</span>
 
 
 <div class="viewcode-block" id="CompressedList">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CompressedList</span><span class="p">(</span><span class="n">ut</span><span class="o">.</span><span class="n">BiocObject</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for compressed list objects.</span>
+<span class="w">    </span><span class="sd">"""Base class for compressed list objects.</span>
 
 <span class="sd">    `CompressedList` stores list elements concatenated in a single vector-like object</span>
 <span class="sd">    with partitioning information that defines where each list element starts and ends.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
+
+    <span class="n">_element_type</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="CompressedList.__init__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__init__">[docs]</a>
@@ -307,7 +310,7 @@
         <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ut</span><span class="o">.</span><span class="n">NamedList</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">_validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a CompressedList.</span>
+<span class="w">        </span><span class="sd">"""Initialize a CompressedList.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            unlist_data:</span>
@@ -327,13 +330,13 @@
 
 <span class="sd">            _validate:</span>
 <span class="sd">                Internal use only.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">_validate</span><span class="o">=</span><span class="n">_validate</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span> <span class="o">=</span> <span class="n">unlist_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span> <span class="o">=</span> <span class="n">partitioning</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">=</span> <span class="n">element_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span> <span class="o">=</span> <span class="n">element_type</span> <span class="k">if</span> <span class="n">element_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span> <span class="o">=</span> <span class="n">_sanitize_frame</span><span class="p">(</span><span class="n">element_metadata</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">partitioning</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">_validate</span><span class="p">:</span>
@@ -347,10 +350,10 @@
 <div class="viewcode-block" id="CompressedList.__deepcopy__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__deepcopy__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">_nil</span><span class="o">=</span><span class="p">[]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A deep copy of the current ``Partitioning``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
         <span class="n">_unlistdata_copy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">)</span>
@@ -373,10 +376,10 @@
 <div class="viewcode-block" id="CompressedList.__copy__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__copy__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A shallow copy of the current ``Partitioning``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">current_class_const</span><span class="p">(</span>
             <span class="n">unlist_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">,</span>
@@ -391,7 +394,7 @@
 <div class="viewcode-block" id="CompressedList.copy">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.copy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:meth:`~__copy__`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:meth:`~__copy__`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span></div>
 
 
@@ -402,21 +405,21 @@
 <div class="viewcode-block" id="CompressedList.__len__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__len__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of list elements.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the number of list elements."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.get_element_lengths">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_element_lengths">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_element_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the lengths of each list element.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the lengths of each list element."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_element_lengths</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.__iter__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__iter__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate over list elements.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Iterate over list elements."""</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
             <span class="k">yield</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></div>
 
@@ -428,51 +431,81 @@
 <div class="viewcode-block" id="CompressedList.__repr__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__repr__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A string representation.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(number_of_elements=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;, unlist_data=&quot;</span> <span class="o">+</span> <span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;, partitioning=&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+<span class="sd">        """</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(number_of_elements=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">", unlist_data="</span> <span class="o">+</span> <span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">", partitioning="</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
-        <span class="n">_etype_name</span> <span class="o">=</span> <span class="s2">&quot;__unknown_class__&quot;</span>
+        <span class="n">_etype_name</span> <span class="o">=</span> <span class="s2">"__unknown_class__"</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">_etype_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span>
-        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="p">,</span> <span class="s2">&quot;__name__&quot;</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="p">,</span> <span class="s2">"__name__"</span><span class="p">):</span>
             <span class="n">_etype_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="o">.</span><span class="vm">__name__</span>
-        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;, element_type=&quot;</span> <span class="o">+</span> <span class="n">_etype_name</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">", element_type="</span> <span class="o">+</span> <span class="n">_etype_name</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;, element_metadata=&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">", element_metadata="</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;, metadata=&quot;</span> <span class="o">+</span> <span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="s2">", metadata="</span> <span class="o">+</span> <span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">")"</span>
         <span class="k">return</span> <span class="n">output</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A pretty-printed string containing the contents of this object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;class: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="sd">        """</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> of length </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
 
-        <span class="n">_etype_name</span> <span class="o">=</span> <span class="s2">&quot;__unknown_class__&quot;</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">_etype_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span>
-        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="p">,</span> <span class="s2">&quot;__name__&quot;</span><span class="p">):</span>
-            <span class="n">_etype_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">output</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;number of elements: (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">) of type: </span><span class="si">{</span><span class="n">_etype_name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">min_lines</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">show_k</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_lines</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">names</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;unlist_data: </span><span class="si">{</span><span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">show_k</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">nm</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'[["</span><span class="si">{</span><span class="n">nm</span><span class="si">}</span><span class="s1">"]]'</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"[[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]]"</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;partitioning: </span><span class="si">{</span><span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">elem</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">BiocFrame</span><span class="p">):</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="s2">"__len__"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">elem_type_name</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ut</span><span class="p">,</span> <span class="n">elem_type_name</span><span class="p">):</span>
+                    <span class="n">val_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">elem_type_name</span><span class="si">}</span><span class="s2">(0)"</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">val_str</span> <span class="o">=</span> <span class="s2">"[]"</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">val_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">val_str</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">" "</span><span class="p">,</span> <span class="n">include_brackets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">val_str</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;element_metadata(</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span><span class="p">))</span><span class="si">}</span><span class="s2"> rows): </span><span class="si">{</span><span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span><span class="o">.</span><span class="n">get_column_names</span><span class="p">()),</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">include_brackets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="w"> </span><span class="n">transform</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;metadata(</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">))</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="n">include_brackets</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="w"> </span><span class="n">transform</span><span class="o">=</span><span class="k">lambda</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">show_k</span>
+        <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">elem_word</span> <span class="o">=</span> <span class="s2">"more element"</span> <span class="k">if</span> <span class="n">diff</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">"more elements"</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"...</span><span class="se">\n</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">diff</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">elem_word</span><span class="si">}</span><span class="s2">&gt;</span><span class="se">\n</span><span class="s2">"</span>
+
+        <span class="c1"># Optional element metadata</span>
+        <span class="n">has_em</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">has_meta</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+        <span class="k">if</span> <span class="n">has_em</span> <span class="ow">or</span> <span class="n">has_meta</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="s2">"-------</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="k">if</span> <span class="n">has_em</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"element_metadata: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="k">if</span> <span class="n">has_meta</span><span class="p">:</span>
+                <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"metadata: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metadata</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
 
         <span class="k">return</span> <span class="n">output</span>
 
@@ -483,13 +516,13 @@
 <div class="viewcode-block" id="CompressedList.get_element_type">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_element_type">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_element_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the element_type.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the element_type."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_type</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">element_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_element_type`, provided for back-compatibility.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_element_type`, provided for back-compatibility."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_element_type</span><span class="p">()</span>
 
     <span class="c1">###########################</span>
@@ -499,13 +532,18 @@
 <div class="viewcode-block" id="CompressedList.get_partitioning">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_partitioning">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_partitioning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the paritioning info.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the paritioning info."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span></div>
 
 
     <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">partitioning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_partitioning`."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_partitioning</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">paritioning</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_paritioning`, provided for back-compatibility.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_paritioning`, provided for back-compatibility."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_partitioning</span><span class="p">()</span>
 
     <span class="c1">#######################</span>
@@ -515,14 +553,14 @@
 <div class="viewcode-block" id="CompressedList.get_names">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_names">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the names of list elements.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the names of list elements."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.set_names">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.set_names">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the names of list elements.</span>
+<span class="w">        </span><span class="sd">"""Set the names of list elements.</span>
 
 <span class="sd">        names:</span>
 <span class="sd">            New names, same as the number of rows.</span>
@@ -535,7 +573,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A modified ``CompressedList`` object, either as a copy of the original</span>
 <span class="sd">            or as a reference to the (in-place-modified) original.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_define_output</span><span class="p">(</span><span class="n">in_place</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">_partitioning</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">set_names</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">in_place</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output</span></div>
@@ -543,17 +581,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_names`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_names`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
 
     <span class="nd">@names</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~set_names` with ``in_place = True``.</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~set_names` with ``in_place = True``.</span>
 
 <span class="sd">        As this mutates the original object, a warning is raised.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Setting property &#39;names&#39; is an in-place operation, use &#39;set_names&#39; instead&quot;</span><span class="p">,</span>
+            <span class="s2">"Setting property 'names' is an in-place operation, use 'set_names' instead"</span><span class="p">,</span>
             <span class="ne">UserWarning</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_names</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">in_place</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -565,14 +603,14 @@
 <div class="viewcode-block" id="CompressedList.get_unlist_data">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_unlist_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_unlist_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all elements.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get all elements."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.set_unlist_data">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.set_unlist_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_unlist_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set new list elements.</span>
+<span class="w">        </span><span class="sd">"""Set new list elements.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            unlist_data:</span>
@@ -584,7 +622,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A modified ``CompressedList`` object, either as a copy of the original</span>
 <span class="sd">            or as a reference to the (in-place-modified) original.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_define_output</span><span class="p">(</span><span class="n">in_place</span><span class="p">)</span>
 
         <span class="n">_validate_data_and_partitions</span><span class="p">(</span><span class="n">unlist_data</span><span class="o">=</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">partition</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">)</span>
@@ -595,17 +633,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">unlist_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_unlist_data`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_unlist_data`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_unlist_data</span><span class="p">()</span>
 
     <span class="nd">@unlist_data</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">unlist_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~set_unlist_data` with ``in_place = True``.</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~set_unlist_data` with ``in_place = True``.</span>
 
 <span class="sd">        As this mutates the original object, a warning is raised.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Setting property &#39;unlist_data&#39; is an in-place operation, use &#39;set_unlist_data&#39; instead&quot;</span><span class="p">,</span>
+            <span class="s2">"Setting property 'unlist_data' is an in-place operation, use 'set_unlist_data' instead"</span><span class="p">,</span>
             <span class="ne">UserWarning</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_unlist_data</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="n">in_place</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -617,17 +655,17 @@
 <div class="viewcode-block" id="CompressedList.get_element_metadata">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.get_element_metadata">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_element_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BiocFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            Dictionary of metadata for each element in this object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_element_metadata</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.set_element_metadata">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.set_element_metadata">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_element_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_metadata</span><span class="p">:</span> <span class="n">BiocFrame</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set new element metadata.</span>
+<span class="w">        </span><span class="sd">"""Set new element metadata.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            element_metadata:</span>
@@ -639,9 +677,9 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A modified ``CompressedList`` object, either as a copy of the original</span>
 <span class="sd">            or as a reference to the (in-place-modified) original.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element_metadata</span><span class="p">,</span> <span class="n">BiocFrame</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`element_metadata` must be a BiocFrame, provided </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">element_metadata</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"`element_metadata` must be a BiocFrame, provided </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">element_metadata</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_define_output</span><span class="p">(</span><span class="n">in_place</span><span class="p">)</span>
         <span class="n">output</span><span class="o">.</span><span class="n">_element_metadata</span> <span class="o">=</span> <span class="n">_sanitize_frame</span><span class="p">(</span><span class="n">element_metadata</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">))</span>
@@ -650,17 +688,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">element_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BiocFrame</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_element_metadata`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_element_metadata`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_element_metadata</span><span class="p">()</span>
 
     <span class="nd">@element_metadata</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">element_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element_metadata</span><span class="p">:</span> <span class="n">BiocFrame</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~set_element_metadata` with ``in_place = True``.</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~set_element_metadata` with ``in_place = True``.</span>
 
 <span class="sd">        As this mutates the original object, a warning is raised.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Setting property &#39;element_metadata&#39; is an in-place operation, use &#39;set_element_metadata&#39; instead&quot;</span><span class="p">,</span>
+            <span class="s2">"Setting property 'element_metadata' is an in-place operation, use 'set_element_metadata' instead"</span><span class="p">,</span>
             <span class="ne">UserWarning</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_element_metadata</span><span class="p">(</span><span class="n">element_metadata</span><span class="p">,</span> <span class="n">in_place</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -672,7 +710,7 @@
 <div class="viewcode-block" id="CompressedList.__getitem__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.__getitem__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">slice</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get an element or slice of elements from the list.</span>
+<span class="w">        </span><span class="sd">"""Get an element or slice of elements from the list.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key:</span>
@@ -680,11 +718,11 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            List element(s).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># string keys (names)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_names</span><span class="p">()):</span>
-                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No element named &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No element named '</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
             <span class="n">key</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">names</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
         <span class="c1"># integer indices</span>
@@ -692,7 +730,7 @@
             <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">key</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">key</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;List index &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39; out of range.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"List index '</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">' out of range."</span><span class="p">)</span>
 
             <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="o">.</span><span class="n">get_partition_range</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
@@ -717,7 +755,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">extract_subset</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;key&#39; must be int, str, slice or list of indices.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"'key' must be int, str, slice or list of indices."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
 
 
     <span class="c1">##################################</span>
@@ -727,7 +765,7 @@
 <div class="viewcode-block" id="CompressedList.extract_range">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.extract_range">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">extract_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a range from `unlist_data`.</span>
+<span class="w">        </span><span class="sd">"""Extract a range from `unlist_data`.</span>
 
 <span class="sd">        This method must be implemented by subclasses to handle</span>
 <span class="sd">        type-specific extraction from `unlist_data`.</span>
@@ -741,12 +779,12 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Extracted element.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;Custom classes should implement their own `extract_range` method for slice operations&quot;</span>
+                <span class="s2">"Custom classes should implement their own `extract_range` method for slice operations"</span>
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
 
 
@@ -759,7 +797,7 @@
         <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ut</span><span class="o">.</span><span class="n">NamedList</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a CompressedList from a regular list.</span>
+<span class="w">        </span><span class="sd">"""Create a CompressedList from a regular list.</span>
 
 <span class="sd">        This method must be implemented by subclasses to handle</span>
 <span class="sd">        type-specific conversion from list to unlist_data.</span>
@@ -776,17 +814,39 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A new `CompressedList`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="s2">"get_names"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">get_names</span><span class="p">)</span> <span class="ow">and</span> <span class="n">lst</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+                <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="s2">"names"</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">names</span><span class="p">)</span> <span class="ow">and</span> <span class="n">lst</span><span class="o">.</span><span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">names</span>
+                <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">items</span> <span class="o">=</span> <span class="n">lst</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">items</span> <span class="o">=</span> <span class="n">lst</span>
+
         <span class="c1"># Flatten the list</span>
         <span class="n">flat_data</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
             <span class="n">flat_data</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sublist</span><span class="p">)</span>
 
         <span class="c1"># Create partitioning</span>
-        <span class="n">partitioning</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
+        <span class="n">partitioning</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
 
         <span class="c1"># Create unlist_data</span>
-        <span class="c1"># unlist_data = cls._element_type(data=flat_data)</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_element_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_element_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">flat_data</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_element_type</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">flat_data</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_element_type</span><span class="p">(</span><span class="n">flat_data</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="k">pass</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">flat_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="p">)</span></div>
 
@@ -797,33 +857,43 @@
 
 <div class="viewcode-block" id="CompressedList.to_list">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.to_list">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert to a regular Python list.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">as_lists</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Convert to a regular Python list.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            as_lists:</span>
+<span class="sd">                Whether to recursively convert elements to regular Python lists.</span>
+<span class="sd">                Defaults to False, which preserves the element types (matching R's `as.list`).</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A regular Python list with all elements.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">as_lists</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
-            <span class="n">_subset</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_subset</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">_subset</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_subset</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="s2">"to_list"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">to_list</span><span class="p">):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="o">.</span><span class="n">to_list</span><span class="p">(</span><span class="n">as_lists</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="s2">"__iter__"</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">elem</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">elem</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">result</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.as_list">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.as_list">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">as_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias to :py:meth:`~to_list`&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">as_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">as_lists</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Alias to :py:meth:`~to_list`"""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_list</span><span class="p">(</span><span class="n">as_lists</span><span class="o">=</span><span class="n">as_lists</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="CompressedList.unlist">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.unlist">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">unlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_names</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the underlying unlisted data.</span>
+<span class="w">        </span><span class="sd">"""Get the underlying unlisted data.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            use_names:</span>
@@ -831,7 +901,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The unlisted data.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_unlist_data</span>
             <span class="k">if</span> <span class="n">use_names</span> <span class="ow">is</span> <span class="kc">False</span>
@@ -842,7 +912,7 @@
 <div class="viewcode-block" id="CompressedList.relist">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.relist">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">relist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unlist_data</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new `CompressedList` with the same partitioning but different data.</span>
+<span class="w">        </span><span class="sd">"""Create a new `CompressedList` with the same partitioning but different data.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            unlist_data:</span>
@@ -850,7 +920,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A new CompressedList.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">_validate_data_and_partitions</span><span class="p">(</span><span class="n">unlist_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partitioning</span><span class="p">)</span>
 
         <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -866,7 +936,7 @@
 <div class="viewcode-block" id="CompressedList.extract_subset">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.extract_subset">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">extract_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a subset of elements by indices.</span>
+<span class="w">        </span><span class="sd">"""Extract a subset of elements by indices.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            indices:</span>
@@ -874,15 +944,14 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A new CompressedList with only the selected elements.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;here&quot;</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">indices</span><span class="p">))</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="n">indices</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
         <span class="c1"># Validate indices</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> out of range&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> out of range"</span><span class="p">)</span>
 
         <span class="c1"># Extract element lengths and names</span>
         <span class="n">new_lengths</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">subset_sequence</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_element_lengths</span><span class="p">(),</span> <span class="n">indices</span><span class="p">)</span>
@@ -925,7 +994,7 @@
 <div class="viewcode-block" id="CompressedList.lapply">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.lapply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">lapply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply a function to each element.</span>
+<span class="w">        </span><span class="sd">"""Apply a function to each element.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            func:</span>
@@ -933,7 +1002,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A new CompressedList with the results.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">func</span><span class="p">(</span><span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
 
         <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -944,7 +1013,7 @@
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.empty">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">empty</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an zero-length `CompressedGenomicRangesList` object.</span>
+<span class="w">        </span><span class="sd">"""Create an zero-length `CompressedGenomicRangesList` object.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            n:</span>
@@ -952,7 +1021,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            same type as caller, in this case a `CompressedGenomicRangesList`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="n">_range_lengths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
 
@@ -966,7 +1035,7 @@
 <div class="viewcode-block" id="CompressedList.extend">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.base.CompressedList.extend">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">CompressedList</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Args:</span>
 <span class="sd">            other:</span>
 <span class="sd">                Some CompressedList object.</span>
@@ -978,7 +1047,7 @@
 <span class="sd">            A ``CompressedList`` where items in ``other`` are added to the end. If</span>
 <span class="sd">            ``in_place = False``, this is a new object, otherwise a reference</span>
 <span class="sd">            to the current object is returned.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_define_output</span><span class="p">(</span><span class="n">in_place</span><span class="p">)</span>
 
         <span class="n">output</span><span class="o">.</span><span class="n">_unlist_data</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">combine_sequences</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">_unlist_data</span><span class="p">)</span>
@@ -992,7 +1061,7 @@
 <span class="nd">@ut</span><span class="o">.</span><span class="n">combine_sequences</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">CompressedList</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_register_combine_patitioning</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="n">CompressedList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompressedList</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot combine an empty object&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Cannot combine an empty object"</span><span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
@@ -1031,7 +1100,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=340bb9e5"></script>
+</div><script src="../../_static/documentation_options.js?v=03f3338f"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

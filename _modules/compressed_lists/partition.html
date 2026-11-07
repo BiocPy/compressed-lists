@@ -4,11 +4,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html">
 
-    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>compressed_lists.partition - compressed-lists 0.4.5 documentation</title>
+    <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>compressed_lists.partition - compressed-lists 0.4.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -161,7 +162,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">compressed-lists 0.4.5 documentation</div></a>
+      <a href="../../index.html"><div class="brand">compressed-lists 0.4.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -182,7 +183,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
-  <span class="sidebar-brand-text">compressed-lists 0.4.5 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.4.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -243,9 +244,9 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">biocutils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ut</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Jayaram Kancherla&quot;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Jayaram Kancherla&quot;</span>
-<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MIT&quot;</span>
+<span class="n">__author__</span> <span class="o">=</span> <span class="s2">"Jayaram Kancherla"</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">"Jayaram Kancherla"</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">"MIT"</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_validate_names</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">expected_len</span><span class="p">):</span>
@@ -253,24 +254,24 @@
         <span class="k">return</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span> <span class="o">!=</span> <span class="n">expected_len</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Length of names must match length of ends.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Length of names must match length of ends."</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Partitioning">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Partitioning</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents partitioning information for a `CompressedList`.</span>
+<span class="w">    </span><span class="sd">"""Represents partitioning information for a `CompressedList`.</span>
 
 <span class="sd">    This is similar to the ``PartitioningByEnd`` class in Bioconductor.</span>
 <span class="sd">    It keeps track of where each element begins and ends in the unlisted data.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="Partitioning.__init__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">ends</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_validate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a Partitioning object.</span>
+<span class="w">        </span><span class="sd">"""Initialize a Partitioning object.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            ends:</span>
@@ -281,7 +282,7 @@
 
 <span class="sd">            _validate:</span>
 <span class="sd">                Internal use only.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_ends</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ends</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
 
         <span class="c1"># Calculate starts from ends</span>
@@ -303,7 +304,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">from_lengths</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span> <span class="n">lengths</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Partitioning from a sequence of lengths.</span>
+<span class="w">        </span><span class="sd">"""Create a Partitioning from a sequence of lengths.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            lengths:</span>
@@ -314,7 +315,7 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A new Partitioning object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">ends</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">ends</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span></div>
 
@@ -323,7 +324,7 @@
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.from_list">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_list</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Partitioning from a list by using the lengths of each element.</span>
+<span class="w">        </span><span class="sd">"""Create a Partitioning from a list by using the lengths of each element.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            lst:</span>
@@ -334,8 +335,21 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            A new Partitioning object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">&quot;__len__&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="s2">"get_names"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">get_names</span><span class="p">)</span> <span class="ow">and</span> <span class="n">lst</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+                <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="s2">"names"</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">names</span><span class="p">)</span> <span class="ow">and</span> <span class="n">lst</span><span class="o">.</span><span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">names</span>
+                <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">lst</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+        <span class="n">lengths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s2">"__len__"</span><span class="p">)</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_lengths</span><span class="p">(</span><span class="n">lengths</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span></div>
 
 
@@ -352,10 +366,10 @@
 <div class="viewcode-block" id="Partitioning.__deepcopy__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.__deepcopy__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">_nil</span><span class="o">=</span><span class="p">[]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A deep copy of the current ``Partitioning``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
         <span class="n">_ends_copy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ends</span><span class="p">)</span>
@@ -372,10 +386,10 @@
 <div class="viewcode-block" id="Partitioning.__copy__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.__copy__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A shallow copy of the current ``Partitioning``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">current_class_const</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">current_class_const</span><span class="p">(</span>
             <span class="n">ends</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ends</span><span class="p">,</span>
@@ -387,7 +401,7 @@
 <div class="viewcode-block" id="Partitioning.copy">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.copy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:meth:`~__copy__`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:meth:`~__copy__`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__copy__</span><span class="p">()</span></div>
 
 
@@ -398,35 +412,35 @@
 <div class="viewcode-block" id="Partitioning.__len__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.__len__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of partitions.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the number of partitions."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ends</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Partitioning.get_nobj">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.get_nobj">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_nobj</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the total number of objects across all partitions.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the total number of objects across all partitions."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ends</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_ends</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span></div>
 
 
 <div class="viewcode-block" id="Partitioning.nobj">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.nobj">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">nobj</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_nobj`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_nobj`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nobj</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="Partitioning.get_element_lengths">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.get_element_lengths">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_element_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the lengths of each partition.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the lengths of each partition."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ends</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_starts</span></div>
 
 
 <div class="viewcode-block" id="Partitioning.element_lengths">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.element_lengths">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">element_lengths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_element_lengths`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_element_lengths`."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_element_lengths</span><span class="p">()</span></div>
 
 
@@ -437,29 +451,29 @@
 <div class="viewcode-block" id="Partitioning.__repr__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.__repr__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A string representation.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(number_of_elements=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="sd">        """</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(number_of_elements=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;, names=&quot;</span> <span class="o">+</span> <span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span>
+            <span class="n">output</span> <span class="o">+=</span> <span class="s2">", names="</span> <span class="o">+</span> <span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="s2">")"</span>
         <span class="k">return</span> <span class="n">output</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            A pretty-printed string containing the contents of this object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;class: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="sd">        """</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"class: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;num of elements: (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"num of elements: (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">"</span>
 
-        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;names(</span><span class="si">{</span><span class="mi">0</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">output</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"names(</span><span class="si">{</span><span class="mi">0</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="s1">' '</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">ut</span><span class="o">.</span><span class="n">print_truncated_list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
 
         <span class="k">return</span> <span class="n">output</span>
 
@@ -470,16 +484,16 @@
 <div class="viewcode-block" id="Partitioning.get_partition_range">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.get_partition_range">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_partition_range</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the start and end indices for partition ``i``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get the start and end indices for partition ``i``."""</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Partition index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> out of range.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Partition index </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> out of range."</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_starts</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ends</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="Partitioning.__getitem__">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.__getitem__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">slice</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get partition range(s) by index or slice.</span>
+<span class="w">        </span><span class="sd">"""Get partition range(s) by index or slice.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            key:</span>
@@ -487,14 +501,14 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Tuple of (start, end) or list of such tuples.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_partition_range</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
             <span class="n">indices</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="o">*</span><span class="n">key</span><span class="o">.</span><span class="n">indices</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
             <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">get_partition_range</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Index must be &#39;int&#39; or &#39;slice&#39;.&quot;</span><span class="p">)</span></div>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Index must be 'int' or 'slice'."</span><span class="p">)</span></div>
 
 
     <span class="c1">######################</span>
@@ -504,14 +518,14 @@
 <div class="viewcode-block" id="Partitioning.get_names">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.get_names">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the names of each partition.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the names of each partition."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_names</span></div>
 
 
 <div class="viewcode-block" id="Partitioning.set_names">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.set_names">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the names of list elements.</span>
+<span class="w">        </span><span class="sd">"""Set the names of list elements.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            names:</span>
@@ -525,7 +539,7 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            A modified ``Partitioning`` object, either as a copy of the original</span>
 <span class="sd">            or as a reference to the (in-place-modified) original.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">):</span>
             <span class="n">names</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
 
@@ -538,17 +552,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_names`, provided for back-compatibility.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_names`, provided for back-compatibility."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
 
     <span class="nd">@names</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:meth:`~set_names` with ``in_place = True``.</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:meth:`~set_names` with ``in_place = True``.</span>
 
 <span class="sd">        As this mutates the original object, a warning is raised.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">warn</span><span class="p">(</span>
-            <span class="s2">&quot;Setting property &#39;row_names&#39; is an in-place operation, use &#39;set_names&#39; instead&quot;</span><span class="p">,</span>
+            <span class="s2">"Setting property 'row_names' is an in-place operation, use 'set_names' instead"</span><span class="p">,</span>
             <span class="ne">UserWarning</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_names</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">in_place</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -560,13 +574,13 @@
 <div class="viewcode-block" id="Partitioning.get_ends">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.get_ends">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_ends</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the names of each partition.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the names of each partition."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ends</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">ends</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_ends`, provided for back-compatibility.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_ends`, provided for back-compatibility."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_ends</span><span class="p">()</span>
 
     <span class="c1">#######################</span>
@@ -576,13 +590,13 @@
 <div class="viewcode-block" id="Partitioning.get_starts">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.get_starts">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_starts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the starts of each partition.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the starts of each partition."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_starts</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">starts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Alias for :py:attr:`~get_starts`, provided for back-compatibility.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Alias for :py:attr:`~get_starts`, provided for back-compatibility."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_starts</span><span class="p">()</span>
 
     <span class="c1">#######################</span>
@@ -592,7 +606,7 @@
 <div class="viewcode-block" id="Partitioning.extend">
 <a class="viewcode-back" href="../../api/compressed_lists.html#compressed_lists.partition.Partitioning.extend">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Partitioning</span><span class="p">,</span> <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Args:</span>
 <span class="sd">            other:</span>
 <span class="sd">                Some Paritioning object.</span>
@@ -604,7 +618,7 @@
 <span class="sd">            A ``Partitioning`` where items in ``other`` are added to the end. If</span>
 <span class="sd">            ``in_place = False``, this is a new object, otherwise a reference</span>
 <span class="sd">            to the current object is returned.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_define_output</span><span class="p">(</span><span class="n">in_place</span><span class="p">)</span>
         <span class="n">previous_len</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">get_nobj</span><span class="p">()</span>
 
@@ -615,10 +629,10 @@
             <span class="n">output</span><span class="o">.</span><span class="n">_names</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">output</span><span class="o">.</span><span class="n">_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">output</span><span class="o">.</span><span class="n">_names</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">([</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">previous_len</span><span class="p">)</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">_names</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">([</span><span class="s2">""</span><span class="p">]</span> <span class="o">*</span> <span class="n">previous_len</span><span class="p">)</span>
                 <span class="n">output</span><span class="o">.</span><span class="n">_names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">other</span><span class="o">.</span><span class="n">_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">_names</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">([</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+                <span class="n">_names</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">Names</span><span class="p">([</span><span class="s2">""</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
                 <span class="n">output</span><span class="o">.</span><span class="n">_names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_names</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">output</span><span class="o">.</span><span class="n">_names</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">_names</span><span class="p">)</span>
@@ -631,7 +645,7 @@
 <span class="nd">@ut</span><span class="o">.</span><span class="n">combine_sequences</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Partitioning</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_register_combine_patitioning</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="n">Partitioning</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Partitioning</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot combine an empty sequence&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Cannot combine an empty sequence"</span><span class="p">)</span>
 
     <span class="n">output</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span>
@@ -670,7 +684,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=340bb9e5"></script>
+</div><script src="../../_static/documentation_options.js?v=03f3338f"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>

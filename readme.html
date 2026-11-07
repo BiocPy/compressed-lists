@@ -5,11 +5,12 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Basic Usage" href="tutorial.html"><link rel="prev" title="compressed-lists" href="index.html">
 
-    <!-- Generated with Sphinx 9.1.0 and Furo 2025.12.19 -->
-        <title>CompressedList Implementation in Python - compressed-lists 0.4.5 documentation</title>
+    <!-- Generated with Sphinx 9.1.1 and Furo 2025.12.19 -->
+        <title>CompressedList Implementation in Python - compressed-lists 0.4.6 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx_autodoc_typehints.css?v=057ac668" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
     
     
@@ -162,7 +163,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">compressed-lists 0.4.5 documentation</div></a>
+      <a href="index.html"><div class="brand">compressed-lists 0.4.6 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -183,7 +184,7 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
-  <span class="sidebar-brand-text">compressed-lists 0.4.5 documentation</span>
+  <span class="sidebar-brand-text">compressed-lists 0.4.6 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -260,12 +261,12 @@
 
 <span class="c1"># Create a CompressedIntegerList</span>
 <span class="n">int_data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
-<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]</span>
 <span class="n">int_list</span> <span class="o">=</span> <span class="n">CompressedIntegerList</span><span class="o">.</span><span class="n">from_list</span><span class="p">(</span><span class="n">int_data</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
 
 <span class="c1"># Access elements</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">int_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>      <span class="c1"># [1, 2, 3]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">int_list</span><span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">])</span>    <span class="c1"># [4, 5]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">int_list</span><span class="p">[</span><span class="s2">"B"</span><span class="p">])</span>    <span class="c1"># [4, 5]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">int_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>    <span class="c1"># Slice of elements</span>
 
 <span class="c1"># Apply a function to each element</span>
@@ -277,7 +278,7 @@
 
 <span class="c1"># Create a CompressedStringList from lengths</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">biocutils</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ut</span>
-<span class="n">char_data</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">StringList</span><span class="p">([</span><span class="s2">&quot;apple&quot;</span><span class="p">,</span> <span class="s2">&quot;banana&quot;</span><span class="p">,</span> <span class="s2">&quot;cherry&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;elderberry&quot;</span><span class="p">,</span> <span class="s2">&quot;fig&quot;</span><span class="p">])</span>
+<span class="n">char_data</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">StringList</span><span class="p">([</span><span class="s2">"apple"</span><span class="p">,</span> <span class="s2">"banana"</span><span class="p">,</span> <span class="s2">"cherry"</span><span class="p">,</span> <span class="s2">"date"</span><span class="p">,</span> <span class="s2">"elderberry"</span><span class="p">,</span> <span class="s2">"fig"</span><span class="p">])</span>
 
 <span class="n">char_list</span> <span class="o">=</span> <span class="n">CompressedStringList</span><span class="p">(</span><span class="n">char_data</span><span class="p">,</span> <span class="n">partitioning</span><span class="o">=</span><span class="n">Partitioning</span><span class="o">.</span><span class="n">from_lengths</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">char_list</span><span class="p">)</span>
@@ -290,7 +291,7 @@
 
 <span class="c1"># Create partitioning from end positions</span>
 <span class="n">ends</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
-<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">]</span>
 <span class="n">part</span> <span class="o">=</span> <span class="n">Partitioning</span><span class="p">(</span><span class="n">ends</span><span class="p">,</span> <span class="n">names</span><span class="p">)</span>
 
 <span class="c1"># Get partition range for an element</span>
@@ -384,7 +385,7 @@ and <a class="reference external" href="https://pyscaffold.org/">PyScaffold</a>.
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=340bb9e5"></script>
+</div><script src="_static/documentation_options.js?v=03f3338f"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/furo.js?v=46bd48cc"></script>
