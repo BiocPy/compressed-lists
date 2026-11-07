@@ -145,3 +145,41 @@ def _generic_register_helper(data, groups_or_partitions, names=None):
         raise ValueError("'groups_or_paritions' must be a group vector or a Partition object.")
 
     return partitioned_data, groups_or_partitions
+
+
+@splitAsCompressedList.register(list)
+def _(
+    data: list,
+    groups_or_partitions: Union[list, Partitioning],
+    names: Optional[Union[ut.Names, Sequence[str]]] = None,
+    metadata: Optional[dict] = None,
+) -> Any:
+    """Handle plain Python lists."""
+    if len(data) == 0:
+        return splitAsCompressedList(ut.StringList([]), groups_or_partitions, names=names, metadata=metadata)
+
+    first = data[0]
+    if isinstance(first, str) and all(isinstance(x, str) for x in data):
+        return splitAsCompressedList(ut.StringList(data), groups_or_partitions, names=names, metadata=metadata)
+    elif isinstance(first, bool) and all(isinstance(x, bool) for x in data):
+        return splitAsCompressedList(ut.BooleanList(data), groups_or_partitions, names=names, metadata=metadata)
+    elif isinstance(first, int) and all(isinstance(x, int) for x in data):
+        return splitAsCompressedList(ut.IntegerList(data), groups_or_partitions, names=names, metadata=metadata)
+    elif isinstance(first, float) and all(isinstance(x, (int, float)) for x in data):
+        return splitAsCompressedList(ut.FloatList(data), groups_or_partitions, names=names, metadata=metadata)
+    else:
+        from .base import CompressedList
+
+        partitioned_data, groups_or_partitions = _generic_register_helper(
+            data=data, groups_or_partitions=groups_or_partitions, names=names
+        )
+        if len(partitioned_data) != 0 and not isinstance(partitioned_data, list):
+            partitioned_data = ut.combine_sequences(*partitioned_data)
+        elif len(partitioned_data) != 0 and isinstance(partitioned_data, list):
+            flat = []
+            for sub in partitioned_data:
+                flat.extend(sub)
+            partitioned_data = flat
+
+        assert isinstance(groups_or_partitions, Partitioning)
+        return CompressedList(unlist_data=partitioned_data, partitioning=groups_or_partitions, metadata=metadata)

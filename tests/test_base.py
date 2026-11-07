@@ -125,8 +125,8 @@ def test_base_repr_str(base_list):
     assert "number_of_elements=3" in repr(base_list)
 
     assert isinstance(str(base_list), str)
-    assert "class: CompressedList" in str(base_list)
-    assert "number of elements: (3)" in str(base_list)
+    assert "CompressedList of length 3" in str(base_list)
+    assert '[["A"]]' in str(base_list)
 
 
 def test_base_extract_subset_edge_cases(base_list, base_list_data):

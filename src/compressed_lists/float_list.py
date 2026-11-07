@@ -15,6 +15,8 @@ __license__ = "MIT"
 class CompressedFloatList(CompressedList):
     """CompressedList implementation for lists of floats."""
 
+    _element_type = ut.FloatList
+
     def __init__(
         self,
         unlist_data: ut.FloatList,

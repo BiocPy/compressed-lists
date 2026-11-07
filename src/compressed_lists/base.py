@@ -54,6 +54,8 @@ class CompressedList(ut.BiocObject):
     with partitioning information that defines where each list element starts and ends.
     """
 
+    _element_type = None
+
     def __init__(
         self,
         unlist_data: Any,
@@ -89,7 +91,7 @@ class CompressedList(ut.BiocObject):
 
         self._unlist_data = unlist_data
         self._partitioning = partitioning
-        self._element_type = element_type
+        self._element_type = element_type if element_type is not None else self._element_type
         self._element_metadata = _sanitize_frame(element_metadata, len(partitioning))
 
         if _validate:
@@ -191,22 +193,52 @@ class CompressedList(ut.BiocObject):
         Returns:
             A pretty-printed string containing the contents of this object.
         """
-        output = f"class: {type(self).__name__}\n"
+        k = len(self)
+        output = f"{type(self).__name__} of length {k}\n"
 
-        _etype_name = "__unknown_class__"
-        if isinstance(self._element_type, str):
-            _etype_name = self._element_type
-        elif hasattr(self._element_type, "__name__"):
-            _etype_name = self._element_type.__name__
+        if k == 0:
+            return output
 
-        output += f"number of elements: ({len(self)}) of type: {_etype_name}\n"
+        min_lines = 10
+        show_k = min(min_lines, k)
+        names = self.names
 
-        output += f"unlist_data: {ut.print_truncated_list(self._unlist_data)}\n"
+        for i in range(show_k):
+            if names is not None:
+                nm = names[i]
+                label = f"[[\"{nm}\"]]"
+            else:
+                label = f"[[{i}]]"
 
-        output += f"partitioning: {ut.print_truncated_list(self._partitioning)}\n"
+            elem = self[i]
+            if isinstance(elem, BiocFrame):
+                output += f"{label}\n{str(elem)}\n"
+            elif hasattr(elem, "__len__") and len(elem) == 0:
+                elem_type_name = type(elem).__name__
+                if hasattr(ut, elem_type_name):
+                    val_str = f"{elem_type_name}(0)"
+                else:
+                    val_str = "[]"
+                output += f"{label} {val_str}\n"
+            else:
+                val_str = ut.print_truncated_list(elem, sep=" ", include_brackets=False, transform=str)
+                output += f"{label} {val_str}\n"
 
-        output += f"element_metadata({str(len(self._element_metadata))} rows): {ut.print_truncated_list(list(self._element_metadata.get_column_names()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
-        output += f"metadata({str(len(self._metadata))}): {ut.print_truncated_list(list(self._metadata.keys()), sep=' ', include_brackets=False, transform=lambda y: y)}\n"
+        diff = k - show_k
+        if diff > 0:
+            elem_word = "more element" if diff == 1 else "more elements"
+            output += f"...\n<{diff} {elem_word}>\n"
+
+        # Optional element metadata
+        has_em = len(self._element_metadata) > 0 and len(self._element_metadata.columns) > 0
+        has_meta = len(self._metadata) > 0
+
+        if has_em or has_meta:
+            output += "-------\n"
+            if has_em:
+                output += f"element_metadata: {list(self._element_metadata.columns)}\n"
+            if has_meta:
+                output += f"metadata: {list(self._metadata.keys())}\n"
 
         return output
 
@@ -230,6 +262,11 @@ class CompressedList(ut.BiocObject):
     def get_partitioning(self) -> Partitioning:
         """Return the paritioning info."""
         return self._partitioning
+
+    @property
+    def partitioning(self) -> Partitioning:
+        """Alias for :py:attr:`~get_partitioning`."""
+        return self.get_partitioning()
 
     @property
     def paritioning(self) -> Partitioning:
@@ -479,16 +516,38 @@ class CompressedList(ut.BiocObject):
         Returns:
             A new `CompressedList`.
         """
+        if names is None:
+            if isinstance(lst, dict):
+                names = list(lst.keys())
+                items = list(lst.values())
+            elif hasattr(lst, "get_names") and callable(lst.get_names) and lst.get_names() is not None:
+                names = lst.get_names()
+                items = list(lst)
+            elif hasattr(lst, "names") and not callable(lst.names) and lst.names is not None:
+                names = lst.names
+                items = list(lst)
+            else:
+                items = lst
+        elif isinstance(lst, dict):
+            items = list(lst.values())
+        else:
+            items = lst
+
         # Flatten the list
         flat_data = []
-        for sublist in lst:
+        for sublist in items:
             flat_data.extend(sublist)
 
         # Create partitioning
-        partitioning = Partitioning.from_list(lst, names)
+        partitioning = Partitioning.from_list(items, names)
 
         # Create unlist_data
-        # unlist_data = cls._element_type(data=flat_data)
+        if cls._element_type is not None and callable(cls._element_type):
+            if not isinstance(flat_data, cls._element_type):
+                try:
+                    flat_data = cls._element_type(flat_data)
+                except Exception:
+                    pass
 
         return cls(flat_data, partitioning, metadata=metadata)
 
@@ -496,24 +555,34 @@ class CompressedList(ut.BiocObject):
     ######>> coercions <<######
     ###########################
 
-    def to_list(self) -> List[List[Any]]:
+    def to_list(self, as_lists: bool = False) -> List[Any]:
         """Convert to a regular Python list.
+
+        Args:
+            as_lists:
+                Whether to recursively convert elements to regular Python lists.
+                Defaults to False, which preserves the element types (matching R's `as.list`).
 
         Returns:
             A regular Python list with all elements.
         """
+        if not as_lists:
+            return list(self)
+
         result = []
-        for i in range(len(self)):
-            _subset = list(self[i])
-            if len(_subset) == 0:
-                _subset = [None]
-            result.append(_subset)
+        for elem in self:
+            if hasattr(elem, "to_list") and callable(elem.to_list):
+                result.append(elem.to_list(as_lists=True))
+            elif hasattr(elem, "__iter__") and not isinstance(elem, (str, bytes)):
+                result.append(list(elem))
+            else:
+                result.append(elem)
 
         return result
 
-    def as_list(self) -> List[List[Any]]:
+    def as_list(self, as_lists: bool = False) -> List[Any]:
         """Alias to :py:meth:`~to_list`"""
-        return self.to_list()
+        return self.to_list(as_lists=as_lists)
 
     def unlist(self, use_names: bool = False) -> Any:
         """Get the underlying unlisted data.

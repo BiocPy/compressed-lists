@@ -15,6 +15,8 @@ __license__ = "MIT"
 class CompressedIntegerList(CompressedList):
     """CompressedList implementation for lists of integers."""
 
+    _element_type = ut.IntegerList
+
     def __init__(
         self,
         unlist_data: ut.IntegerList,
