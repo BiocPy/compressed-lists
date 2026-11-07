@@ -206,7 +206,7 @@ class CompressedList(ut.BiocObject):
         for i in range(show_k):
             if names is not None:
                 nm = names[i]
-                label = f"[[\"{nm}\"]]"
+                label = f'[["{nm}"]]'
             else:
                 label = f"[[{i}]]"
 
