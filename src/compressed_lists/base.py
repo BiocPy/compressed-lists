@@ -631,7 +631,6 @@ class CompressedList(ut.BiocObject):
         Returns:
             A new CompressedList with only the selected elements.
         """
-        print("here", indices, type(indices))
         if isinstance(indices, np.ndarray):
             indices = indices.tolist()
 
