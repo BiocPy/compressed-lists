@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, Iterator, List, Optional, Sequence, Union
+from collections.abc import Callable, Iterator, Sequence
+from typing import Any
 from warnings import warn
 
 import biocutils as ut
-from biocframe import BiocFrame
 import numpy as np
+from biocframe import BiocFrame
 
 from .partition import Partitioning
 
@@ -61,8 +62,8 @@ class CompressedList(ut.BiocObject):
         unlist_data: Any,
         partitioning: Partitioning,
         element_type: Any = None,
-        element_metadata: Optional[BiocFrame] = None,
-        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+        element_metadata: BiocFrame | None = None,
+        metadata: dict[str, Any] | ut.NamedList | None = None,
         _validate: bool = True,
     ):
         """Initialize a CompressedList.
@@ -212,7 +213,7 @@ class CompressedList(ut.BiocObject):
 
             elem = self[i]
             if isinstance(elem, BiocFrame):
-                output += f"{label}\n{str(elem)}\n"
+                output += f"{label}\n{elem!s}\n"
             elif hasattr(elem, "__len__") and len(elem) == 0:
                 elem_type_name = type(elem).__name__
                 if hasattr(ut, elem_type_name):
@@ -277,7 +278,7 @@ class CompressedList(ut.BiocObject):
     ######>> names <<######
     #######################
 
-    def get_names(self) -> Optional[ut.Names]:
+    def get_names(self) -> ut.Names | None:
         """Get the names of list elements."""
         return self._partitioning.get_names()
 
@@ -301,7 +302,7 @@ class CompressedList(ut.BiocObject):
         return output
 
     @property
-    def names(self) -> Optional[ut.Names]:
+    def names(self) -> ut.Names | None:
         """Alias for :py:attr:`~get_names`."""
         return self._partitioning.get_names()
 
@@ -416,7 +417,7 @@ class CompressedList(ut.BiocObject):
     ######>> accessors <<#####
     ##########################
 
-    def __getitem__(self, key: Union[int, str, slice]) -> Any:
+    def __getitem__(self, key: int | str | slice) -> Any:
         """Get an element or slice of elements from the list.
 
         Args:
@@ -495,8 +496,8 @@ class CompressedList(ut.BiocObject):
     def from_list(
         cls,
         lst: Any,
-        names: Optional[Union[ut.Names, Sequence[str]]] = None,
-        metadata: Optional[Union[Dict[str, Any], ut.NamedList]] = None,
+        names: ut.Names | Sequence[str] | None = None,
+        metadata: dict[str, Any] | ut.NamedList | None = None,
     ) -> CompressedList:
         """Create a CompressedList from a regular list.
 
@@ -555,7 +556,7 @@ class CompressedList(ut.BiocObject):
     ######>> coercions <<######
     ###########################
 
-    def to_list(self, as_lists: bool = False) -> List[Any]:
+    def to_list(self, as_lists: bool = False) -> list[Any]:
         """Convert to a regular Python list.
 
         Args:
@@ -580,7 +581,7 @@ class CompressedList(ut.BiocObject):
 
         return result
 
-    def as_list(self, as_lists: bool = False) -> List[Any]:
+    def as_list(self, as_lists: bool = False) -> list[Any]:
         """Alias to :py:meth:`~to_list`"""
         return self.to_list(as_lists=as_lists)
 
