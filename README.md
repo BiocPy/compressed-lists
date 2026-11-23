@@ -26,22 +26,23 @@ names = ["A", "B", "C"]
 int_list = CompressedIntegerList.from_list(int_data, names)
 
 # Access elements
-print(int_list[0])      # [1, 2, 3]
-print(int_list["B"])    # [4, 5]
-print(int_list[1:3])    # Slice of elements
+print(int_list[0])  # [1, 2, 3]
+print(int_list["B"])  # [4, 5]
+print(int_list[1:3])  # Slice of elements
 
 # Apply a function to each element
 squared = int_list.lapply(lambda x: [i**2 for i in x])
-print(squared[0])       # [1, 4, 9]
+print(squared[0])  # [1, 4, 9]
 
 # Convert to a regular Python list
 regular_list = int_list.to_list()
 
 # Create a CompressedStringList from lengths
 import biocutils as ut
+
 char_data = ut.StringList(["apple", "banana", "cherry", "date", "elderberry", "fig"])
 
-char_list = CompressedStringList(char_data, partitioning=Partitioning.from_lengths([2,3,1]))
+char_list = CompressedStringList(char_data, partitioning=Partitioning.from_lengths([2, 3, 1]))
 print(char_list)
 ```
 
